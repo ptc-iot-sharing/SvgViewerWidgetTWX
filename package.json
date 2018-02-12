@@ -1,0 +1,49 @@
+{
+    "name": "svg_viewer",
+    "version": "1.0.1",
+    "description": "A svg viewer allowing viewing svg files, as well as interacting with them dynamically.",
+    "thingworxServer": "http://localhost:8016/",
+    "thingworxUser": "Administrator",
+    "thingworxPassword": "trUf6yuz2?_Gub",
+    "author": "Thingworx Labs",
+    "minimumThingWorxVersion": "6.0.0",
+    "homepage": "http://roicentersvn/placatus/DemoWebpackWidget",
+    "repository": {
+        "type": "git",
+        "url": "http://roicentersvn.ptcnet.ptc.com/placatus/DemoWebpackWidget.git"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack --progress -p",
+        "watch": "webpack --progress --watch",
+        "server": "webpack-dev-server --open",
+        "upload": "webpack --progress -p --env.upload",
+        "init": "webpack --env.init"
+    },
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/core": "^7.0.0-beta.39",
+        "@babel/preset-env": "^7.0.0-beta.39",
+        "@types/jquery": "^3.3.0",
+        "@types/node": "^8.0.47",
+        "@types/webpack-env": "^1.13.2",
+        "awesome-typescript-loader": "^3.2.3",
+        "babel-loader": "^8.0.0-beta.0",
+        "clean-webpack-plugin": "^0.1.18",
+        "copy-webpack-plugin": "^4.2.0",
+        "css-loader": "^0.28.7",
+        "extract-text-webpack-plugin": "^3.0.2",
+        "file-loader": "^1.1.5",
+        "request": "^2.83.0",
+        "source-map-loader": "^0.2.3",
+        "style-loader": "^0.19.0",
+        "ts-loader": "^3.1.1",
+        "typescript": "^2.6.1",
+        "url-loader": "^0.6.2",
+        "webpack": "^3.10.0",
+        "webpack-dev-server": "^2.9.3",
+        "xml2js": "^0.4.19",
+        "zip-webpack-plugin": "^2.1.0"
+    },
+    "dependencies": {}
+}
