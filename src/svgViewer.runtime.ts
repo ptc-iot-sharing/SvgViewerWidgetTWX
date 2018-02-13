@@ -1,7 +1,6 @@
-/// <reference path="./svgRenderer/svgRenderer.ts" />
-
 import { ThingworxRuntimeWidget, TWService, TWProperty } from './support/widgetRuntimeSupport'
-import { SvgElement } from './svgRenderer/svgRenderer';
+
+import {SvgElement, SvgRendererOptions} from './svgRenderer/svgRenderer'
 
 @ThingworxRuntimeWidget
 export class SvgViewerWidget extends TWRuntimeWidget {
@@ -10,40 +9,45 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         throw new Error("Method not implemented.");
     }
 
-    /**
-     * Handles the internals of working with the svg files
-     */
-    private internalRenderer;
-
+    // the renderer currently used
     private svgRenderer: SvgElement;
-
-    @TWProperty("SVGIdField")
-    set svgIdField(value: string) {};
 
     @TWProperty("SVGFileUrl")
     set svgFileUrl(value: string) {
+        if (!TW.IDE.isImageLinkUrl(value)) {
+            //check to see if imageLink is an actual URL;
+            this.setProperty("SVGFileUrl", '/Thingworx/MediaEntities/' + TW.encodeEntityName(value));
+        }
         this.updateDrawnSvg();
     };
 
 
     renderHtml(): string {
+        require("./styles/runtime.css");
         return '<div class="widget-content widget-svg-viewer"></div>';
     };
 
     async afterRender(): Promise<void> {
-        debugger;
-        this.internalRenderer = await import("./svgRenderer/svgRenderer");
-        debugger
-    
+   
         this.updateDrawnSvg();
+    }
+
+    createRendererSettings(): SvgRendererOptions {
+        return {
+            isDexpiDataSource: this.getProperty('DexpiDataSource') || false,
+            idField: this.getProperty("SVGIdField") || "class",
+            initialZoom: this.getProperty("InitialZoom") || 1,
+            smoothScroll: this.getProperty("SmoothScroll"),
+            initialXPosition: this.getProperty("InitialXPosition") || 0,
+            initialYPosition: this.getProperty("InitialYPosition") || 0
+        }
     }
     
     updateDrawnSvg():void {
-        this.svgRenderer = new this.internalRenderer.SvgElement(this.jqElement, this.svgFileUrl, {
-            isDexpiDataSource: this.getProperty('DexpiDataSource'),
-            idField: this.svgIdField
-        })
-
+        if(!this.svgFileUrl) {
+            return;
+        }
+        this.svgRenderer = new SvgElement(this.jqElement, this.svgFileUrl, this.createRendererSettings() )
         this.svgRenderer.createSvgElement();    
     }
 
@@ -56,6 +60,8 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     }
 
     beforeDestroy?(): void {
-        // resetting current widget
+        if(this.svgRenderer) {
+            this.svgRenderer.dispose();
+        }
     }
 }

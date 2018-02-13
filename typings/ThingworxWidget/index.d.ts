@@ -1186,16 +1186,18 @@ declare abstract class TWRuntimeWidget extends TWWidget {
 
 }
 
-declare namespace TW {
-
-    abstract class Widget extends TWRuntimeWidget { }
-
-    namespace Runtime {
-        const Widgets: Dictionary<typeof TW.Widget>;
-    }
-
-    namespace IDE {
-        abstract class Widget extends TWComposerWidget { }
-        const Widgets: Dictionary<typeof TW.IDE.Widget>;
+declare interface X { 
+    [prop: string]: any;
+    Widget: typeof TWRuntimeWidget;
+    IDE: {
+        [prop: string]: any;
+        Widget: typeof TWComposerWidget;
+        Widgets: Dictionary<typeof TW.IDE.Widget>;
+    };
+    Runtime: {
+        [prop: string]: any;
+        Widget: typeof TWRuntimeWidget;
+        Widgets: Dictionary<typeof TW.IDE.Widget>;
     }
 }
+declare const TW: X;

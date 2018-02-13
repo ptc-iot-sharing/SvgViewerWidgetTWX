@@ -26,6 +26,11 @@
             "type": "npm",
             "script": "packageExtension",
             "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "upload",
+            "problemMatcher": []
         }
     ]
 }
