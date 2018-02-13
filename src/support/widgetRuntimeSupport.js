@@ -21,6 +21,8 @@ export function TWProperty(name) {
                 this.setProperty(name, value);
             }
         }
+        // set the newly created setter
+        descriptor.set = setter;
 
         // Override the getter to return the result of calling getProperty
         descriptor.get = function () {
@@ -220,7 +222,7 @@ export function ThingworxRuntimeWidget(widget) {
     // Thingworx attempts to change the prototype of the custom widget constructor
     // which in addition to being a bad practice, prevents the usual prototype-based inheritance
     // and prevents using the class-based syntax
-    Object.defineProperty(widget, 'prototype', {writable: false});
+    Object.defineProperty(widget, 'prototype', { writable: false });
 
     TW.Runtime.Widgets[widget.name] = widget;
 }
@@ -230,7 +232,7 @@ export function ThingworxRuntimeWidget(widget) {
  * @param widget        The widget class to export.
  */
 export function ThingworxComposerWidget(widget) {
-    Object.defineProperty(widget, 'prototype', {writable: false});
+    Object.defineProperty(widget, 'prototype', { writable: false });
 
     TW.IDE.Widgets[widget.name] = widget;
 }

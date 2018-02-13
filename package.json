@@ -1,10 +1,10 @@
 {
-    "name": "svg_viewer",
-    "version": "1.0.1",
+    "name": "svgViewer",
+    "version": "1.0.31",
     "description": "A svg viewer allowing viewing svg files, as well as interacting with them dynamically.",
-    "thingworxServer": "http://localhost:8016/",
+    "thingworxServer": "http://localhost:8020/",
     "thingworxUser": "Administrator",
-    "thingworxPassword": "trUf6yuz2?_Gub",
+    "thingworxPassword": "admin",
     "author": "Thingworx Labs",
     "minimumThingWorxVersion": "6.0.0",
     "homepage": "http://roicentersvn/placatus/DemoWebpackWidget",
@@ -17,7 +17,7 @@
         "build": "webpack --progress -p",
         "watch": "webpack --progress --watch",
         "server": "webpack-dev-server --open",
-        "upload": "webpack --progress -p --env.upload",
+        "upload": "webpack --progress --env.upload",
         "init": "webpack --env.init"
     },
     "license": "ISC",
