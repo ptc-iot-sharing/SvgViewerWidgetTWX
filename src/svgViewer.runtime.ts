@@ -1,10 +1,10 @@
 import { ThingworxRuntimeWidget, TWService, TWProperty } from './support/widgetRuntimeSupport'
 
-import {SvgElement, SvgRendererOptions} from './svgRenderer/svgRenderer'
+import { SvgElement, SvgRendererOptions } from './svgRenderer/svgRenderer'
 
 @ThingworxRuntimeWidget
 export class SvgViewerWidget extends TWRuntimeWidget {
-    
+
     serviceInvoked(name: string): void {
         throw new Error("Method not implemented.");
     }
@@ -21,14 +21,19 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         this.updateDrawnSvg();
     };
 
-
+    @TWProperty("Data")
+    set svgData(value: TWInfotable) {
+        if(this.svgRenderer) {
+            this.svgRenderer.applyOverrides(value.rows);
+        }
+    }
+    
     renderHtml(): string {
         require("./styles/runtime.css");
         return '<div class="widget-content widget-svg-viewer"></div>';
     };
 
-    async afterRender(): Promise<void> {
-   
+    afterRender(): void {
         this.updateDrawnSvg();
     }
 
@@ -42,13 +47,13 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             initialYPosition: this.getProperty("InitialYPosition") || 0
         }
     }
-    
-    updateDrawnSvg():void {
-        if(!this.svgFileUrl) {
+
+    updateDrawnSvg(): void {
+        if (!this.svgFileUrl) {
             return;
         }
-        this.svgRenderer = new SvgElement(this.jqElement, this.svgFileUrl, this.createRendererSettings() )
-        this.svgRenderer.createSvgElement();    
+        this.svgRenderer = new SvgElement(this.jqElement, this.svgFileUrl, this.createRendererSettings())
+        this.svgRenderer.createSvgElement();
     }
 
     updateProperty(info: TWUpdatePropertyInfo): void {
@@ -60,7 +65,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     }
 
     beforeDestroy?(): void {
-        if(this.svgRenderer) {
+        if (this.svgRenderer) {
             this.svgRenderer.dispose();
         }
     }

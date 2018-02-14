@@ -5,10 +5,12 @@
         "noImplicitAny": false,
         "module": "esnext",
         "target": "es5",
+        "downlevelIteration": true,
         "experimentalDecorators": true,
         "lib": [
             "es2015",
-            "dom"
+            "dom",
+            "dom.iterable"
         ],
         "typeRoots": [
             "./typings/",
