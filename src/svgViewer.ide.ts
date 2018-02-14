@@ -53,6 +53,11 @@ export class SvgViewerWidget extends TWComposerWidget {
                     baseType: 'BOOLEAN',
                     defaultValue: false
                 },
+                ZoomPanEnabled: {
+                    description: 'Enable or disable zooming and panning',
+                    baseType: 'BOOLEAN',
+                    defaultValue: true
+                },
                 SmoothScroll: {
                     description: 'Enable or disable smooth scrolling of the pan and zoom functionality',
                     baseType: 'BOOLEAN',
@@ -101,6 +106,19 @@ export class SvgViewerWidget extends TWComposerWidget {
     }
 
     beforeDestroy(): void {
+    }
+
+    afterSetProperty(name: string, value): boolean {
+        let props = this.allWidgetProperties().properties;
+        if(name == "ZoomPanEnabled") {
+            props["SmoothScroll"]["isVisible"] = value;
+            props["InitialXPosition"]["isVisible"] = value;
+            props["InitialYPosition"]["isVisible"] = value;
+            props["InitialZoom"]["isVisible"] = value;
+            this.updateProperties();
+            return value;
+        } 
+        return false;
     }
 
 }

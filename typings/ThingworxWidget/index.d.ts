@@ -737,9 +737,9 @@ declare abstract class TWComposerWidget extends TWWidget {
      * Whenever the array returned by this method is mutated, `updatedProperties` should be invoked
      * to update the widget's internal state.
      * Subclasses are expected to not override this method.
-     * @return          An array of property definitions.
+     * @return          The widget property info
      */
-    allWidgetProperties(): [TWWidgetProperty];
+    allWidgetProperties(): TWWidgetProperties;
 
     /**
      * Returns an array containing all of this widget's binding source properties.

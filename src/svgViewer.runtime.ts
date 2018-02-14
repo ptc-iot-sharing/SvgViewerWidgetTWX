@@ -23,11 +23,11 @@ export class SvgViewerWidget extends TWRuntimeWidget {
 
     @TWProperty("Data")
     set svgData(value: TWInfotable) {
-        if(this.svgRenderer) {
+        if (this.svgRenderer) {
             this.svgRenderer.applyOverrides(value.rows);
         }
     }
-    
+
     renderHtml(): string {
         require("./styles/runtime.css");
         return '<div class="widget-content widget-svg-viewer"></div>';
@@ -40,11 +40,14 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     createRendererSettings(): SvgRendererOptions {
         return {
             isDexpiDataSource: this.getProperty('DexpiDataSource') || false,
-            idField: this.getProperty("SVGIdField") || "class",
-            initialZoom: this.getProperty("InitialZoom") || 1,
-            smoothScroll: this.getProperty("SmoothScroll"),
-            initialXPosition: this.getProperty("InitialXPosition") || 0,
-            initialYPosition: this.getProperty("InitialYPosition") || 0,
+            idField: this.getProperty("SVGIdField") || "id",
+            zoomPanOptions: {
+                isEnabled: this.getProperty("ZoomPanEnabled"),
+                initialZoom: this.getProperty("InitialZoom") || 1,
+                smoothScroll: this.getProperty("SmoothScroll"),
+                initialXPosition: this.getProperty("InitialXPosition") || 0,
+                initialYPosition: this.getProperty("InitialYPosition") || 0
+            },
             elementClickedCallback: this.elementClicked
         }
     }

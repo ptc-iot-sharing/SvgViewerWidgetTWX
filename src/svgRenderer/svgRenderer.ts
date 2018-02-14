@@ -13,26 +13,32 @@ export interface SvgRendererOptions {
      */
     isDexpiDataSource: boolean;
 
-    /**
-     * Enable or disable smooth scrolling of the pan and zoom functionality
-     */
-    smoothScroll: boolean;
+    zoomPanOptions: {
+        /**
+         * Enable or disable zoom and pan in the svg
+         */
+        isEnabled: boolean;
 
-    /**
-     * The initial X position of the zoomed file
-     */
-    initialXPosition: number;
+        /**
+        * Enable or disable smooth scrolling of the pan and zoom functionality
+        */
+        smoothScroll: boolean;
 
-    /**
-     * The initial Y position of the zoomed file
-     */
-    initialYPosition: number;
+        /**
+         * The initial X position of the zoomed file
+         */
+        initialXPosition: number;
 
-    /**
-     * The initial zoom of the svg
-     */
-    initialZoom: number;
+        /**
+         * The initial Y position of the zoomed file
+         */
+        initialYPosition: number;
 
+        /**
+         * The initial zoom of the svg
+         */
+        initialZoom: number;
+    }
     /** 
      * Callback fired when a element is clicked
      */
@@ -78,14 +84,16 @@ export class SvgElement {
         // move all the nodes from the svg into the root group
         Array.prototype.slice.call(this.svgElement.childNodes).forEach(element => rootGroup.appendChild(element));
         this.svgElement.appendChild(rootGroup);
-        // apply pan and zoom onto the svg
-        this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll("#rootGroup")[0], {
-            smoothScroll: this.options.smoothScroll
-        }).zoomAbs(
-            this.options.initialXPosition, // initial x position
-            this.options.initialYPosition, // initial y position
-            this.options.initialZoom  // initial zoom 
-        );
+        if (this.options.zoomPanOptions.isEnabled) {
+            // apply pan and zoom onto the svg
+            this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll("#rootGroup")[0], {
+                smoothScroll: this.options.zoomPanOptions.smoothScroll
+            }).zoomAbs(
+                this.options.zoomPanOptions.initialXPosition, // initial x position
+                this.options.zoomPanOptions.initialYPosition, // initial y position
+                this.options.zoomPanOptions.initialZoom  // initial zoom 
+            );
+        }
         // register a listener for all the clickable elements in the svg
         $(this.svgElement).on("click", "[svg-clickable]", (event) => {
             // fire the callback with the element name
