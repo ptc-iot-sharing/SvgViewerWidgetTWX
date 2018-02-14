@@ -8,6 +8,9 @@
 export function TWProperty(name) {
     return function (target, key, descriptor) {
         var setter;
+        var hasDescriptor = (descriptor !== undefined);
+        if (!hasDescriptor) descriptor = {};
+
         // Override the setter to call setProperty. It should also invoke the member's setter if it has one
         if (descriptor.set) {
             var previousSetter = descriptor.set;
@@ -36,19 +39,21 @@ export function TWProperty(name) {
 
             if (standardUpdateProperties) {
                 target.updateProperty = function (info) {
-                    if (this._decoratedProperties[info.TargetProperty]) this[this._decoratedProperties[info.TargetProperty]] = info.SinglePropertyValue;
+                    if (this._decoratedProperties[info.TargetProperty]) this[this._decoratedProperties[info.TargetProperty]] = info.SinglePropertyValue || info.RawSinglePropertyValue;
                     standardUpdateProperties.apply(this, arguments);
                 };
             }
             else {
                 target.updateProperty = function (info) {
-                    if (this._decoratedProperties[info.TargetProperty]) this[this._decoratedProperties[info.TargetProperty]] = info.SinglePropertyValue;
+                    if (this._decoratedProperties[info.TargetProperty]) this[this._decoratedProperties[info.TargetProperty]] = info.SinglePropertyValue || info.RawSinglePropertyValue;
                 };
             }
         }
 
         // Add this automatic property to the internal binding map
         target._decoratedProperties[name] = key;
+
+        if (!hasDescriptor) Object.defineProperty(target, key, descriptor);
     }
 }
 
@@ -85,6 +90,7 @@ export function TWService(name) {
 if (TW.IDE && (typeof TW.IDE.Widget == 'function')) {
     (function () {
         let TWWidgetConstructor = TW.IDE.Widget;
+        if (window.TWComposerWidget) return;
         let __BMTWInternalState;
         let __BMTWArguments;
         TW.IDE.Widget = function () {
@@ -164,6 +170,7 @@ if (TW.IDE && (typeof TW.IDE.Widget == 'function')) {
 if (typeof TW.Widget == 'function') {
     (function () {
         let TWWidgetConstructor = TW.Widget;
+        if (window.TWRuntimeWidget) return;
         let __BMTWInternalState;
         TW.Widget = function () {
             TWWidgetConstructor.apply(this, arguments);
