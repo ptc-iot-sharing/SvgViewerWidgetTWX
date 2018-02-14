@@ -44,8 +44,15 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             initialZoom: this.getProperty("InitialZoom") || 1,
             smoothScroll: this.getProperty("SmoothScroll"),
             initialXPosition: this.getProperty("InitialXPosition") || 0,
-            initialYPosition: this.getProperty("InitialYPosition") || 0
+            initialYPosition: this.getProperty("InitialYPosition") || 0,
+            elementClickedCallback: this.elementClicked
         }
+    }
+
+    // make sure to capture this using an arrow function
+    elementClicked = (elementName: string) => {
+        this.setProperty("SelectedElementID", elementName);
+        this.jqElement.triggerHandler("ElementClicked");
     }
 
     updateDrawnSvg(): void {

@@ -6,11 +6,7 @@
         {
             "type": "npm",
             "script": "watch",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "problemMatcher": []
         },
         {
             "type": "npm",
@@ -30,7 +26,11 @@
         {
             "type": "npm",
             "script": "upload",
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

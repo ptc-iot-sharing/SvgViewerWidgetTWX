@@ -27,11 +27,16 @@ export interface SvgRendererOptions {
      * The initial Y position of the zoomed file
      */
     initialYPosition: number;
-    
+
     /**
      * The initial zoom of the svg
      */
     initialZoom: number;
+
+    /** 
+     * Callback fired when a element is clicked
+     */
+    elementClickedCallback(elementName: string): void;
 }
 
 export interface SvgOverride {
@@ -80,7 +85,12 @@ export class SvgElement {
             this.options.initialXPosition, // initial x position
             this.options.initialYPosition, // initial y position
             this.options.initialZoom  // initial zoom 
-          );
+        );
+        // register a listener for all the clickable elements in the svg
+        $(this.svgElement).on("click", "[svg-clickable]", (event) => {
+            // fire the callback with the element name
+            this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+        });
         if (this.options.isDexpiDataSource) {
             // for dexpi files, the imagemap is at the start of the file
             // because svg files are rendered in the order of the nodes, we must move the imageMap note at the end
@@ -93,30 +103,37 @@ export class SvgElement {
     }
 
     public applyOverrides(overrideList: SvgOverride[]) {
+        // remove all exiting svg-clickable attributes
+        $(this.svgElement).find("[svg-clickable]").removeAttr("svg-clickable");
+        // iterate over the overrides
         for (const override of overrideList) {
             // find the elements to override
             let elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + override.elementName + '"] *');
             // iterate over them
             for (const element of elements) {
                 // iterate over the attributes to override
-               for (const attrOverride in override) {
-                   if (override.hasOwnProperty(attrOverride) && attrOverride.startsWith("override-")) {
-                       // override them
-                       element.setAttribute( attrOverride.substr("override-".length), override[attrOverride]);
-                   }
-               } 
-               // set the elements as clickable if we are not dealing with dexpi data
-               if(!this.options.isDexpiDataSource) {
-                   element.setAttribute("fill", "transparent");
-                    (<SVGElement>element).style.cursor = 'pointer'
-               }
+                for (const attrOverride in override) {
+                    if (override.hasOwnProperty(attrOverride) && attrOverride.startsWith("override-")) {
+                        // override them
+                        element.setAttribute(attrOverride.substr("override-".length), override[attrOverride]);
+                    }
+                }
+                // set the elements as clickable if we are not dealing with dexpi data
+                if (!this.options.isDexpiDataSource) {
+                    element.setAttribute("fill", "transparent");
+                    (<SVGElement>element).style.cursor = 'pointer';
+                    // mark the element as clickable
+                    element.setAttribute("svg-clickable", "");
+                }
             }
             // we if are dealing with dexpi data, handle the image map as well
-            if(this.options.isDexpiDataSource) {
-                let imageMapElements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + override.elementName + '"]'); 
+            if (this.options.isDexpiDataSource) {
+                let imageMapElements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + override.elementName + '"]');
                 for (const imageMapElement of imageMapElements) {
                     imageMapElement.setAttribute("fill", "transparent");
                     (<SVGElement>imageMapElement).style.cursor = 'pointer';
+                    // mark the element as clickable
+                    imageMapElement.setAttribute("svg-clickable", "");
                 }
             }
         }
