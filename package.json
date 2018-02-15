@@ -1,16 +1,16 @@
 {
     "name": "svgViewer",
-    "version": "1.0.71",
+    "version": "1.0.77",
     "description": "A svg viewer allowing viewing svg files, as well as interacting with them dynamically.",
     "thingworxServer": "http://localhost:8020/",
     "thingworxUser": "Administrator",
     "thingworxPassword": "admin",
     "author": "Thingworx Labs",
     "minimumThingWorxVersion": "6.0.0",
-    "homepage": "http://roicentersvn/placatus/DemoWebpackWidget",
+    "homepage": "http://roicentersvn/placatus/SvgViewerWidget",
     "repository": {
         "type": "git",
-        "url": "http://roicentersvn.ptcnet.ptc.com/placatus/DemoWebpackWidget.git"
+        "url": "http://roicentersvn.ptcnet.ptc.com/placatus/SvgViewerWidget.git"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",

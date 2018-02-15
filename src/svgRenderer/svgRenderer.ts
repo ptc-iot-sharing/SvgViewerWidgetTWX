@@ -13,6 +13,16 @@ export interface SvgRendererOptions {
      */
     isDexpiDataSource: boolean;
 
+    /**
+     * Height of the image. Use css units
+     */
+    imageHeight: string;
+
+    /**
+     * Width of the image. Use css units
+     */
+    imageWidth: string;
+
     zoomPanOptions: {
         /**
          * Enable or disable zoom and pan in the svg
@@ -78,6 +88,7 @@ export class SvgElement {
         let svgData = await this.loadSvgFile(this.svgFileUrl);
         // add it to the container
         this.container.html(svgData);
+        // create a new root group for all the groups in this svg
         let rootGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
         rootGroup.setAttributeNS(null, "id", "rootGroup");
         this.svgElement = this.container.find("svg")[0];
@@ -93,6 +104,10 @@ export class SvgElement {
                 this.options.zoomPanOptions.initialYPosition, // initial y position
                 this.options.zoomPanOptions.initialZoom  // initial zoom 
             );
+        } else {
+            // set the width and height
+            this.svgElement.setAttribute("height", this.options.imageHeight);
+            this.svgElement.setAttribute("width", this.options.imageWidth);
         }
         // register a listener for all the clickable elements in the svg
         $(this.svgElement).on("click", "[svg-clickable]", (event) => {

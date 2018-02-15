@@ -60,7 +60,7 @@ declare interface TWInfotable {
     /**
      * The contents of the infotable.
      */
-    rows: [any];
+    rows: any[];
 }
 
 /**
@@ -291,7 +291,7 @@ declare interface TWWidgetProperty {
      * If the baseType is set to `'STRING'`, this field may optionally specify a set of possible values for the property.
      * When this field is specified, the property will appear as a dropdown list in the composer, containing the values defined here.
      */
-    selectOptions?: [TWPropertySelectOption];
+    selectOptions?: TWPropertySelectOption[];
 
     /**
      * Defaults to false.
@@ -332,7 +332,7 @@ declare interface TWWidgetProperties {
      * An array of category names to which the widget belongs.
      * This makes it possible to filter the widget using the Category selector in the composer.
      */
-    category: [string];
+    category: string[];
 
     /**
      * Defaults to false. When set to true, the widget will be responsive and may be used in responsive layouts.
@@ -709,7 +709,7 @@ declare abstract class TWComposerWidget extends TWWidget {
      * @param result            Should be set to an empty array.
      *                          If the widget is found, it is added to this array.
      */
-    findFirstWidgetWithId(id: string, result: [TWWidget]): void;
+    findFirstWidgetWithId(id: string, result: TWWidget[]): void;
 
     /**
      * Finds the first child widget of this widget of the given type.
@@ -718,7 +718,7 @@ declare abstract class TWComposerWidget extends TWWidget {
      * @param result            Should be set to an empty array.
      *                          If the widget is found, it is added to this array.
      */
-    findFirstWidgetOfType(type: string, result: [TWWidget]): void;
+    findFirstWidgetOfType(type: string, result: TWWidget[]): void;
 
     /**
      * TBD
@@ -746,42 +746,42 @@ declare abstract class TWComposerWidget extends TWWidget {
      * Subclasses are expected to not override this method.
      * @return          An array of property definitions.
      */
-    findBindingSources(): [TWWidgetProperties];
+    findBindingSources(): TWWidgetProperties[];
 
     /**
      * Returns an array containing all of this widget's binding target properties.
      * Subclasses are expected to not override this method.
      * @return          An array of property definitions.
      */
-    findBindingTargets(): [TWWidgetProperties];
+    findBindingTargets(): TWWidgetProperties[];
 
     /**
      * Returns an array containing all of this widget's binding source properties that have `warnIfNotBoundAsSource` set to `true`.
      * Subclasses are expected to not override this method.
      * @return          An array of property definitions.
      */
-    findRequiredBindingSources(): [TWWidgetProperties];
+    findRequiredBindingSources(): TWWidgetProperties[];
 
     /**
      * Returns an array containing all of this widget's binding target properties that have `warnIfNotBoundAsTarget` set to `true`.
      * Subclasses are expected to not override this method.
      * @return          An array of property definitions.
      */
-    findRequiredBindingTargets(): [TWWidgetProperties];
+    findRequiredBindingTargets(): TWWidgetProperties[];
 
     /**
      * Returns an array containing all of this widget's events.
      * Subclasses are expected to not override this method.
      * @return          An array of property definitions.
      */
-    findBindingEvents(): [TWWidgetProperties];
+    findBindingEvents(): TWWidgetProperties[];
 
     /**
      * Returns an array containing all of this widget's events that have `warnIfNotBoundAsTarget` set to `true`.
      * Subclasses are expected to not override this method.
      * @return          An array of property definitions.
      */
-    findRequiredBindingEvents(): [TWWidgetProperties];
+    findRequiredBindingEvents(): TWWidgetProperties[];
 
     /**
      * Removes all bindings that have the given property as a target.
@@ -960,7 +960,7 @@ declare abstract class TWRuntimeWidget extends TWWidget {
      * @param preventEventTrigger       Defaults to false. If set to true, this update will not trigger the
      *                                  `SelectedRowsChanged` event of the service whose selection will be updated.
      */
-    updateSelection(property: string, selectedRowIndices: [number], preventEventTrigger?: boolean?): void;
+    updateSelection(property: string, selectedRowIndices: number[], preventEventTrigger?: boolean?): void;
 
     /**
      * Invoked by the platform when the selection for one of this widget's bound infotable properties
@@ -971,7 +971,7 @@ declare abstract class TWRuntimeWidget extends TWWidget {
      *                                  The position of the indexes in this array will match the positions
      *                                  of the objects in the `selectedRows` argument.
      */
-    handleSelectionUpdate?(property: string, selectedRows: [any], selectedRowIndices: [number]): void;
+    handleSelectionUpdate?(property: string, selectedRows: any[], selectedRowIndices: number[]): void;
 
     /**
      * Invoked internally when a bound property is updated as a result of its binding.
@@ -1151,7 +1151,7 @@ declare abstract class TWRuntimeWidget extends TWWidget {
      * Returns an array containing the child widgets of this widget.
      * The contents of the array returned by this method should not be modified.
      */
-    getWidgets(): [TWRuntimeWidget];
+    getWidgets(): TWRuntimeWidget[];
 
     /**
      * Should be invoked to replace the current page mashup.

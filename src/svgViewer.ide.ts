@@ -22,16 +22,6 @@ export class SvgViewerWidget extends TWComposerWidget {
                     baseType: 'IMAGELINK',
                     description: 'A link to a svg file'
                 },
-                ImageWidth: {
-                    defaultValue: '100%',
-                    description: 'The image width. Can be set in px, % or other units',
-                    baseType: 'STRING'
-                },
-                ImageHeight: {
-                    defaultValue: '100%',
-                    description: 'The image height. Can be set in px, % or other units',
-                    baseType: 'STRING'
-                },
                 Data: {
                     isBindingTarget: true,
                     isEditable: false,
@@ -77,7 +67,19 @@ export class SvgViewerWidget extends TWComposerWidget {
                     description: 'The initial zoom of the svg',
                     baseType: 'NUMBER',
                     defaultValue: 1
-                }
+                },
+                ImageWidth: {
+                    defaultValue: '100%',
+                    description: 'The image width. Can be set in px, % or other units',
+                    baseType: 'STRING',
+                    isVisible: false
+                },
+                ImageHeight: {
+                    defaultValue: '100%',
+                    description: 'The image height. Can be set in px, % or other units',
+                    baseType: 'STRING',
+                    isVisible: false
+                },
             }
         }
     };
@@ -110,14 +112,16 @@ export class SvgViewerWidget extends TWComposerWidget {
 
     afterSetProperty(name: string, value): boolean {
         let props = this.allWidgetProperties().properties;
-        if(name == "ZoomPanEnabled") {
+        if (name == "ZoomPanEnabled") {
             props["SmoothScroll"]["isVisible"] = value;
             props["InitialXPosition"]["isVisible"] = value;
             props["InitialYPosition"]["isVisible"] = value;
             props["InitialZoom"]["isVisible"] = value;
+            props["ImageWidth"]["isVisible"] = !value;
+            props["ImageHeight"]["isVisible"] = !value;
             this.updateProperties();
             return value;
-        } 
+        }
         return false;
     }
 

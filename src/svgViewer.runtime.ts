@@ -41,6 +41,8 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         return {
             isDexpiDataSource: this.getProperty('DexpiDataSource') || false,
             idField: this.getProperty("SVGIdField") || "id",
+            imageHeight: this.getProperty("ImageHeight") || "100%",
+            imageWidth: this.getProperty("ImageWidth") || "100%",
             zoomPanOptions: {
                 isEnabled: this.getProperty("ZoomPanEnabled"),
                 initialZoom: this.getProperty("InitialZoom") || 1,
@@ -55,6 +57,15 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     // make sure to capture this using an arrow function
     elementClicked = (elementName: string) => {
         this.setProperty("SelectedElementID", elementName);
+        let selectedRows = [];
+        // also update the row selection in the data array
+        for (let i = 0; i < this.svgData.rows.length; i++) {
+            const row = this.svgData.rows[i];
+            if(row.elementName == elementName) {
+                selectedRows.push(i);
+            }
+        }
+        this.updateSelection("Data", selectedRows);
         this.jqElement.triggerHandler("ElementClicked");
     }
 
