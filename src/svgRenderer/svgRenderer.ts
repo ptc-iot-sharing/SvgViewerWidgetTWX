@@ -126,6 +126,21 @@ export class SvgElement {
         }
     }
 
+    /**
+     * Creates a new title element as child for the given element. If it already exists, then it's reused
+     * @param element Parent element to use
+     * @param value Test to use as title
+     */
+    private addTitleToElement(element: Element, value: string) {
+        if (element.querySelector("title")) {
+            element.querySelector("title").textContent = value;
+        } else {
+            let title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+            title.textContent = value;
+            element.insertBefore(title, element.firstChild);
+        }
+    }
+
     public applyOverrides(overrideList: SvgOverride[]) {
         // remove all exiting svg-clickable attributes
         $(this.svgElement).find("[svg-clickable]").removeAttr("svg-clickable");
@@ -135,12 +150,20 @@ export class SvgElement {
             let elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + override.elementName + '"] *');
             // iterate over them
             for (const element of elements) {
+                // skip over title elements as they don't need to have this
+                if (element.tagName == "title") continue;
                 // iterate over the attributes to override
                 for (const attrOverride in override) {
-                    if (override.hasOwnProperty(attrOverride) && attrOverride.startsWith("override-")) {
-                        // override them
-                        element.setAttribute(attrOverride.substr("override-".length), override[attrOverride]);
+                    if (override.hasOwnProperty(attrOverride)) {
+                        if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
+                            // override them
+                            element.setAttribute(attrOverride.substr("override-".length), override[attrOverride]);
+                        }
+                        if (!this.options.isDexpiDataSource && attrOverride == "override-tooltip") {
+                            this.addTitleToElement(element, override[attrOverride]);
+                        }
                     }
+
                 }
                 // set the elements as clickable if we are not dealing with dexpi data
                 if (!this.options.isDexpiDataSource) {
@@ -158,6 +181,12 @@ export class SvgElement {
                     (<SVGElement>imageMapElement).style.cursor = 'pointer';
                     // mark the element as clickable
                     imageMapElement.setAttribute("svg-clickable", "");
+                    // iterate over the attributes to override
+                    for (const attrOverride in override) {
+                        if (override.hasOwnProperty(attrOverride) && attrOverride == "override-tooltip") {
+                            this.addTitleToElement(imageMapElement, override[attrOverride]);
+                        }
+                    }
                 }
             }
         }
