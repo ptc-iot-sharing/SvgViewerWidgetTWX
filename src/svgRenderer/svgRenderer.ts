@@ -98,7 +98,8 @@ export class SvgElement {
         if (this.options.zoomPanOptions.isEnabled) {
             // apply pan and zoom onto the svg
             this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll("#rootGroup")[0], {
-                smoothScroll: this.options.zoomPanOptions.smoothScroll
+                smoothScroll: this.options.zoomPanOptions.smoothScroll,
+                bounds: true
             }).zoomAbs(
                 this.options.zoomPanOptions.initialXPosition, // initial x position
                 this.options.zoomPanOptions.initialYPosition, // initial y position
