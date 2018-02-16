@@ -40,6 +40,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     createRendererSettings(): SvgRendererOptions {
         return {
             isDexpiDataSource: this.getProperty('DexpiDataSource') || false,
+            overrideIdField: this.getProperty("DataIdField") || "elementName",
             idField: this.getProperty("SVGIdField") || "id",
             imageHeight: this.getProperty("ImageHeight") || "100%",
             imageWidth: this.getProperty("ImageWidth") || "100%",
@@ -61,7 +62,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         // also update the row selection in the data array
         for (let i = 0; i < this.svgData.rows.length; i++) {
             const row = this.svgData.rows[i];
-            if(row.elementName == elementName) {
+            if(row[this.getProperty("DataIdField")] == elementName) {
                 selectedRows.push(i);
             }
         }

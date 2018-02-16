@@ -23,6 +23,11 @@ export interface SvgRendererOptions {
      */
     imageWidth: string;
 
+    /**
+     * The name of the field in the override list
+     */
+    overrideIdField: string;
+
     zoomPanOptions: {
         /**
          * Enable or disable zoom and pan in the svg
@@ -147,7 +152,7 @@ export class SvgElement {
         // iterate over the overrides
         for (const override of overrideList) {
             // find the elements to override
-            let elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + override.elementName + '"] *');
+            let elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"] *');
             // iterate over them
             for (const element of elements) {
                 // skip over title elements as they don't need to have this
@@ -175,7 +180,7 @@ export class SvgElement {
             }
             // we if are dealing with dexpi data, handle the image map as well
             if (this.options.isDexpiDataSource) {
-                let imageMapElements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + override.elementName + '"]');
+                let imageMapElements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"]');
                 for (const imageMapElement of imageMapElements) {
                     imageMapElement.setAttribute("fill", "transparent");
                     (<SVGElement>imageMapElement).style.cursor = 'pointer';
