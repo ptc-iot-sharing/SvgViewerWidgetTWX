@@ -81,11 +81,6 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     updateProperty(info: TWUpdatePropertyInfo): void {
     }
 
-    @TWService("TestService")
-    testService(): void {
-        alert("Called via binding");
-    }
-
     beforeDestroy?(): void {
         if (this.svgRenderer) {
             this.svgRenderer.dispose();

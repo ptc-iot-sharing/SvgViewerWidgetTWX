@@ -92,8 +92,6 @@ export class SvgViewerWidget extends TWComposerWidget {
 
     widgetServices(): Dictionary<TWWidgetService> {
         return {
-            "TestService": {
-            }
         };
     };
 
