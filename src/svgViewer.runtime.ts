@@ -1,6 +1,6 @@
 import { ThingworxRuntimeWidget, TWService, TWProperty } from './support/widgetRuntimeSupport'
 
-import { SvgElement, SvgRendererOptions } from './svgRenderer/svgRenderer'
+import { SvgElement, SvgRendererOptions, SvgOverride } from './svgRenderer/svgRenderer'
 
 @ThingworxRuntimeWidget
 export class SvgViewerWidget extends TWRuntimeWidget {
@@ -30,6 +30,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
 
     renderHtml(): string {
         require("./styles/runtime.css");
+
         return '<div class="widget-content widget-svg-viewer"></div>';
     };
 
@@ -51,8 +52,24 @@ export class SvgViewerWidget extends TWRuntimeWidget {
                 initialXPosition: this.getProperty("InitialXPosition") || 0,
                 initialYPosition: this.getProperty("InitialYPosition") || 0
             },
-            elementClickedCallback: this.elementClicked
+            elementClickedCallback: this.elementClicked,
+            selectedOverride: this.styleToOverrideList()
         }
+    }
+
+    styleToOverrideList(): SvgOverride {
+        let selectedOverride = <SvgOverride>{};;
+        let selectedStyle = TW.getStyleFromStyleDefinition(this.getProperty('SelectedStyle'));
+        if (selectedStyle.image)
+            selectedOverride["override-fill"] = "url(#img1)"; 
+        if (selectedStyle.backgroundColor)
+            selectedOverride["override-fill"] = selectedStyle.backgroundColor;
+        if (selectedStyle.lineColor)
+            selectedOverride["override-stroke"] = selectedStyle.lineColor;
+        if (selectedStyle.lineThickness)
+            selectedOverride["override-stroke-width"] = selectedStyle.lineThickness;
+
+        return selectedOverride;
     }
 
     // make sure to capture this using an arrow function
@@ -62,7 +79,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         // also update the row selection in the data array
         for (let i = 0; i < this.svgData.rows.length; i++) {
             const row = this.svgData.rows[i];
-            if(row[this.getProperty("DataIdField")] == elementName) {
+            if (row[this.getProperty("DataIdField")] == elementName) {
                 selectedRows.push(i);
             }
         }
@@ -79,6 +96,16 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     }
 
     updateProperty(info: TWUpdatePropertyInfo): void {
+    }
+
+    handleSelectionUpdate(propertyName, selectedRows, selectedRowIndices) {
+        switch (propertyName) {
+            case "Data":
+                if(this.svgRenderer) {
+                    let elementName = selectedRows.length > 0 ? selectedRows[0][this.getProperty("DataIdField")] : "";
+                    this.svgRenderer.triggerElementSelectionByName(elementName);
+                }
+        }
     }
 
     beforeDestroy?(): void {

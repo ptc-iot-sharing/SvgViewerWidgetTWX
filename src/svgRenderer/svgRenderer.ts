@@ -58,6 +58,11 @@ export interface SvgRendererOptions {
      * Callback fired when a element is clicked
      */
     elementClickedCallback(elementName: string): void;
+
+    /** 
+     * List of overrides for the selected element
+     */
+    selectedOverride: SvgOverride;
 }
 
 export interface SvgOverride {
@@ -117,6 +122,9 @@ export class SvgElement {
         }
         // register a listener for all the clickable elements in the svg
         $(this.svgElement).on("click", "[svg-clickable]", (event) => {
+            // remove existing selected elements
+            $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
+            this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
             this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
         });
@@ -131,6 +139,30 @@ export class SvgElement {
         }
     }
 
+    private triggerElementSelection(element: Element) {
+        // add the tag to the element
+        element.setAttribute("svg-selected", "");
+        // set the style of the selected element
+        this.applyOverrideToElement(element, this.options.selectedOverride);
+    }
+
+    public triggerElementSelectionByName(elementName: string) {
+        // remove existing selected elements
+        $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
+        let elements;
+        if (this.options.isDexpiDataSource) {
+            // we if are dealing with dexpi data apply changes to the image map
+            elements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + elementName + '"]');
+
+        } else {
+            // find the elements
+            elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + elementName + '"] *');
+        }
+        // iterate over them
+        for (const element of elements) {
+            this.applyOverrideToElement(element, this.options.selectedOverride);
+        }
+    }
     /**
      * Creates a new title element as child for the given element. If it already exists, then it's reused
      * @param element Parent element to use
@@ -157,19 +189,7 @@ export class SvgElement {
             for (const element of elements) {
                 // skip over title elements as they don't need to have this
                 if (element.tagName == "title") continue;
-                // iterate over the attributes to override
-                for (const attrOverride in override) {
-                    if (override.hasOwnProperty(attrOverride)) {
-                        if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
-                            // override them
-                            element.setAttribute(attrOverride.substr("override-".length), override[attrOverride]);
-                        }
-                        if (!this.options.isDexpiDataSource && attrOverride == "override-tooltip") {
-                            this.addTitleToElement(element, override[attrOverride]);
-                        }
-                    }
-
-                }
+                this.applyOverrideToElement(element, override);
                 // set the elements as clickable if we are not dealing with dexpi data
                 if (!this.options.isDexpiDataSource) {
                     element.setAttribute("fill", "transparent");
@@ -194,6 +214,22 @@ export class SvgElement {
                     }
                 }
             }
+        }
+    }
+
+    private applyOverrideToElement(element: Element, override: SvgOverride) {
+        // iterate over the attributes to override
+        for (const attrOverride in override) {
+            if (override.hasOwnProperty(attrOverride)) {
+                if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
+                    // override them
+                    element.setAttribute(attrOverride.substr("override-".length), override[attrOverride]);
+                }
+                if (!this.options.isDexpiDataSource && attrOverride == "override-tooltip") {
+                    this.addTitleToElement(element, override[attrOverride]);
+                }
+            }
+
         }
     }
 

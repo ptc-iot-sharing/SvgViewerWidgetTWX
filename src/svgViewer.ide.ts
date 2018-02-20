@@ -42,8 +42,12 @@ export class SvgViewerWidget extends TWComposerWidget {
                 SelectedElementID: {
                     description: "The id of the element that was just clicked",
                     isBindingSource: true,
-                    baseType: 'STRING'
+                    baseType: "STRING"
                 },
+                SelectedStyle: {
+					description: 'Style defining how a selected element appears.',
+					baseType: 'STYLEDEFINITION'
+				},
                 DexpiDataSource: {
                     description: 'Specifies if the svg file is a svg file converted from dexpi.',
                     baseType: 'BOOLEAN',
