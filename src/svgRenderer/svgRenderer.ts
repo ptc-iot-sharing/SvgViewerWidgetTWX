@@ -147,8 +147,13 @@ export class SvgElement {
     }
 
     public triggerElementSelectionByName(elementName: string) {
+        // remove the override from the selected elements
+        let selectedElements =  $(this.svgElement).find("[svg-selected]");
+        for (const element of selectedElements) {
+            element.setAttribute("fill", "transparent");
+        }
         // remove existing selected elements
-        $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
+        selectedElements.removeAttr("svg-selected");
         // if the element has no name, just return
         if(!elementName) {
             return;
@@ -165,6 +170,8 @@ export class SvgElement {
         // iterate over them
         for (const element of elements) {
             this.applyOverrideToElement(element, this.options.selectedOverride);
+            // add the tag to the element
+            element.setAttribute("svg-selected", "");
         }
     }
     /**
