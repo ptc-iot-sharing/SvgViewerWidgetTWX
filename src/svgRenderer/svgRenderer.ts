@@ -196,7 +196,9 @@ export class SvgElement {
                 this.applyOverrideToElement(element, override);
                 // set the elements as clickable if we are not dealing with dexpi data
                 if (!this.options.isDexpiDataSource) {
-                    element.setAttribute("fill", "transparent");
+                    if(element.getAttribute("fill") == "none") {
+                        element.setAttribute("fill", "transparent");
+                    }
                     (<SVGElement>element).style.cursor = 'pointer';
                     // mark the element as clickable
                     element.setAttribute("svg-clickable", "");
@@ -207,7 +209,7 @@ export class SvgElement {
                 let imageMapElements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"]');
                 for (const imageMapElement of imageMapElements) {
                     // if there is no previously set fill, then set one
-                    if(!imageMapElement.getAttribute("fill")) {
+                    if(imageMapElement.getAttribute("fill") == "none") {
                         imageMapElement.setAttribute("fill", "transparent");
                     }
                     (<SVGElement>imageMapElement).style.cursor = 'pointer';
