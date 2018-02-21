@@ -21,7 +21,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         this.updateDrawnSvg();
     };
 
-    @TWProperty("Data")
+    @TWProperty("OverrideList")
     set svgData(value: TWInfotable) {
         if (this.svgRenderer) {
             this.svgRenderer.applyOverrides(value.rows);

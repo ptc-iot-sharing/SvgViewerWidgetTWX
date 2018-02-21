@@ -149,6 +149,10 @@ export class SvgElement {
     public triggerElementSelectionByName(elementName: string) {
         // remove existing selected elements
         $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
+        // if the element has no name, just return
+        if(!elementName) {
+            return;
+        }
         let elements;
         if (this.options.isDexpiDataSource) {
             // we if are dealing with dexpi data apply changes to the image map
@@ -202,7 +206,10 @@ export class SvgElement {
             if (this.options.isDexpiDataSource) {
                 let imageMapElements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"]');
                 for (const imageMapElement of imageMapElements) {
-                    imageMapElement.setAttribute("fill", "transparent");
+                    // if there is no previously set fill, then set one
+                    if(!imageMapElement.getAttribute("fill")) {
+                        imageMapElement.setAttribute("fill", "transparent");
+                    }
                     (<SVGElement>imageMapElement).style.cursor = 'pointer';
                     // mark the element as clickable
                     imageMapElement.setAttribute("svg-clickable", "");

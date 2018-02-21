@@ -25,10 +25,22 @@ export class SvgViewerWidget extends TWComposerWidget {
                 Data: {
                     isBindingTarget: true,
                     isEditable: false,
-                    description: 'A infotable with overrides for svg attribute styles',
+                    description: 'A infotable with the element information',
                     baseType: 'INFOTABLE',
                 },
                 DataIdField: {
+                    baseType: 'FIELDNAME',
+                    sourcePropertyName: 'Data',
+                    defaultValue: 'elementName',
+                    description: 'The field in the Data infotable to use for matching with the SVGIdField'
+                },
+                OverrideList: {
+                    isBindingTarget: true,
+                    isEditable: false,
+                    description: 'A infotable with overrides for svg attribute styles',
+                    baseType: 'INFOTABLE',
+                },
+                OverrideListIdField: {
                     baseType: 'FIELDNAME',
                     sourcePropertyName: 'Data',
                     defaultValue: 'elementName',
