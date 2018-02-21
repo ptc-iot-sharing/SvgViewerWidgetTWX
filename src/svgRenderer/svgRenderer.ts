@@ -122,8 +122,6 @@ export class SvgElement {
         }
         // register a listener for all the clickable elements in the svg
         $(this.svgElement).on("click", "[svg-clickable]", (event) => {
-            // remove existing selected elements
-            $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
             this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
@@ -140,6 +138,14 @@ export class SvgElement {
     }
 
     private triggerElementSelection(element: Element) {
+        // remove the override from the selected elements
+        let selectedElements = $(this.svgElement).find("[svg-selected]");
+        for (const element of selectedElements) {
+            element.setAttribute("fill", "transparent");
+            element.setAttribute("stroke", "transparent");
+        }
+        // remove existing selected elements
+        selectedElements.removeAttr("svg-selected");
         // add the tag to the element
         element.setAttribute("svg-selected", "");
         // set the style of the selected element
@@ -148,14 +154,15 @@ export class SvgElement {
 
     public triggerElementSelectionByName(elementName: string) {
         // remove the override from the selected elements
-        let selectedElements =  $(this.svgElement).find("[svg-selected]");
+        let selectedElements = $(this.svgElement).find("[svg-selected]");
         for (const element of selectedElements) {
             element.setAttribute("fill", "transparent");
+            element.setAttribute("stroke", "transparent");
         }
         // remove existing selected elements
         selectedElements.removeAttr("svg-selected");
         // if the element has no name, just return
-        if(!elementName) {
+        if (!elementName) {
             return;
         }
         let elements;
@@ -203,7 +210,7 @@ export class SvgElement {
                 this.applyOverrideToElement(element, override);
                 // set the elements as clickable if we are not dealing with dexpi data
                 if (!this.options.isDexpiDataSource) {
-                    if(element.getAttribute("fill") == "none") {
+                    if (element.getAttribute("fill") == "none") {
                         element.setAttribute("fill", "transparent");
                     }
                     (<SVGElement>element).style.cursor = 'pointer';
@@ -216,7 +223,7 @@ export class SvgElement {
                 let imageMapElements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"]');
                 for (const imageMapElement of imageMapElements) {
                     // if there is no previously set fill, then set one
-                    if(imageMapElement.getAttribute("fill") == "none") {
+                    if (imageMapElement.getAttribute("fill") == "none") {
                         imageMapElement.setAttribute("fill", "transparent");
                     }
                     (<SVGElement>imageMapElement).style.cursor = 'pointer';
