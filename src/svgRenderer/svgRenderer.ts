@@ -60,6 +60,16 @@ export interface SvgRendererOptions {
     elementClickedCallback(elementName: string): void;
 
     /** 
+     * Callback fired when a element is double clicked
+     */
+    elementDoubleClickedCallback(elementName: string): void;
+
+    /** 
+     * Callback fired when a element is middle clicked
+     */
+    elementMiddleClickedCallback(elementName: string): void;
+
+    /** 
      * List of overrides for the selected element
      */
     selectedOverride: SvgOverride;
@@ -125,6 +135,20 @@ export class SvgElement {
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
             this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+        });
+        // register a listener for all the clickable elements in the svg, for double click
+        $(this.svgElement).on("dblclick", "[svg-clickable]", (event) => {
+            this.triggerElementSelection(event.currentTarget);
+            // fire the callback with the element name
+            this.options.elementDoubleClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+        });
+        // register a listener for all the clickable elements in the svg, for mouse down, listening for middle click
+        $(this.svgElement).on("mousedown", "[svg-clickable]", (event) => {
+            if (event.which == 2) {
+                this.triggerElementSelection(event.currentTarget);
+                // fire the callback with the element name
+                this.options.elementMiddleClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+            }
         });
         if (this.options.isDexpiDataSource) {
             // for dexpi files, the imagemap is at the start of the file

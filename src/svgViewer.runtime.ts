@@ -52,7 +52,9 @@ export class SvgViewerWidget extends TWRuntimeWidget {
                 initialXPosition: this.getProperty("InitialXPosition") || 0,
                 initialYPosition: this.getProperty("InitialYPosition") || 0
             },
-            elementClickedCallback: this.elementClicked,
+            elementClickedCallback: this.generateEventTriggerForHandlerNamed("ElementClicked"),
+            elementDoubleClickedCallback: this.generateEventTriggerForHandlerNamed("ElementDoubleClicked"),
+            elementMiddleClickedCallback: this.generateEventTriggerForHandlerNamed("ElementMiddleClicked"),
             selectedOverride: this.styleToOverrideList()
         }
     }
@@ -72,8 +74,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         return selectedOverride;
     }
 
-    // make sure to capture this using an arrow function
-    elementClicked = (elementName: string) => {
+    generateEventTriggerForHandlerNamed = (handlerName) => (elementName: string) => {
         this.setProperty("SelectedElementID", elementName);
         let selectedRows = [];
         // also update the row selection in the data array
@@ -84,7 +85,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             }
         }
         this.updateSelection("Data", selectedRows);
-        this.jqElement.triggerHandler("ElementClicked");
+        this.jqElement.triggerHandler(handlerName);
     }
 
     updateDrawnSvg(): void {

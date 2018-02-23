@@ -57,9 +57,9 @@ export class SvgViewerWidget extends TWComposerWidget {
                     baseType: "STRING"
                 },
                 SelectedStyle: {
-					description: 'Style defining how a selected element appears.',
-					baseType: 'STYLEDEFINITION'
-				},
+                    description: 'Style defining how a selected element appears.',
+                    baseType: 'STYLEDEFINITION'
+                },
                 DexpiDataSource: {
                     description: 'Specifies if the svg file is a svg file converted from dexpi.',
                     baseType: 'BOOLEAN',
@@ -114,8 +114,16 @@ export class SvgViewerWidget extends TWComposerWidget {
     widgetEvents(): Dictionary<TWWidgetEvent> {
         return {
             ElementClicked: {
-                warnIfNotBound: true,
+                warnIfNotBound: false,
                 description: 'Triggered after an named element was clicked'
+            },
+            ElementDoubleClicked: {
+                warnIfNotBound: false,
+                description: 'Triggered after an named element double was clicked'
+            },
+            ElementMiddleClicked: {
+                warnIfNotBound: false,
+                description: 'Triggered after an named element middle was clicked'
             }
         };
     }
