@@ -97,17 +97,40 @@ export class SvgElement {
 
     svgElement: HTMLElement;
 
+    previousOverrideElements: { element: Element, cachedStyle: string }[] = [];
+
     constructor(container: JQuery, svgFile: string, options: SvgRendererOptions) {
         this.svgFileUrl = svgFile;
         this.container = container;
         this.options = options;
+        // clear the contents of the contaienr
+        container[0].innerHTML = "";
+        // create css styles out of the selected overrides and append them to the widget
+        let styleAttr: { attr: string, value: string }[] = [];
+        for (const attrOverride in this.options.selectedOverride) {
+            if (this.options.selectedOverride.hasOwnProperty(attrOverride)) {
+                if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
+                    // construct the style attr
+                    styleAttr.push({ attr: attrOverride.substr("override-".length), value: this.options.selectedOverride[attrOverride] });
+                }
+            }
+        }
+        let selectedCssStyleDef = `#${container[0].id} [svg-selected] {`;
+        selectedCssStyleDef += styleAttr.map((val) => `${val.attr}: ${val.value} !important`).join(";\n");
+        selectedCssStyleDef += "}";
+
+        let selectedCssStyle = document.createElement("style");
+        selectedCssStyle.type = "text/css";
+        selectedCssStyle.innerHTML = selectedCssStyleDef;
+
+        container[0].appendChild(selectedCssStyle);
     }
 
     public async createSvgElement() {
         // get the svg data as we need to inline it
         let svgData = await this.loadSvgFile(this.svgFileUrl);
         // add it to the container
-        this.container.html(svgData);
+        this.container[0].innerHTML += (svgData);
         // create a new root group for all the groups in this svg
         let rootGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
         rootGroup.setAttributeNS(null, "id", "rootGroup");
@@ -163,28 +186,14 @@ export class SvgElement {
 
     private triggerElementSelection(element: Element) {
         // remove the override from the selected elements
-        let selectedElements = $(this.svgElement).find("[svg-selected]");
-        for (const element of selectedElements) {
-            element.setAttribute("fill", "transparent");
-            element.setAttribute("stroke", "transparent");
-        }
-        // remove existing selected elements
-        selectedElements.removeAttr("svg-selected");
+        $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
         // add the tag to the element
         element.setAttribute("svg-selected", "");
-        // set the style of the selected element
-        this.applyOverrideToElement(element, this.options.selectedOverride);
     }
 
     public triggerElementSelectionByName(elementName: string) {
         // remove the override from the selected elements
-        let selectedElements = $(this.svgElement).find("[svg-selected]");
-        for (const element of selectedElements) {
-            element.setAttribute("fill", "transparent");
-            element.setAttribute("stroke", "transparent");
-        }
-        // remove existing selected elements
-        selectedElements.removeAttr("svg-selected");
+        let selectedElements = $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
         // if the element has no name, just return
         if (!elementName) {
             return;
@@ -200,7 +209,6 @@ export class SvgElement {
         }
         // iterate over them
         for (const element of elements) {
-            this.applyOverrideToElement(element, this.options.selectedOverride);
             // add the tag to the element
             element.setAttribute("svg-selected", "");
         }
@@ -221,6 +229,10 @@ export class SvgElement {
     }
 
     public applyOverrides(overrideList: SvgOverride[]) {
+        // reset the existing elements
+        for (const elementInfo of this.previousOverrideElements) {
+            elementInfo.element.setAttribute("style", elementInfo.cachedStyle);
+        }
         // remove all exiting svg-clickable attributes
         $(this.svgElement).find("[svg-clickable]").removeAttr("svg-clickable");
         // iterate over the overrides
@@ -231,28 +243,19 @@ export class SvgElement {
             for (const element of elements) {
                 // skip over title elements as they don't need to have this
                 if (element.tagName == "title") continue;
+                // for dexpi, we do not need to apply overrides to the elements in imageMap
+                if (this.options.isDexpiDataSource && element.parentElement.id == "ImageMap") continue;
                 this.applyOverrideToElement(element, override);
                 // set the elements as clickable if we are not dealing with dexpi data
                 if (!this.options.isDexpiDataSource) {
-                    if (element.getAttribute("fill") == "none") {
-                        element.setAttribute("fill", "transparent");
-                    }
-                    (<SVGElement>element).style.cursor = 'pointer';
-                    // mark the element as clickable
-                    element.setAttribute("svg-clickable", "");
+                    this.applyClickableToElement(element);
                 }
             }
             // we if are dealing with dexpi data, handle the image map as well
             if (this.options.isDexpiDataSource) {
                 let imageMapElements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"]');
                 for (const imageMapElement of imageMapElements) {
-                    // if there is no previously set fill, then set one
-                    if (imageMapElement.getAttribute("fill") == "none") {
-                        imageMapElement.setAttribute("fill", "transparent");
-                    }
-                    (<SVGElement>imageMapElement).style.cursor = 'pointer';
-                    // mark the element as clickable
-                    imageMapElement.setAttribute("svg-clickable", "");
+                    this.applyClickableToElement(imageMapElement);
                     // iterate over the attributes to override
                     for (const attrOverride in override) {
                         if (override.hasOwnProperty(attrOverride) && attrOverride == "override-tooltip") {
@@ -264,19 +267,29 @@ export class SvgElement {
         }
     }
 
+    private applyClickableToElement(element: Element) {
+        // mark the element as clickable
+        element.setAttribute("svg-clickable", "");
+        (<SVGElement>element).style.cursor = 'pointer';
+        // if there is no previously set fill, then set one
+        if (!(<SVGElement>element).style.fill) {
+            (<SVGElement>element).style.fill = 'transparent';
+        }
+    }
+
     private applyOverrideToElement(element: Element, override: SvgOverride) {
+        this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style") });
         // iterate over the attributes to override
         for (const attrOverride in override) {
             if (override.hasOwnProperty(attrOverride)) {
                 if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
-                    // override them
-                    element.setAttribute(attrOverride.substr("override-".length), override[attrOverride]);
+                    // construct the style attr based on overrides
+                    (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
                 }
                 if (!this.options.isDexpiDataSource && attrOverride == "override-tooltip") {
                     this.addTitleToElement(element, override[attrOverride]);
                 }
             }
-
         }
     }
 
