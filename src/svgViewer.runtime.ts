@@ -21,7 +21,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         this.updateDrawnSvg();
     };
 
-    @TWProperty("OverrideList")
+    @TWProperty("Data")
     set svgData(value: TWInfotable) {
         if (this.svgRenderer) {
             this.svgRenderer.applyOverrides(value.rows);
@@ -55,7 +55,8 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             elementClickedCallback: this.generateEventTriggerForHandlerNamed("ElementClicked"),
             elementDoubleClickedCallback: this.generateEventTriggerForHandlerNamed("ElementDoubleClicked"),
             elementMiddleClickedCallback: this.generateEventTriggerForHandlerNamed("ElementMiddleClicked"),
-            selectedOverride: this.styleToOverrideList()
+            selectedOverride: this.styleToOverrideList(),
+            selectionTrigger: this.applySelection
         }
     }
 
@@ -76,6 +77,11 @@ export class SvgViewerWidget extends TWRuntimeWidget {
 
     generateEventTriggerForHandlerNamed = (handlerName) => (elementName: string) => {
         this.setProperty("SelectedElementID", elementName);
+        this.applySelection(elementName);
+        this.jqElement.triggerHandler(handlerName);
+    }
+
+    applySelection = (elementName: string) => {
         let selectedRows = [];
         // also update the row selection in the data array
         for (let i = 0; i < this.svgData.rows.length; i++) {
@@ -85,7 +91,6 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             }
         }
         this.updateSelection("Data", selectedRows);
-        this.jqElement.triggerHandler(handlerName);
     }
 
     updateDrawnSvg(): void {

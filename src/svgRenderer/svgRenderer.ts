@@ -73,6 +73,12 @@ export interface SvgRendererOptions {
      * List of overrides for the selected element
      */
     selectedOverride: SvgOverride;
+
+    /**
+     * Used to trigger the selection to external systems
+     * @param elementName name of the element selected
+     */
+    selectionTrigger(elementName: string): void;
 }
 
 export interface SvgOverride {
@@ -98,6 +104,8 @@ export class SvgElement {
     svgElement: HTMLElement;
 
     previousOverrideElements: { element: Element, cachedStyle: string }[] = [];
+
+    currentSelectedElement: string;
 
     constructor(container: JQuery, svgFile: string, options: SvgRendererOptions) {
         this.svgFileUrl = svgFile;
@@ -229,6 +237,7 @@ export class SvgElement {
     }
 
     public applyOverrides(overrideList: SvgOverride[]) {
+        this.options.selectionTrigger(this.currentSelectedElement);
         // reset the existing elements
         for (const elementInfo of this.previousOverrideElements) {
             elementInfo.element.setAttribute("style", elementInfo.cachedStyle);
@@ -244,7 +253,7 @@ export class SvgElement {
                 // for dexpi, we do not need to apply overrides to the elements in imageMap
                 if (this.options.isDexpiDataSource && element.parentElement.id == "ImageMap") continue;
                 // apply the overrides to the children
-                for(const child of element.children) {
+                for (const child of element.children) {
                     this.applyOverrideToElement(child, override);
                 }
                 // set the elements as clickable if we are not dealing with dexpi data
