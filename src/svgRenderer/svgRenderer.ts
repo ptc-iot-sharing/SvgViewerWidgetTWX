@@ -115,7 +115,7 @@ export class SvgElement {
                 }
             }
         }
-        let selectedCssStyleDef = `#${container[0].id} [svg-selected] {`;
+        let selectedCssStyleDef = `#${container[0].id} [svg-selected] *, #${container[0].id} [svg-selected] {`;
         selectedCssStyleDef += styleAttr.map((val) => `${val.attr}: ${val.value} !important`).join(";\n");
         selectedCssStyleDef += "}";
 
@@ -205,7 +205,7 @@ export class SvgElement {
 
         } else {
             // find the elements
-            elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + elementName + '"] *');
+            elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + elementName + '"]');
         }
         // iterate over them
         for (const element of elements) {
@@ -238,14 +238,15 @@ export class SvgElement {
         // iterate over the overrides
         for (const override of overrideList) {
             // find the elements to override
-            let elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"] *');
+            let elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"]');
             // iterate over them
             for (const element of elements) {
-                // skip over title elements as they don't need to have this
-                if (element.tagName == "title") continue;
                 // for dexpi, we do not need to apply overrides to the elements in imageMap
                 if (this.options.isDexpiDataSource && element.parentElement.id == "ImageMap") continue;
-                this.applyOverrideToElement(element, override);
+                // apply the overrides to the children
+                for(const child of element.children) {
+                    this.applyOverrideToElement(child, override);
+                }
                 // set the elements as clickable if we are not dealing with dexpi data
                 if (!this.options.isDexpiDataSource) {
                     this.applyClickableToElement(element);
@@ -278,6 +279,8 @@ export class SvgElement {
     }
 
     private applyOverrideToElement(element: Element, override: SvgOverride) {
+        // skip over title elements as they don't need to have overrides
+        if (element.tagName == "title") return;
         this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style") });
         // iterate over the attributes to override
         for (const attrOverride in override) {
