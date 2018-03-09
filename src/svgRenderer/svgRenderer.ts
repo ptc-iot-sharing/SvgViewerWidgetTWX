@@ -151,7 +151,8 @@ export class SvgElement {
             this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll("#rootGroup")[0], {
                 smoothScroll: this.options.zoomPanOptions.smoothScroll,
                 bounds: true
-            }).zoomAbs(
+            });
+            this.panandZoomInstance.zoomAbs(
                 this.options.zoomPanOptions.initialXPosition, // initial x position
                 this.options.zoomPanOptions.initialYPosition, // initial y position
                 this.options.zoomPanOptions.initialZoom  // initial zoom 
@@ -193,6 +194,7 @@ export class SvgElement {
     }
 
     private triggerElementSelection(element: Element) {
+        this.currentSelectedElement = element.getAttribute(this.options.idField);
         // remove the override from the selected elements
         $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
         // add the tag to the element
@@ -200,6 +202,7 @@ export class SvgElement {
     }
 
     public triggerElementSelectionByName(elementName: string) {
+        this.currentSelectedElement = elementName;
         // remove the override from the selected elements
         let selectedElements = $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
         // if the element has no name, just return
@@ -209,11 +212,11 @@ export class SvgElement {
         let elements;
         if (this.options.isDexpiDataSource) {
             // we if are dealing with dexpi data apply changes to the image map
-            elements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + elementName + '"]');
+            elements = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${elementName}"]`);
 
         } else {
             // find the elements
-            elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + elementName + '"]');
+            elements = this.svgElement.querySelectorAll(`[${this.options.idField}="${elementName}"]`);
         }
         // iterate over them
         for (const element of elements) {
@@ -247,7 +250,7 @@ export class SvgElement {
         // iterate over the overrides
         for (const override of overrideList) {
             // find the elements to override
-            let elements = this.svgElement.querySelectorAll('[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"]');
+            let elements = this.svgElement.querySelectorAll(`[${this.options.idField}="${override[this.options.overrideIdField]}"]`);
             // iterate over them
             for (const element of elements) {
                 // for dexpi, we do not need to apply overrides to the elements in imageMap
@@ -263,7 +266,7 @@ export class SvgElement {
             }
             // we if are dealing with dexpi data, handle the image map as well
             if (this.options.isDexpiDataSource) {
-                let imageMapElements = this.svgElement.querySelectorAll('#ImageMap>rect[' + this.options.idField + '="' + override[this.options.overrideIdField] + '"]');
+                let imageMapElements = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${override[this.options.overrideIdField]}"]`);
                 for (const imageMapElement of imageMapElements) {
                     this.applyClickableToElement(imageMapElement);
                     // iterate over the attributes to override
@@ -307,6 +310,39 @@ export class SvgElement {
 
     public dispose() {
         this.panandZoomInstance.dispose();
+    }
+
+    /**
+     * Pan onto the given element
+     * @param elementName Element to zoom onto. If multiple elements exist, use the first one
+     */
+    public panOntoElement() {
+        if (this.panandZoomInstance) {
+            // find the first selected element
+            let selectedElement: Element;
+            if (this.options.isDexpiDataSource) {
+                selectedElement = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${this.currentSelectedElement}"]`)[0];
+            } else {
+                selectedElement = this.svgElement.querySelectorAll(`[${this.options.idField}="${this.currentSelectedElement}"]`)[0];
+            }
+            if (selectedElement) {
+                // find the size of the element we are zooming into
+                let clientRect = selectedElement.getBoundingClientRect();
+                let cx = clientRect.left + clientRect.width / 2;
+                let cy = clientRect.top + clientRect.height / 2;
+                // find the size of the container
+                let container = this.container[0].getBoundingClientRect();
+                let dx = container.left + container.width / 2 - cx;
+                let dy = container.top + container.height / 2 - cy;
+                // pan onto the element
+                this.panandZoomInstance.moveBy(dx, dy, true);
+            } else {
+                console.error("No elements found to select");
+                return;
+            }
+        } else {
+            console.error("Cannot pan onto something as pan and zoom is disabled")
+        }
     }
 
     /**

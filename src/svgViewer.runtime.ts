@@ -27,7 +27,12 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             this.svgRenderer.applyOverrides(value.rows);
         }
     }
-
+    @TWService("PanOntoSelected")
+    PanOntoSelected(): void {
+        if(this.svgRenderer) {
+            this.svgRenderer.panOntoElement();
+        }
+    }
     renderHtml(): string {
         require("./styles/runtime.css");
 

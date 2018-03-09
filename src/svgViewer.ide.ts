@@ -96,6 +96,9 @@ export class SvgViewerWidget extends TWComposerWidget {
 
     widgetServices(): Dictionary<TWWidgetService> {
         return {
+            "PanOntoSelected": {
+                description: "Pans onto the selected element in the svg. PanAndZoom must be enabled for this to work."
+            }
         };
     };
 
