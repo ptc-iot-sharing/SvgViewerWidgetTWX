@@ -89,7 +89,7 @@ export class SvgViewerWidget extends TWComposerWidget {
                     description: 'The image height. Can be set in px, % or other units',
                     baseType: 'STRING',
                     isVisible: false
-                },
+                }
             }
         }
     };

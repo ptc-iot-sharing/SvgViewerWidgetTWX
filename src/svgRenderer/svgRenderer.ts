@@ -300,6 +300,15 @@ export class SvgElement {
                 if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
                     // construct the style attr based on overrides
                     (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
+                    if (element.tagName == "text") {
+                        if (attrOverride == "override-stroke-width") {
+                            continue;
+                        } else if (attrOverride == "override-text-stroke-width") {
+                            // construct the style attr based on overrides
+                            (<SVGElement>element).style["stroke-width"] = override[attrOverride];
+                        }
+
+                    }
                 }
                 if (!this.options.isDexpiDataSource && attrOverride == "override-tooltip") {
                     this.addTitleToElement(element, override[attrOverride]);
