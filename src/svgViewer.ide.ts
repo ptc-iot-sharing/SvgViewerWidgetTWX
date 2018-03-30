@@ -53,6 +53,11 @@ export class SvgViewerWidget extends TWComposerWidget {
                     baseType: 'BOOLEAN',
                     defaultValue: false
                 },
+                ApplyToChildren: {
+                    description: 'Whether to apply the overrides to the element or to its children',
+                    baseType: 'BOOLEAN',
+                    defaultValue: true
+                },
                 ZoomPanEnabled: {
                     description: 'Enable or disable zooming and panning',
                     baseType: 'BOOLEAN',

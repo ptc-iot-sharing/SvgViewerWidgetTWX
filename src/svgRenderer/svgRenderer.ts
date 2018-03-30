@@ -28,6 +28,11 @@ export interface SvgRendererOptions {
      */
     overrideIdField: string;
 
+    /**
+     * Whether to apply the overrides to the found element or to its children
+     */
+    applyToChildren: boolean;
+
     zoomPanOptions: {
         /**
          * Enable or disable zoom and pan in the svg
@@ -255,9 +260,13 @@ export class SvgElement {
             for (const element of elements) {
                 // for dexpi, we do not need to apply overrides to the elements in imageMap
                 if (this.options.isDexpiDataSource && element.parentElement.id == "ImageMap") continue;
-                // apply the overrides to the children
-                for (const child of element.children) {
-                    this.applyOverrideToElement(child, override);
+                if (this.options.applyToChildren) {
+                    // apply the overrides to the children
+                    for (const child of element.children) {
+                        this.applyOverrideToElement(child, override);
+                    }
+                } else {
+                    this.applyOverrideToElement(element, override);
                 }
                 // set the elements as clickable if we are not dealing with dexpi data
                 if (!this.options.isDexpiDataSource) {
