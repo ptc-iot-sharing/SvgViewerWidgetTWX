@@ -1,6 +1,6 @@
 {
     "name": "svgViewer",
-    "version": "1.0.273",
+    "version": "1.0.275",
     "description": "A svg viewer allowing viewing svg files, as well as interacting with them dynamically.",
     "thingworxServer": "http://localhost:8020/",
     "thingworxUser": "Administrator",
@@ -8,6 +8,9 @@
     "author": "Thingworx RoIcenter placatus",
     "minimumThingWorxVersion": "6.0.0",
     "homepage": "http://roicentersvn/placatus/SvgViewerWidget",
+    "autoUpdate": {
+        "giteaURL": "http://roicentersvn/api/v1/repos/placatus/SvgViewerWidget/releases/latest"
+    },
     "repository": {
         "type": "git",
         "url": "http://roicentersvn.ptcnet.ptc.com/placatus/SvgViewerWidget.git"
