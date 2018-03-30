@@ -10,6 +10,7 @@ Here is how to use the widget in a simple usecase:
 
 * You have your SVG file, where the elements that you want to update/interact with are clearly identifiable (via id or a custom attribute)
 The SVG file can look something like this:
+
 ```
 <svg> 
   <g id="myId1">
@@ -23,6 +24,7 @@ The SVG file can look something like this:
   </g>
 </svg>
 ```
+
 * You link that svg file into the widget. It’s important to bind the link to the svg file rather writing the file path directly in the widget properties (bug at the moment). The svg file can be uploaded to a file repository, to a media entity, or accessible using an url.
 * You create an infotable that contains “overrides” (more on that later). 
 This infotable would look something like this:
