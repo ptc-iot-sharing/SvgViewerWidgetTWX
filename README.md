@@ -60,7 +60,7 @@ It's also important to note that the `override-fill`, `override-stroke` are just
 * Configure the `SelectedStyle` (style of the selected elements).
 * Depending on your svg file, you may want to uncheck `ApplyToChildren`. This specifies whether to apply the overrides to the element or to its children.
 * Decide if you want `ZoomPanEnabled` or not. If it's enabled, than you can configure the initial zoom level or the position. If not, you can scale the SVG as you want.
-* There is also another property, `DexpiDataSource`. If you know what it is, keep it enabled. If not, it must be disabled. HINT: if your svg file was generated from the DEXPI Graphics Builder, is must be enabled.
+* There is also another property, `DexpiDataSource`. If you don't know what it is, keep it disabled. HINT: if your svg file was generated from the DEXPI Graphics Builder, is must be enabled.
 * `SelectedElementID` also points to the current selected element.
 
 The following events are also available:
