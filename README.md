@@ -25,7 +25,7 @@ The SVG file can look something like this:
   </g>
   <g tagName="myId3">
     <ellipse cx="2.12898292" cy="1.64099586" rx="1.59673719" ry="1.64099586"/>
-    <path d="M2.12898292,3.55549103 L2.12898292,8.4784786" stroke-linecap="round"/>
+    <path tagId="myId4" d="M2.12898292,3.55549103 L2.12898292,8.4784786" stroke-linecap="round"/>
   </g>
 </svg>
 ```
@@ -41,7 +41,7 @@ This infotable would look something like this:
 | ------------| ------------------ | ------------- | --------------- | --------------------
 | myId1       | This idtest        | red           | yellow          | 3.5
 | myId2       | Test foo           | #431234       | green           | 2
-
+| myId4       | Test foo           | #431234       | green           | 2
 
 The only required column is `ElementName`. This column maps the override rows to the elements in the svg. For example, the infotable above will change the `fill`, `stroke` and `stroke-width` of all the elements in the group `myId1` to the values (red, yellow and 3.5 respectively).
 
