@@ -172,12 +172,14 @@ export class SvgElement {
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
             this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+            event.stopPropagation();
         });
         // register a listener for all the clickable elements in the svg, for double click
         $(this.svgElement).on("dblclick", "[svg-clickable]", (event) => {
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
             this.options.elementDoubleClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+            event.stopPropagation();
         });
         // register a listener for all the clickable elements in the svg, for mouse down, listening for middle click
         $(this.svgElement).on("mousedown", "[svg-clickable]", (event) => {
@@ -185,6 +187,7 @@ export class SvgElement {
                 this.triggerElementSelection(event.currentTarget);
                 // fire the callback with the element name
                 this.options.elementMiddleClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+                event.stopPropagation();
             }
         });
         if (this.options.isDexpiDataSource) {
