@@ -108,7 +108,7 @@ export class SvgElement {
 
     svgElement: HTMLElement;
 
-    previousOverrideElements: { element: Element, cachedStyle: string }[] = [];
+    previousOverrideElements: { element: Element, cachedStyle: string, cachedClass: string }[] = [];
 
     currentSelectedElement: string;
 
@@ -122,7 +122,7 @@ export class SvgElement {
         let styleAttr: { attr: string, value: string }[] = [];
         for (const attrOverride in this.options.selectedOverride) {
             if (this.options.selectedOverride.hasOwnProperty(attrOverride)) {
-                if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
+                if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip" && attrOverride != "override-class") {
                     // construct the style attr
                     styleAttr.push({ attr: attrOverride.substr("override-".length), value: this.options.selectedOverride[attrOverride] });
                 }
@@ -252,6 +252,11 @@ export class SvgElement {
         // reset the existing elements
         for (const elementInfo of this.previousOverrideElements) {
             elementInfo.element.setAttribute("style", elementInfo.cachedStyle);
+            if(elementInfo.cachedClass) {
+                elementInfo.element.setAttribute("class", elementInfo.cachedClass);
+            } else {
+                elementInfo.element.removeAttribute("class");
+            }
         }
         // remove all exiting svg-clickable attributes
         $(this.svgElement).find("[svg-clickable]").removeAttr("svg-clickable");
@@ -305,13 +310,17 @@ export class SvgElement {
     private applyOverrideToElement(element: Element, override: SvgOverride) {
         // skip over title elements as they don't need to have overrides
         if (element.tagName == "title") return;
-        this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style") });
+        this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style"), cachedClass: element.getAttribute("class") });
         // iterate over the attributes to override
         for (const attrOverride in override) {
             if (override.hasOwnProperty(attrOverride)) {
                 if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
-                    // construct the style attr based on overrides
-                    (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
+                    if (attrOverride == "override-class") {
+                        (<SVGAElement>element).classList.add(override[attrOverride]);
+                    } else {
+                        // construct the style attr based on overrides
+                        (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
+                    }
                     if (element.tagName == "text") {
                         if (attrOverride == "override-stroke-width") {
                             continue;
@@ -319,7 +328,6 @@ export class SvgElement {
                             // construct the style attr based on overrides
                             (<SVGElement>element).style["stroke-width"] = override[attrOverride];
                         }
-
                     }
                 }
                 if (!this.options.isDexpiDataSource && attrOverride == "override-tooltip") {
