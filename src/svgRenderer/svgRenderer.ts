@@ -317,6 +317,11 @@ export class SvgElement {
                 if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
                     if (attrOverride == "override-class") {
                         (<SVGAElement>element).classList.add(override[attrOverride]);
+                    } else if(attrOverride == "override-text") {
+                        // only override the text if we actually have something
+                        if(override[attrOverride]) {
+                            element.innerHTML = override[attrOverride];
+                        }
                     } else {
                         // construct the style attr based on overrides
                         (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
