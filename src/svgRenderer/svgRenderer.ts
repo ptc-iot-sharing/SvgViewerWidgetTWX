@@ -33,6 +33,11 @@ export interface SvgRendererOptions {
      */
     applyToChildren: boolean;
 
+    /**
+     * If an override attribute is empty set that value as undefiend. If False, it will keep the old attribute value
+     */
+    resetOverrideAttributeIfEmpty: boolean;
+
     zoomPanOptions: {
         /**
          * Enable or disable zoom and pan in the svg
@@ -324,8 +329,11 @@ export class SvgElement {
                             element.innerHTML = override[attrOverride];
                         }
                     } else {
-                        // construct the style attr based on overrides
-                        (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
+                        // only override if we have a value
+                        if(override[attrOverride] || this.options.resetOverrideAttributeIfEmpty) {
+                            // construct the style attr based on overrides
+                            (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
+                        }
                     }
                     if (element.tagName == "text") {
                         if (attrOverride == "override-stroke-width") {

@@ -62,7 +62,8 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             elementMiddleClickedCallback: this.generateEventTriggerForHandlerNamed("ElementMiddleClicked"),
             selectedOverride: this.styleToOverrideList(),
             selectionTrigger: this.applySelection,
-            applyToChildren: this.getProperty("ApplyToChildren")
+            applyToChildren: this.getProperty("ApplyToChildren"),
+            resetOverrideAttributeIfEmpty: this.getProperty("ResetOverrideAttributeIfEmpty")
         }
     }
 

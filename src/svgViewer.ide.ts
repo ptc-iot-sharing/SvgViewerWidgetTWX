@@ -58,6 +58,11 @@ export class SvgViewerWidget extends TWComposerWidget {
                     baseType: 'BOOLEAN',
                     defaultValue: true
                 },
+                ResetOverrideAttributeIfEmpty: {
+                    description: 'If an override attribute is empty set that value as undefiend. If False, it will keep the old attribute value',
+                    baseType: 'BOOLEAN',
+                    defaultValue: true
+                },
                 ZoomPanEnabled: {
                     description: 'Enable or disable zooming and panning',
                     baseType: 'BOOLEAN',

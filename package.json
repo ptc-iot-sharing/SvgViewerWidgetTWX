@@ -1,6 +1,6 @@
 {
     "name": "svgViewer",
-    "version": "1.0.303",
+    "version": "1.0.307",
     "description": "A svg viewer allowing viewing svg files, as well as interacting with them dynamically.",
     "thingworxServer": "http://pp-18072512016r.portal.ptc.io:8080/",
     "thingworxUser": "Administrator",
