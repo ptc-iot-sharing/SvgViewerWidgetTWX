@@ -162,6 +162,7 @@ export class SvgElement {
                 this.options.zoomPanOptions.initialYPosition, // initial y position
                 this.options.zoomPanOptions.initialZoom  // initial zoom 
             );
+            this.panandZoomInstance.moveTo(this.options.zoomPanOptions.initialXPosition, this.options.zoomPanOptions.initialYPosition);
         } else {
             // set the width and height
             this.svgElement.setAttribute("height", this.options.imageHeight);
