@@ -1,5 +1,5 @@
 // automatically import the css file
-import { ThingworxComposerWidget } from './support/widgetRuntimeSupport'
+import { ThingworxComposerWidget } from 'typescriptwebpacksupport';
 
 @ThingworxComposerWidget
 export class SvgViewerWidget extends TWComposerWidget {

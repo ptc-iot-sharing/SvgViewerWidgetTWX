@@ -1,4 +1,4 @@
-import { ThingworxRuntimeWidget, TWService, TWProperty } from './support/widgetRuntimeSupport'
+import { ThingworxRuntimeWidget, TWService, TWProperty } from 'typescriptwebpacksupport'
 
 import { SvgElement, SvgRendererOptions, SvgOverride } from './svgRenderer/svgRenderer'
 
