@@ -160,12 +160,22 @@ export class SvgElement {
             // apply pan and zoom onto the svg
             this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll("#rootGroup")[0], {
                 smoothScroll: this.options.zoomPanOptions.smoothScroll,
-                bounds: true
+                zoomDoubleClickSpeed: 1,
+                bounds: true,
+                onTouch: (e: TouchEvent) => {
+                    if ((<Element>e.target).hasAttribute("svg-clickable")) {
+                        if(Date.now() - (<any>e.target).lastTouch > 300) {
+                            $(e.target).trigger("dblclick");
+                        }
+                        (<any>e.target).lastTouch = Date.now();
+                        return false;
+                    }
+                }
             });
             this.panandZoomInstance.zoomAbs(
                 this.options.zoomPanOptions.initialXPosition, // initial x position
                 this.options.zoomPanOptions.initialYPosition, // initial y position
-                this.options.zoomPanOptions.initialZoom  // initial zoom 
+                this.options.zoomPanOptions.initialZoom  // initial zoom
             );
             this.panandZoomInstance.moveTo(this.options.zoomPanOptions.initialXPosition, this.options.zoomPanOptions.initialYPosition);
         } else {
@@ -174,7 +184,7 @@ export class SvgElement {
             this.svgElement.setAttribute("width", this.options.imageWidth);
         }
         // register a listener for all the clickable elements in the svg
-        $(this.svgElement).on("click", "[svg-clickable]", (event) => {
+        $(this.svgElement).on("click tap", "[svg-clickable]", (event) => {
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
             this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
