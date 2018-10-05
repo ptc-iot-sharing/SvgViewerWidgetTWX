@@ -318,7 +318,8 @@ export class SvgElement {
         element.setAttribute("svg-clickable", "");
         (<SVGElement>element).style.cursor = 'pointer';
         // if there is no previously set fill, then set one
-        if (!(<SVGElement>element).style.fill) {
+        const elementStyle = getComputedStyle(element);
+        if (!elementStyle.getPropertyValue("fill")) {
             (<SVGElement>element).style.fill = 'transparent';
         }
     }
