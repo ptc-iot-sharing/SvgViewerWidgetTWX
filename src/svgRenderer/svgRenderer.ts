@@ -164,7 +164,7 @@ export class SvgElement {
                 bounds: true,
                 onTouch: (e: TouchEvent) => {
                     if ((<Element>e.target).hasAttribute("svg-clickable")) {
-                        if(Date.now() - (<any>e.target).lastTouch > 300) {
+                        if (Date.now() - (<any>e.target).lastTouch > 300) {
                             $(e.target).trigger("dblclick");
                         }
                         (<any>e.target).lastTouch = Date.now();
@@ -268,7 +268,7 @@ export class SvgElement {
         // reset the existing elements
         for (const elementInfo of this.previousOverrideElements) {
             elementInfo.element.setAttribute("style", elementInfo.cachedStyle);
-            if(elementInfo.cachedClass) {
+            if (elementInfo.cachedClass) {
                 elementInfo.element.setAttribute("class", elementInfo.cachedClass);
             } else {
                 elementInfo.element.removeAttribute("class");
@@ -334,11 +334,11 @@ export class SvgElement {
                 if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
                     if (attrOverride == "override-class") {
                         (<SVGAElement>element).classList.add(override[attrOverride]);
-                    } else if(attrOverride == "override-text") {
-                            element.innerHTML = override[attrOverride];
+                    } else if (attrOverride == "override-text") {
+                        element.innerHTML = override[attrOverride];
                     } else {
                         // only override if we have a value
-                        if(override[attrOverride] || this.options.resetOverrideAttributeIfEmpty) {
+                        if (override[attrOverride] || this.options.resetOverrideAttributeIfEmpty) {
                             // construct the style attr based on overrides
                             (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
                         }
