@@ -1,10 +1,10 @@
 {
     "name": "svgViewer",
-    "version": "1.0.322",
+    "version": "1.0.345",
     "description": "A svg viewer allowing viewing svg files, as well as interacting with them dynamically.",
-    "thingworxServer": "http://localhost:8020/",
+    "thingworxServer": "http://localhost:8016/",
     "thingworxUser": "Administrator",
-    "thingworxPassword": "admin",
+    "thingworxPassword": "changeme123456",
     "author": "Thingworx RoIcenter placatus",
     "minimumThingWorxVersion": "6.0.0",
     "homepage": "http://roicentersvn/placatus/SvgViewerWidget",

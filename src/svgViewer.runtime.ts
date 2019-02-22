@@ -104,8 +104,12 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         if (!this.svgFileUrl) {
             return;
         }
+        if(this.svgRenderer) {
+            this.svgRenderer.dispose();
+        }
         this.svgRenderer = new SvgElement(this.jqElement, this.svgFileUrl, this.createRendererSettings())
         this.svgRenderer.createSvgElement();
+        this.jqElement.triggerHandler("Loaded");
     }
 
     updateProperty(info: TWUpdatePropertyInfo): void {

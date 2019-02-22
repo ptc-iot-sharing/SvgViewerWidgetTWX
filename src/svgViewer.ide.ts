@@ -125,6 +125,10 @@ export class SvgViewerWidget extends TWComposerWidget {
             ElementMiddleClicked: {
                 warnIfNotBound: false,
                 description: 'Triggered after an named element middle was clicked'
+            },
+            Loaded: {
+                warnIfNotBound: false,
+                description: 'Triggered after the editor finishes loading the svg"
             }
         };
     }
