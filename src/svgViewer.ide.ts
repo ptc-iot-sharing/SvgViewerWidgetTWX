@@ -128,7 +128,7 @@ export class SvgViewerWidget extends TWComposerWidget {
             },
             Loaded: {
                 warnIfNotBound: false,
-                description: 'Triggered after the editor finishes loading the svg"
+                description: 'Triggered after the editor finishes loading the svg'
             }
         };
     }
