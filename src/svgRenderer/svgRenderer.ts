@@ -185,6 +185,10 @@ export class SvgElement {
         }
         // register a listener for all the clickable elements in the svg
         $(this.svgElement).on("click tap", "[svg-clickable]", (event) => {
+            if (Date.now() - (<any>event.target).lastTouch > 300) {
+                $(event.target).trigger("dblclick");
+            }
+            (<any>event.target).lastTouch = Date.now();
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
             this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
@@ -319,7 +323,7 @@ export class SvgElement {
         (<SVGElement>element).style.cursor = 'pointer';
         // if there is no previously set fill, then set one
         const elementStyle = getComputedStyle(element);
-        if (!elementStyle.getPropertyValue("fill") || !element.getAttribute("fill")) {
+        if (!(elementStyle.getPropertyValue("fill") || element.getAttribute("fill"))) {
             (<SVGElement>element).style.fill = 'transparent';
         }
     }
@@ -334,7 +338,7 @@ export class SvgElement {
                 if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
                     if (attrOverride == "override-class") {
                         (<SVGAElement>element).classList.add(override[attrOverride]);
-                    } else if (attrOverride == "override-text") {
+                    } else if (attrOverride == "override-text" && override[attrOverride] != undefined) {
                         element.innerHTML = override[attrOverride];
                     } else {
                         // only override if we have a value
