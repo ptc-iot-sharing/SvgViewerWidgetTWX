@@ -12,6 +12,8 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     // the renderer currently used
     private svgRenderer: SvgElement;
 
+    private needToApplyData = false;
+
     @TWProperty("SVGFileUrl")
     set svgFileUrl(value: string) {
         if (!TW.IDE.isImageLinkUrl(value)) {
@@ -25,6 +27,8 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     set svgData(value: TWInfotable) {
         if (this.svgRenderer) {
             this.svgRenderer.applyOverrides(value.rows);
+        } else {
+            this.needToApplyData = true;
         }
     }
     @TWService("PanOntoSelected")
@@ -109,6 +113,10 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         }
         this.svgRenderer = new SvgElement(this.jqElement, this.svgFileUrl, this.createRendererSettings())
         this.svgRenderer.createSvgElement();
+        if(this.needToApplyData) {
+            this.svgRenderer.applyOverrides(this.svgData.rows);
+            this.needToApplyData = false;
+        }
         this.jqElement.triggerHandler("Loaded");
     }
 
