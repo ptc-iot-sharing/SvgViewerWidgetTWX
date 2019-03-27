@@ -13,7 +13,7 @@ You have your SVG file, where the elements that you want to update/interact with
 The SVG file can look something like this:
 
 ```
-<svg> 
+<svg>
   <g tagName="myId1">
     <ellipse cx="2.12898292" cy="1.64099586" rx="1.59673719" ry="1.64099586"/>
     <path d="M2.12898292,3.55549103 L2.12898292,8.4784786" stroke-linecap="round"/>
@@ -33,7 +33,7 @@ The SVG file can look something like this:
 You link that svg file into the widget. It’s important to bind the link to the svg file rather writing the file path directly in the widget properties (bug at the moment). The svg file can be uploaded to a file repository, to a media entity, or accessible using an url.
 
 ### The data infotable
-You create an infotable that contains “overrides” (more on that later). 
+You create an infotable that contains “overrides” (more on that later).
 This infotable would look something like this:
 
 
@@ -50,6 +50,7 @@ The elements in the infotable also dictate what elements are clickable. The info
 It's also important to note that the `override-fill`, `override-stroke` are just examples. You can override any attribute of the svg if you prefix its name with `override-`. However, there are a couple of special `overrides` that you can include:
    * `override-tooltip`: Specify a tooltip for an element. This is visible when hovering.
    * `override-text-stroke-width`: If you override the `stroke-width` of a group, you may find that the `text` elements are hard to read. This is a special override for the `stroke-width` that applies only to `text` elements.
+   * `override-text`: Change the contents of a `<text>` or `<tspan>` element. If a string is empty or undefined, it will not be updated. For specifying an empty value, use ` ` (a space).
 
 ### Bindings and properties
 
