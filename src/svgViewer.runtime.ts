@@ -13,14 +13,18 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     private svgRenderer: SvgElement;
 
     private needToApplyData = false;
+    private _svgFileUrl: string;
 
     @TWProperty("SVGFileUrl")
     set svgFileUrl(value: string) {
-        if (!TW.IDE.isImageLinkUrl(value)) {
-            //check to see if imageLink is an actual URL;
-            this.setProperty("SVGFileUrl", '/Thingworx/MediaEntities/' + TW.encodeEntityName(value));
-        }
+        if(value != this._svgFileUrl) {
+            this._svgFileUrl = value;
+            if (!TW.IDE.isImageLinkUrl(value)) {
+                //check to see if imageLink is an actual URL;
+                this.setProperty("SVGFileUrl", '/Thingworx/MediaEntities/' + TW.encodeEntityName(value));
+            }
         this.updateDrawnSvg();
+    }
     };
 
     @TWProperty("Data")
@@ -104,15 +108,15 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         this.updateSelection("Data", selectedRows);
     }
 
-    updateDrawnSvg(): void {
+    async updateDrawnSvg(): Promise<void> {
         if (!this.svgFileUrl) {
             return;
         }
         if(this.svgRenderer) {
             this.svgRenderer.dispose();
         }
-        this.svgRenderer = new SvgElement(this.jqElement, this.svgFileUrl, this.createRendererSettings())
-        this.svgRenderer.createSvgElement();
+        this.svgRenderer = new SvgElement(this.jqElement, this.svgFileUrl, this.createRendererSettings());
+        await this.svgRenderer.createSvgElement();
         if(this.needToApplyData) {
             this.svgRenderer.applyOverrides(this.svgData.rows);
             this.needToApplyData = false;
