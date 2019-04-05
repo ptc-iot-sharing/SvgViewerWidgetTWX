@@ -323,7 +323,7 @@ export class SvgElement {
         (<SVGElement>element).style.cursor = 'pointer';
         // if there is no previously set fill, then set one
         const elementStyle = getComputedStyle(element);
-        if (!(elementStyle.getPropertyValue("fill") || element.getAttribute("fill"))) {
+        if (elementStyle.getPropertyValue("fill") == "" || elementStyle.getPropertyValue("fill") == "none" || element.getAttribute("fill") == "" || element.getAttribute("fill") == "none") {
             (<SVGElement>element).style.fill = 'transparent';
         }
     }
