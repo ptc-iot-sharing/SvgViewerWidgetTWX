@@ -164,7 +164,7 @@ export class SvgElement {
                 bounds: true,
                 onTouch: (e: TouchEvent) => {
                     if ((<Element>e.target).hasAttribute("svg-clickable")) {
-                        if (Date.now() - (<any>e.target).lastTouch > 300) {
+                        if (Date.now() - (<any>e.target).lastTouch < 300) {
                             $(e.target).trigger("dblclick");
                         }
                         (<any>e.target).lastTouch = Date.now();
@@ -185,7 +185,7 @@ export class SvgElement {
         }
         // register a listener for all the clickable elements in the svg
         $(this.svgElement).on("click tap", "[svg-clickable]", (event) => {
-            if (Date.now() - (<any>event.target).lastTouch > 300) {
+            if (Date.now() - (<any>event.target).lastTouch < 300) {
                 $(event.target).trigger("dblclick");
             }
             (<any>event.target).lastTouch = Date.now();
