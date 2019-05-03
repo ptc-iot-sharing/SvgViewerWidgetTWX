@@ -29,10 +29,15 @@ export class SvgViewerWidget extends TWComposerWidget {
                     baseType: 'INFOTABLE',
                 },
                 DataIdField: {
-                    baseType: 'FIELDNAME',
-                    sourcePropertyName: 'Data',
+                    baseType: 'STRING',
                     defaultValue: 'elementName',
                     description: 'The field in the Data infotable to use for matching with the SVGIdField'
+                },
+                OverrideListField: {
+                    baseType: 'FIELDNAME',
+                    sourcePropertyName: 'Data',
+                    defaultValue: '',
+                    description: 'Optional: The field in the Data infotable that contains nested infotable with the overrides'
                 },
                 SVGIdField: {
                     baseType: 'STRING',

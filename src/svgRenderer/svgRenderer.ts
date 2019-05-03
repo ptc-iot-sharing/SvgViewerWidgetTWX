@@ -1,4 +1,3 @@
-let panzoom = require('panzoom');
 /**
  * Options that can be applied to the svg elements
  */
@@ -86,9 +85,9 @@ export interface SvgRendererOptions {
 
     /**
      * Used to trigger the selection to external systems
-     * @param elementName name of the element selected
+     * @param elementNames names of the elements selected
      */
-    selectionTrigger(elementName: string): void;
+    selectionTrigger(elementNames: string[]): void;
 }
 
 export interface SvgOverride {
@@ -115,7 +114,7 @@ export class SvgElement {
 
     previousOverrideElements: { element: Element, cachedStyle: string, cachedClass: string }[] = [];
 
-    currentSelectedElement: string;
+    currentSelectedElement: string[];
 
     constructor(container: JQuery, svgFile: string, options: SvgRendererOptions) {
         this.svgFileUrl = svgFile;
@@ -157,6 +156,8 @@ export class SvgElement {
         Array.prototype.slice.call(this.svgElement.childNodes).forEach(element => rootGroup.appendChild(element));
         this.svgElement.appendChild(rootGroup);
         if (this.options.zoomPanOptions.isEnabled) {
+            let panzoom = await require('panzoom');
+
             // apply pan and zoom onto the svg
             this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll("#rootGroup")[0], {
                 smoothScroll: this.options.zoomPanOptions.smoothScroll,
@@ -222,30 +223,24 @@ export class SvgElement {
     }
 
     private triggerElementSelection(element: Element) {
-        this.currentSelectedElement = element.getAttribute(this.options.idField);
+        this.currentSelectedElement = [element.getAttribute(this.options.idField)];
         // remove the override from the selected elements
         $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
         // add the tag to the element
         element.setAttribute("svg-selected", "");
     }
 
-    public triggerElementSelectionByName(elementName: string) {
-        this.currentSelectedElement = elementName;
+    public triggerElementSelectionByName(elementNames: string[]) {
+        this.currentSelectedElement = elementNames;
         // remove the override from the selected elements
-        let selectedElements = $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
+        $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
         // if the element has no name, just return
-        if (!elementName) {
+        if (!elementNames || elementNames.length == 0) {
             return;
         }
-        let elements;
-        if (this.options.isDexpiDataSource) {
-            // we if are dealing with dexpi data apply changes to the image map
-            elements = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${elementName}"]`);
+        let elements = [];
+        elements = elementNames.reduce((ac, el) =>  ac.concat(Array.prototype.slice.call(this.svgElement.querySelectorAll(`[${this.options.idField}="${el}"]`))), []);
 
-        } else {
-            // find the elements
-            elements = this.svgElement.querySelectorAll(`[${this.options.idField}="${elementName}"]`);
-        }
         // iterate over them
         for (const element of elements) {
             // add the tag to the element
@@ -378,7 +373,7 @@ export class SvgElement {
             if (this.options.isDexpiDataSource) {
                 selectedElement = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${this.currentSelectedElement}"]`)[0];
             } else {
-                selectedElement = this.svgElement.querySelectorAll(`[${this.options.idField}="${this.currentSelectedElement}"]`)[0];
+                selectedElement = this.svgElement.querySelectorAll(`[${this.options.idField}="${this.currentSelectedElement[0]}"]`)[0];
             }
             if (selectedElement) {
                 // find the size of the element we are zooming into
