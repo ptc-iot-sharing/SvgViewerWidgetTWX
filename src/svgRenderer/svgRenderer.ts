@@ -7,11 +7,6 @@ export interface SvgRendererOptions {
      */
     idField: string;
 
-    /** 
-     * Treat files as dexpi
-     */
-    isDexpiDataSource: boolean;
-
     /**
      * Height of the image. Use css units
      */
@@ -211,15 +206,6 @@ export class SvgElement {
                 event.stopPropagation();
             }
         });
-        if (this.options.isDexpiDataSource) {
-            // for dexpi files, the imagemap is at the start of the file
-            // because svg files are rendered in the order of the nodes, we must move the imageMap note at the end
-            let imageMap = this.container.find("#ImageMap");
-            // remove the imagemap
-            imageMap.remove();
-            // append it to the svg
-            imageMap.appendTo(this.svgElement.firstElementChild);
-        }
     }
 
     private triggerElementSelection(element: Element) {
@@ -281,8 +267,6 @@ export class SvgElement {
             let elements = this.svgElement.querySelectorAll(`[${this.options.idField}="${override[this.options.overrideIdField]}"]`);
             // iterate over them
             for (const element of elements) {
-                // for dexpi, we do not need to apply overrides to the elements in imageMap
-                if (this.options.isDexpiDataSource && element.parentElement.id == "ImageMap") continue;
                 if (this.options.applyToChildren) {
                     // apply the overrides to the children
                     for (const child of element.children) {
@@ -291,23 +275,7 @@ export class SvgElement {
                 } else {
                     this.applyOverrideToElement(element, override);
                 }
-                // set the elements as clickable if we are not dealing with dexpi data
-                if (!this.options.isDexpiDataSource) {
-                    this.applyClickableToElement(element);
-                }
-            }
-            // we if are dealing with dexpi data, handle the image map as well
-            if (this.options.isDexpiDataSource) {
-                let imageMapElements = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${override[this.options.overrideIdField]}"]`);
-                for (const imageMapElement of imageMapElements) {
-                    this.applyClickableToElement(imageMapElement);
-                    // iterate over the attributes to override
-                    for (const attrOverride in override) {
-                        if (override.hasOwnProperty(attrOverride) && attrOverride == "override-tooltip") {
-                            this.addTitleToElement(imageMapElement, override[attrOverride]);
-                        }
-                    }
-                }
+                this.applyClickableToElement(element);
             }
         }
     }
@@ -351,7 +319,7 @@ export class SvgElement {
                         }
                     }
                 }
-                if (!this.options.isDexpiDataSource && attrOverride == "override-tooltip") {
+                if (attrOverride == "override-tooltip") {
                     this.addTitleToElement(element, override[attrOverride]);
                 }
             }
@@ -370,11 +338,8 @@ export class SvgElement {
         if (this.panandZoomInstance) {
             // find the first selected element
             let selectedElement: Element;
-            if (this.options.isDexpiDataSource) {
-                selectedElement = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${this.currentSelectedElement}"]`)[0];
-            } else {
-                selectedElement = this.svgElement.querySelectorAll(`[${this.options.idField}="${this.currentSelectedElement[0]}"]`)[0];
-            }
+
+            selectedElement = this.svgElement.querySelectorAll(`[${this.options.idField}="${this.currentSelectedElement[0]}"]`)[0];
             if (selectedElement) {
                 // find the size of the element we are zooming into
                 let clientRect = selectedElement.getBoundingClientRect();

@@ -53,11 +53,6 @@ export class SvgViewerWidget extends TWComposerWidget {
                     description: 'Style defining how a selected element appears.',
                     baseType: 'STYLEDEFINITION'
                 },
-                DexpiDataSource: {
-                    description: 'Specifies if the svg file is a svg file converted from dexpi.',
-                    baseType: 'BOOLEAN',
-                    defaultValue: false
-                },
                 ApplyToChildren: {
                     description: 'Whether to apply the overrides to the element or to its children',
                     baseType: 'BOOLEAN',

@@ -52,7 +52,6 @@ export class SvgViewerWidget extends TWRuntimeWidget {
 
     createRendererSettings(): SvgRendererOptions {
         return {
-            isDexpiDataSource: this.getProperty('DexpiDataSource') || false,
             overrideIdField: this.getProperty("DataIdField") || "elementName",
             idField: this.getProperty("SVGIdField") || "id",
             imageHeight: this.getProperty("ImageHeight") || "100%",
