@@ -143,7 +143,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
                     const overrideField = this.getProperty("OverrideListField");
                     const dataField = this.getProperty("DataIdField");
                     if (overrideField) {
-                        elements = elements.concat(selectedRows.reduce((ac, el) => ac.concat(el[overrideField].rows.map(x => x[dataField])), []));
+                        elements = elements.concat(selectedRows.reduce((ac, el) => ac.concat(el[overrideField].rows.filter((x) => x.selectable !== false).map(x => x[dataField])), []));
                     } else {
                         elements = elements.concat(selectedRows.map((el) => el[dataField]));
                     }

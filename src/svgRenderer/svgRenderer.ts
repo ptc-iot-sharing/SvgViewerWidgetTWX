@@ -275,7 +275,9 @@ export class SvgElement {
                 } else {
                     this.applyOverrideToElement(element, override);
                 }
-                this.applyClickableToElement(element);
+                if(override["override-selectable"] !== false) {
+                    this.applyClickableToElement(element);
+                }
             }
         }
     }
