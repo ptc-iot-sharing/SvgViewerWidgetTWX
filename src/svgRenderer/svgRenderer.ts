@@ -91,7 +91,7 @@ export interface SvgOverride {
      */
     elementName: string;
     /**
-     * A list of overrides whose keys start with override- and the attribute name to override
+     * A list of overrides whose keys start with the overrides and the attribute name to override
      */
     [override: string]: any;
 }
@@ -121,9 +121,9 @@ export class SvgElement {
         let styleAttr: { attr: string, value: string }[] = [];
         for (const attrOverride in this.options.selectedOverride) {
             if (this.options.selectedOverride.hasOwnProperty(attrOverride)) {
-                if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip" && attrOverride != "override-class") {
+                if (attrOverride != "tooltip" && attrOverride != "class") {
                     // construct the style attr
-                    styleAttr.push({ attr: attrOverride.substr("override-".length), value: this.options.selectedOverride[attrOverride] });
+                    styleAttr.push({ attr: attrOverride, value: this.options.selectedOverride[attrOverride] });
                 }
             }
         }
@@ -275,7 +275,7 @@ export class SvgElement {
                 } else {
                     this.applyOverrideToElement(element, override);
                 }
-                if(override["override-selectable"] !== false) {
+                if(override["selectable"] !== false) {
                     this.applyClickableToElement(element);
                 }
             }
@@ -300,28 +300,28 @@ export class SvgElement {
         // iterate over the attributes to override
         for (const attrOverride in override) {
             if (override.hasOwnProperty(attrOverride)) {
-                if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
-                    if (attrOverride == "override-class") {
+                if (attrOverride != "tooltip") {
+                    if (attrOverride == "class") {
                         (<SVGAElement>element).classList.add(override[attrOverride]);
-                    } else if (attrOverride == "override-text" && override[attrOverride] != undefined) {
+                    } else if (attrOverride == "text" && override[attrOverride] != undefined) {
                         element.innerHTML = override[attrOverride];
                     } else {
                         // only override if we have a value
                         if (override[attrOverride] || this.options.resetOverrideAttributeIfEmpty) {
                             // construct the style attr based on overrides
-                            (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
+                            (<SVGElement>element).style[attrOverride] = override[attrOverride];
                         }
                     }
                     if (element.tagName == "text") {
-                        if (attrOverride == "override-stroke-width") {
+                        if (attrOverride == "stroke-width") {
                             continue;
-                        } else if (attrOverride == "override-text-stroke-width") {
+                        } else if (attrOverride == "text-stroke-width") {
                             // construct the style attr based on overrides
                             (<SVGElement>element).style["stroke-width"] = override[attrOverride];
                         }
                     }
                 }
-                if (attrOverride == "override-tooltip") {
+                if (attrOverride == "tooltip") {
                     this.addTitleToElement(element, override[attrOverride]);
                 }
             }

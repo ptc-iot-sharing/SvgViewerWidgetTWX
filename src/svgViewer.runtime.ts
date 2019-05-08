@@ -29,7 +29,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     @TWProperty("Data")
     set svgData(value: TWInfotable) {
         if (this.svgRenderer) {
-            this.svgRenderer.applyOverrides(this.transformNestedInfotableIfNeeded(value.rows));
+            this.svgRenderer.applyOverrides(this.transformDataToOverrideList(value.rows));
         } else {
             this.needToApplyData = true;
         }
@@ -77,13 +77,13 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         let selectedOverride = <SvgOverride>{};;
         let selectedStyle = TW.getStyleFromStyleDefinition(this.getProperty('SelectedStyle'));
         if (selectedStyle.image)
-            selectedOverride["override-fill"] = "url(#img1)";
+            selectedOverride["fill"] = "url(#img1)";
         if (selectedStyle.backgroundColor)
-            selectedOverride["override-fill"] = selectedStyle.backgroundColor;
+            selectedOverride["fill"] = selectedStyle.backgroundColor;
         if (selectedStyle.lineColor)
-            selectedOverride["override-stroke"] = selectedStyle.lineColor;
+            selectedOverride["stroke"] = selectedStyle.lineColor;
         if (selectedStyle.lineThickness)
-            selectedOverride["override-stroke-width"] = selectedStyle.lineThickness;
+            selectedOverride["stroke-width"] = selectedStyle.lineThickness;
 
         return selectedOverride;
     }
@@ -126,7 +126,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         this.svgRenderer = new SvgElement(this.jqElement, this.svgFileUrl, this.createRendererSettings());
         await this.svgRenderer.createSvgElement();
         if (this.needToApplyData) {
-            this.svgRenderer.applyOverrides(this.transformNestedInfotableIfNeeded(this.svgData.rows));
+            this.svgRenderer.applyOverrides(this.transformDataToOverrideList(this.svgData.rows));
             this.needToApplyData = false;
         }
         this.jqElement.triggerHandler("Loaded");
@@ -153,28 +153,36 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         }
     }
 
-    transformNestedInfotableIfNeeded(overrideRows: any[]) {
+    transformDataToOverrideList(overrideRows: any[]) {
         const overrideListField = this.getProperty("OverrideListField");
         if (overrideListField) {
-            const clonedData = JSON.parse(JSON.stringify(overrideRows));
+            const overrideList = [];
             for (const row of overrideRows) {
                 if (row[overrideListField]) {
                     for (const override of row[overrideListField].rows) {
-                        const newRow = Object.assign({}, row);
+                        const newRow = {};
                         for (const key in override) {
-                            if (key != this.getProperty("DataIdField")) {
-                                newRow["override-" + key] = override[key];
-                            } else {
-                                newRow[key] = override[key];
-                            }
+                            newRow[key] = override[key];
                         }
-                        clonedData.push(newRow);
+                        overrideList.push(newRow);
                     }
                 }
             }
-            return clonedData;
+            return overrideList;
         } else {
-            return overrideRows;
+            const overrideList = [];
+
+            for (const override of overrideRows) {
+                for (const key in override) {
+                    const newRow = {};
+                    if(key.startsWith("override-")) {
+                        newRow[key.substr("override-".length)] = override[key];
+                    }
+                    newRow[this.getProperty("DataIdField")] = override[this.getProperty("DataIdField")];
+                    overrideList.push(newRow);
+                }
+            }
+            return overrideList;
         }
     }
 
