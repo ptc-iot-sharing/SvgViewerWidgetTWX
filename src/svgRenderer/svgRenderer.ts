@@ -160,10 +160,21 @@ export class SvgElement {
                 bounds: true,
                 onTouch: (e: TouchEvent) => {
                     if ((<Element>e.target).hasAttribute("svg-clickable")) {
-                        if (Date.now() - (<any>e.target).lastTouch < 300) {
-                            $(e.target).trigger("dblclick");
+                        var currentTime = new Date().getTime();
+                        if((<any>e.target).lastTouch === undefined) {
+                            (<any>e.target).lastTouch = 0;
                         }
-                        (<any>e.target).lastTouch = Date.now();
+                        var tapLength = currentTime - (<any>e.target).lastTouch;
+                        clearTimeout((<any>e.target).timeout);
+                        if (tapLength < 500 && tapLength > 0) {
+                            $(e.target).trigger("dblclick");
+                            event.preventDefault();
+                        } else {
+                            (<any>e.target).timeout = setTimeout(function() {
+                                clearTimeout((<any>e.target).timeout);
+                            }, 500);
+                        }
+                        (<any>e.target).lastTouch = currentTime;
                         return false;
                     }
                 }
@@ -181,10 +192,6 @@ export class SvgElement {
         }
         // register a listener for all the clickable elements in the svg
         $(this.svgElement).on("click tap", "[svg-clickable]", (event) => {
-            if (Date.now() - (<any>event.target).lastTouch < 300) {
-                $(event.target).trigger("dblclick");
-            }
-            (<any>event.target).lastTouch = Date.now();
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
             this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
