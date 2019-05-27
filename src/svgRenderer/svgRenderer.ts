@@ -266,6 +266,7 @@ export class SvgElement {
                 elementInfo.element.removeAttribute("class");
             }
         }
+        this.previousOverrideElements = [];
         // remove all exiting svg-clickable attributes
         $(this.svgElement).find("[svg-clickable]").removeAttr("svg-clickable");
         // iterate over the overrides
@@ -303,7 +304,10 @@ export class SvgElement {
     private applyOverrideToElement(element: Element, override: SvgOverride) {
         // skip over title elements as they don't need to have overrides
         if (element.tagName == "title") return;
-        this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style"), cachedClass: element.getAttribute("class") });
+        // make sure we are not adding the same element twice
+        if(this.previousOverrideElements.filter((el)=> (el.element == element)).length == 0) {
+            this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style"), cachedClass: element.getAttribute("class") });
+        }
         // iterate over the attributes to override
         for (const attrOverride in override) {
             if (override.hasOwnProperty(attrOverride)) {
