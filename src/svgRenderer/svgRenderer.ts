@@ -157,7 +157,7 @@ export class SvgElement {
             this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll("#rootGroup")[0], {
                 smoothScroll: this.options.zoomPanOptions.smoothScroll,
                 zoomDoubleClickSpeed: 1,
-                bounds: true,
+                bounds: false,
                 onTouch: (e: TouchEvent) => {
                     if ((<Element>e.target).hasAttribute("svg-clickable")) {
                         var currentTime = new Date().getTime();
