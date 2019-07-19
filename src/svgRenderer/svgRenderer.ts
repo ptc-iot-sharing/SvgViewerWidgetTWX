@@ -274,20 +274,24 @@ export class SvgElement {
             // find the elements to override
             let elements = this.svgElement.querySelectorAll(`[${this.options.idField}="${override[this.options.overrideIdField]}"]`);
             // iterate over them
+
             for (const element of elements) {
                 if (this.options.applyToChildren) {
                     // apply the overrides to the children
-                    for (const child of element.children) {
-                        this.applyOverrideToElement(child, override);
-                    }
+                    this.applyOverrideToChildren(element, override);
                 } else {
                     this.applyOverrideToElement(element, override);
                 }
-                if(override["selectable"] !== false) {
-                    this.applyClickableToElement(element);
-                }
+
             }
         }
+    }
+
+    private applyOverrideToChildren(element: Element, override: SvgOverride) {
+        for (const child of element.children) {
+            this.applyOverrideToChildren(child, override);
+        }
+        this.applyOverrideToElement(element, override);
     }
 
     private applyClickableToElement(element: Element) {
@@ -307,6 +311,9 @@ export class SvgElement {
         // make sure we are not adding the same element twice
         if(this.previousOverrideElements.filter((el)=> (el.element == element)).length == 0) {
             this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style"), cachedClass: element.getAttribute("class") });
+        }
+        if(override["selectable"] !== false) {
+            this.applyClickableToElement(element);
         }
         // iterate over the attributes to override
         for (const attrOverride in override) {
