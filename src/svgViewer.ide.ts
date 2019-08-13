@@ -5,7 +5,7 @@ import { ThingworxComposerWidget } from 'typescriptwebpacksupport';
 export class SvgViewerWidget extends TWComposerWidget {
 
     widgetIconUrl(): string {
-        return require('./images/icon.png');
+        return require('advanced-image-loader!./images/icon.png?width=16&height=16&format=png').src;
     }
 
     widgetProperties(): TWWidgetProperties {
