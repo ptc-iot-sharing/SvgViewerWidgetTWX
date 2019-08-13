@@ -1,4 +1,3 @@
-let panzoom = require('panzoom');
 /**
  * Options that can be applied to the svg elements
  */
@@ -7,11 +6,6 @@ export interface SvgRendererOptions {
      * Svg attribute that uniquely identifes an element
      */
     idField: string;
-
-    /** 
-     * Treat files as dexpi
-     */
-    isDexpiDataSource: boolean;
 
     /**
      * Height of the image. Use css units
@@ -86,9 +80,9 @@ export interface SvgRendererOptions {
 
     /**
      * Used to trigger the selection to external systems
-     * @param elementName name of the element selected
+     * @param elementNames names of the elements selected
      */
-    selectionTrigger(elementName: string): void;
+    selectionTrigger(elementNames: string[]): void;
 }
 
 export interface SvgOverride {
@@ -97,7 +91,7 @@ export interface SvgOverride {
      */
     elementName: string;
     /**
-     * A list of overrides whose keys start with override- and the attribute name to override
+     * A list of overrides whose keys start with the overrides and the attribute name to override
      */
     [override: string]: any;
 }
@@ -115,7 +109,7 @@ export class SvgElement {
 
     previousOverrideElements: { element: Element, cachedStyle: string, cachedClass: string }[] = [];
 
-    currentSelectedElement: string;
+    currentSelectedElement: string[];
 
     constructor(container: JQuery, svgFile: string, options: SvgRendererOptions) {
         this.svgFileUrl = svgFile;
@@ -127,9 +121,9 @@ export class SvgElement {
         let styleAttr: { attr: string, value: string }[] = [];
         for (const attrOverride in this.options.selectedOverride) {
             if (this.options.selectedOverride.hasOwnProperty(attrOverride)) {
-                if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip" && attrOverride != "override-class") {
+                if (attrOverride != "tooltip" && attrOverride != "class") {
                     // construct the style attr
-                    styleAttr.push({ attr: attrOverride.substr("override-".length), value: this.options.selectedOverride[attrOverride] });
+                    styleAttr.push({ attr: attrOverride, value: this.options.selectedOverride[attrOverride] });
                 }
             }
         }
@@ -157,6 +151,8 @@ export class SvgElement {
         Array.prototype.slice.call(this.svgElement.childNodes).forEach(element => rootGroup.appendChild(element));
         this.svgElement.appendChild(rootGroup);
         if (this.options.zoomPanOptions.isEnabled) {
+            let panzoom = await require('panzoom');
+
             // apply pan and zoom onto the svg
             this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll("#rootGroup")[0], {
                 smoothScroll: this.options.zoomPanOptions.smoothScroll,
@@ -164,10 +160,21 @@ export class SvgElement {
                 bounds: false,
                 onTouch: (e: TouchEvent) => {
                     if ((<Element>e.target).hasAttribute("svg-clickable")) {
-                        if (Date.now() - (<any>e.target).lastTouch < 300) {
-                            $(e.target).trigger("dblclick");
+                        var currentTime = new Date().getTime();
+                        if((<any>e.target).lastTouch === undefined) {
+                            (<any>e.target).lastTouch = 0;
                         }
-                        (<any>e.target).lastTouch = Date.now();
+                        var tapLength = currentTime - (<any>e.target).lastTouch;
+                        clearTimeout((<any>e.target).timeout);
+                        if (tapLength < 500 && tapLength > 0) {
+                            $(e.target).trigger("dblclick");
+                            event.preventDefault();
+                        } else {
+                            (<any>e.target).timeout = setTimeout(function() {
+                                clearTimeout((<any>e.target).timeout);
+                            }, 500);
+                        }
+                        (<any>e.target).lastTouch = currentTime;
                         return false;
                     }
                 }
@@ -185,10 +192,6 @@ export class SvgElement {
         }
         // register a listener for all the clickable elements in the svg
         $(this.svgElement).on("click tap", "[svg-clickable]", (event) => {
-            if (Date.now() - (<any>event.target).lastTouch < 300) {
-                $(event.target).trigger("dblclick");
-            }
-            (<any>event.target).lastTouch = Date.now();
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
             this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
@@ -210,42 +213,27 @@ export class SvgElement {
                 event.stopPropagation();
             }
         });
-        if (this.options.isDexpiDataSource) {
-            // for dexpi files, the imagemap is at the start of the file
-            // because svg files are rendered in the order of the nodes, we must move the imageMap note at the end
-            let imageMap = this.container.find("#ImageMap");
-            // remove the imagemap
-            imageMap.remove();
-            // append it to the svg
-            imageMap.appendTo(this.svgElement.firstElementChild);
-        }
     }
 
     private triggerElementSelection(element: Element) {
-        this.currentSelectedElement = element.getAttribute(this.options.idField);
+        this.currentSelectedElement = [element.getAttribute(this.options.idField)];
         // remove the override from the selected elements
         $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
         // add the tag to the element
         element.setAttribute("svg-selected", "");
     }
 
-    public triggerElementSelectionByName(elementName: string) {
-        this.currentSelectedElement = elementName;
+    public triggerElementSelectionByName(elementNames: string[]) {
+        this.currentSelectedElement = elementNames;
         // remove the override from the selected elements
-        let selectedElements = $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
+        $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
         // if the element has no name, just return
-        if (!elementName) {
+        if (!elementNames || elementNames.length == 0) {
             return;
         }
-        let elements;
-        if (this.options.isDexpiDataSource) {
-            // we if are dealing with dexpi data apply changes to the image map
-            elements = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${elementName}"]`);
+        let elements = [];
+        elements = elementNames.reduce((ac, el) =>  ac.concat(Array.prototype.slice.call(this.svgElement.querySelectorAll(`[${this.options.idField}="${el}"]`))), []);
 
-        } else {
-            // find the elements
-            elements = this.svgElement.querySelectorAll(`[${this.options.idField}="${elementName}"]`);
-        }
         // iterate over them
         for (const element of elements) {
             // add the tag to the element
@@ -278,6 +266,7 @@ export class SvgElement {
                 elementInfo.element.removeAttribute("class");
             }
         }
+        this.previousOverrideElements = [];
         // remove all exiting svg-clickable attributes
         $(this.svgElement).find("[svg-clickable]").removeAttr("svg-clickable");
         // iterate over the overrides
@@ -285,36 +274,24 @@ export class SvgElement {
             // find the elements to override
             let elements = this.svgElement.querySelectorAll(`[${this.options.idField}="${override[this.options.overrideIdField]}"]`);
             // iterate over them
+
             for (const element of elements) {
-                // for dexpi, we do not need to apply overrides to the elements in imageMap
-                if (this.options.isDexpiDataSource && element.parentElement.id == "ImageMap") continue;
                 if (this.options.applyToChildren) {
                     // apply the overrides to the children
-                    for (const child of element.children) {
-                        this.applyOverrideToElement(child, override);
-                    }
+                    this.applyOverrideToChildren(element, override);
                 } else {
                     this.applyOverrideToElement(element, override);
                 }
-                // set the elements as clickable if we are not dealing with dexpi data
-                if (!this.options.isDexpiDataSource) {
-                    this.applyClickableToElement(element);
-                }
-            }
-            // we if are dealing with dexpi data, handle the image map as well
-            if (this.options.isDexpiDataSource) {
-                let imageMapElements = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${override[this.options.overrideIdField]}"]`);
-                for (const imageMapElement of imageMapElements) {
-                    this.applyClickableToElement(imageMapElement);
-                    // iterate over the attributes to override
-                    for (const attrOverride in override) {
-                        if (override.hasOwnProperty(attrOverride) && attrOverride == "override-tooltip") {
-                            this.addTitleToElement(imageMapElement, override[attrOverride]);
-                        }
-                    }
-                }
+
             }
         }
+    }
+
+    private applyOverrideToChildren(element: Element, override: SvgOverride) {
+        for (const child of element.children) {
+            this.applyOverrideToChildren(child, override);
+        }
+        this.applyOverrideToElement(element, override);
     }
 
     private applyClickableToElement(element: Element) {
@@ -331,32 +308,38 @@ export class SvgElement {
     private applyOverrideToElement(element: Element, override: SvgOverride) {
         // skip over title elements as they don't need to have overrides
         if (element.tagName == "title") return;
-        this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style"), cachedClass: element.getAttribute("class") });
+        // make sure we are not adding the same element twice
+        if(this.previousOverrideElements.filter((el)=> (el.element == element)).length == 0) {
+            this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style"), cachedClass: element.getAttribute("class") });
+        }
+        if(override["selectable"] !== false) {
+            this.applyClickableToElement(element);
+        }
         // iterate over the attributes to override
         for (const attrOverride in override) {
             if (override.hasOwnProperty(attrOverride)) {
-                if (attrOverride.startsWith("override-") && attrOverride != "override-tooltip") {
-                    if (attrOverride == "override-class") {
+                if (attrOverride != "tooltip") {
+                    if (attrOverride == "class") {
                         (<SVGAElement>element).classList.add(override[attrOverride]);
-                    } else if (attrOverride == "override-text" && override[attrOverride] != undefined) {
+                    } else if (attrOverride == "text" && override[attrOverride] != undefined) {
                         element.innerHTML = override[attrOverride];
                     } else {
                         // only override if we have a value
                         if (override[attrOverride] || this.options.resetOverrideAttributeIfEmpty) {
                             // construct the style attr based on overrides
-                            (<SVGElement>element).style[attrOverride.substr("override-".length)] = override[attrOverride];
+                            (<SVGElement>element).style[attrOverride] = override[attrOverride];
                         }
                     }
                     if (element.tagName == "text") {
-                        if (attrOverride == "override-stroke-width") {
+                        if (attrOverride == "stroke-width") {
                             continue;
-                        } else if (attrOverride == "override-text-stroke-width") {
+                        } else if (attrOverride == "text-stroke-width") {
                             // construct the style attr based on overrides
                             (<SVGElement>element).style["stroke-width"] = override[attrOverride];
                         }
                     }
                 }
-                if (!this.options.isDexpiDataSource && attrOverride == "override-tooltip") {
+                if (attrOverride == "tooltip") {
                     this.addTitleToElement(element, override[attrOverride]);
                 }
             }
@@ -375,11 +358,8 @@ export class SvgElement {
         if (this.panandZoomInstance) {
             // find the first selected element
             let selectedElement: Element;
-            if (this.options.isDexpiDataSource) {
-                selectedElement = this.svgElement.querySelectorAll(`#ImageMap>rect[${this.options.idField}="${this.currentSelectedElement}"]`)[0];
-            } else {
-                selectedElement = this.svgElement.querySelectorAll(`[${this.options.idField}="${this.currentSelectedElement}"]`)[0];
-            }
+
+            selectedElement = this.svgElement.querySelectorAll(`[${this.options.idField}="${this.currentSelectedElement[0]}"]`)[0];
             if (selectedElement) {
                 // find the size of the element we are zooming into
                 let clientRect = selectedElement.getBoundingClientRect();

@@ -29,10 +29,15 @@ export class SvgViewerWidget extends TWComposerWidget {
                     baseType: 'INFOTABLE',
                 },
                 DataIdField: {
-                    baseType: 'FIELDNAME',
-                    sourcePropertyName: 'Data',
+                    baseType: 'STRING',
                     defaultValue: 'elementName',
                     description: 'The field in the Data infotable to use for matching with the SVGIdField'
+                },
+                OverrideListField: {
+                    baseType: 'FIELDNAME',
+                    sourcePropertyName: 'Data',
+                    defaultValue: '',
+                    description: 'Optional: The field in the Data infotable that contains nested infotable with the overrides'
                 },
                 SVGIdField: {
                     baseType: 'STRING',
@@ -47,11 +52,6 @@ export class SvgViewerWidget extends TWComposerWidget {
                 SelectedStyle: {
                     description: 'Style defining how a selected element appears.',
                     baseType: 'STYLEDEFINITION'
-                },
-                DexpiDataSource: {
-                    description: 'Specifies if the svg file is a svg file converted from dexpi.',
-                    baseType: 'BOOLEAN',
-                    defaultValue: false
                 },
                 ApplyToChildren: {
                     description: 'Whether to apply the overrides to the element or to its children',
