@@ -1,12 +1,13 @@
 'use strict';
 const path = require('path');
 const fs = require('fs');
+const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const EncodingPlugin = require('webpack-encoding-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // enable cleaning of the build and zip directories
-const CleanWebpackPlugin = require('clean-webpack-plugin').default;
+const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 // enable building of the widget
 const ZipPlugin = require('zip-webpack-plugin');
 // enable reading master data from the package.json file
@@ -64,6 +65,9 @@ module.exports = function (env, argv) {
             new CopyWebpackPlugin([{ from: 'Entities', to: '../../Entities' }]),
             // generates the metadata xml file and adds it to the archive
             new WidgetMetadataGenerator(),
+            new webpack.DefinePlugin({
+                'WIDGET_PATH_URL': JSON.stringify(`../Common/extensions/${packageName}/ui/${packageJson.name}/`)
+            }),
             // create the extension zip
             new ZipPlugin({
                 path: path.join(__dirname, 'zip'), // a top level directory called zip
@@ -233,7 +237,7 @@ module.exports = function (env, argv) {
     if (uploadEnabled) {
         result.plugins.push(
             new UploadToThingworxPlugin({
-                thingworxServer: packageJson.thingworxServer,
+                thingworxServer: packageJson.thingworxServer.endsWith('/') ? packageJson.thingworxServer.slice(0, -1) : packageJson.thingworxServer,
                 thingworxUser: packageJson.thingworxUser,
                 thingworxPassword: packageJson.thingworxPassword
             })
