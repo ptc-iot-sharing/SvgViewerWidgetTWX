@@ -8,6 +8,11 @@ export interface SvgRendererOptions {
     idField: string;
 
     /**
+     * A CSS selector that can idenfiy an element. If this is provided, then the idField is not used
+     */
+    selectorField: string;
+
+    /**
      * Height of the image. Use css units
      */
     imageHeight: string;
@@ -82,7 +87,18 @@ export interface SvgRendererOptions {
      * Used to trigger the selection to external systems
      * @param elementNames names of the elements selected
      */
-    selectionTrigger(elementNames: string[]): void;
+    selectionTrigger(elementNames: SvgElementIdentifier[]): void;
+}
+
+export interface SvgElementIdentifier {
+    /**
+     * The value of the attribute
+     */
+    name: string;
+    /**
+     * An optional CSS selector that can be used as an alternative to the name
+     */
+    selector?: string;
 }
 
 export interface SvgOverride {
@@ -109,7 +125,7 @@ export class SvgElement {
 
     previousOverrideElements: { element: Element, cachedStyle: string, cachedClass: string }[] = [];
 
-    currentSelectedElement: string[];
+    currentSelectedElement: SvgElementIdentifier[] = [];
 
     constructor(container: JQuery, svgFile: string, options: SvgRendererOptions) {
         this.svgFileUrl = svgFile;
@@ -216,14 +232,14 @@ export class SvgElement {
     }
 
     private triggerElementSelection(element: Element) {
-        this.currentSelectedElement = [element.getAttribute(this.options.idField)];
+        this.currentSelectedElement = [{name: element.getAttribute(this.options.idField)}];
         // remove the override from the selected elements
         $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
         // add the tag to the element
         element.setAttribute("svg-selected", "");
     }
 
-    public triggerElementSelectionByName(elementNames: string[]) {
+    public triggerElementSelectionByName(elementNames: SvgElementIdentifier[]) {
         this.currentSelectedElement = elementNames;
         // remove the override from the selected elements
         $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
@@ -232,7 +248,7 @@ export class SvgElement {
             return;
         }
         let elements = [];
-        elements = elementNames.reduce((ac, el) =>  ac.concat(Array.prototype.slice.call(this.svgElement.querySelectorAll(`[${this.options.idField}="${el}"]`))), []);
+        elements = elementNames.reduce((ac, el) =>  ac.concat(this.getElementsFromOverride(el)), []);
 
         // iterate over them
         for (const element of elements) {
@@ -272,9 +288,8 @@ export class SvgElement {
         // iterate over the overrides
         for (const override of overrideList) {
             // find the elements to override
-            let elements = this.svgElement.querySelectorAll(`[${this.options.idField}="${override[this.options.overrideIdField]}"]`);
+            let elements = this.getElementsFromOverride({name: override[this.options.overrideIdField], selector: override[this.options.selectorField]});
             // iterate over them
-
             for (const element of elements) {
                 if (this.options.applyToChildren) {
                     // apply the overrides to the children
@@ -359,7 +374,7 @@ export class SvgElement {
             // find the first selected element
             let selectedElement: Element;
 
-            selectedElement = this.svgElement.querySelectorAll(`[${this.options.idField}="${this.currentSelectedElement[0]}"]`)[0];
+            selectedElement = this.getElementsFromOverride(this.currentSelectedElement[0])[0];
             if (selectedElement) {
                 // find the size of the element we are zooming into
                 let clientRect = selectedElement.getBoundingClientRect();
@@ -377,6 +392,14 @@ export class SvgElement {
             }
         } else {
             console.error("Cannot pan onto something as pan and zoom is disabled")
+        }
+    }
+
+    private getElementsFromOverride(elementIdentifier: SvgElementIdentifier): Element[] {
+        if(elementIdentifier.selector) {
+            return Array.prototype.slice.call(this.svgElement.querySelectorAll(elementIdentifier.selector));
+        } else {
+            return Array.prototype.slice.call(this.svgElement.querySelectorAll(`[${this.options.idField}="${elementIdentifier.name}"]`));
         }
     }
 

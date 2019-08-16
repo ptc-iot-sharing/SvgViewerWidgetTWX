@@ -1,5 +1,5 @@
 import { ThingworxRuntimeWidget, TWService, TWProperty } from 'typescriptwebpacksupport'
-import { SvgElement, SvgRendererOptions, SvgOverride } from './svgRenderer/svgRenderer'
+import { SvgElement, SvgRendererOptions, SvgOverride, SvgElementIdentifier } from './svgRenderer/svgRenderer'
 
 @ThingworxRuntimeWidget
 export class SvgViewerWidget extends TWRuntimeWidget {
@@ -54,6 +54,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         return {
             overrideIdField: this.getProperty("DataIdField") || "elementName",
             idField: this.getProperty("SVGIdField") || "id",
+            selectorField: this.getProperty("SelectorIdField") || "",
             imageHeight: this.getProperty("ImageHeight") || "100%",
             imageWidth: this.getProperty("ImageWidth") || "100%",
             zoomPanOptions: {
@@ -90,26 +91,28 @@ export class SvgViewerWidget extends TWRuntimeWidget {
 
     generateEventTriggerForHandlerNamed = (handlerName) => (elementName: string) => {
         this.setProperty("SelectedElementID", elementName);
-        this.applySelection([elementName]);
+        this.applySelection([{ name: elementName }]);
         this.jqElement.triggerHandler(handlerName);
     }
 
-    applySelection = (elementName: string[]) => {
+    applySelection = (elementNames: SvgElementIdentifier[]) => {
         let selectedRows = [];
         const overrideField = this.getProperty("OverrideListField");
         const dataField = this.getProperty("DataIdField");
         // also update the row selection in the data array
         for (let i = 0; i < this.svgData.rows.length; i++) {
             const row = this.svgData.rows[i];
-            if (overrideField) {
-                for (const override of row[overrideField].rows) {
-                    if(override[dataField] == elementName) {
+            for (const elementName of elementNames) {
+                if (overrideField) {
+                    for (const override of row[overrideField].rows) {
+                        if (override[dataField] == elementName.name) {
+                            selectedRows.push(i);
+                        }
+                    }
+                } else {
+                    if (row[dataField] == elementName.name) {
                         selectedRows.push(i);
                     }
-                }
-            } else {
-                if (row[dataField] == elementName) {
-                    selectedRows.push(i);
                 }
             }
         }
@@ -139,13 +142,14 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         switch (propertyName) {
             case "Data":
                 if (this.svgRenderer) {
-                    let elements = [];
+                    let elements: SvgElementIdentifier[] = [];
                     const overrideField = this.getProperty("OverrideListField");
                     const dataField = this.getProperty("DataIdField");
+                    const selectorField = this.getProperty("SelectorIdField");
                     if (overrideField) {
-                        elements = elements.concat(selectedRows.reduce((ac, el) => ac.concat(el[overrideField].rows.filter((x) => x.selectable !== false).map(x => x[dataField])), []));
+                        elements = elements.concat(selectedRows.reduce((ac, el) => ac.concat(el[overrideField].rows.filter((x) => x.selectable !== false).map(x => ({ name: x[dataField], selector: x[selectorField] }))), []));
                     } else {
-                        elements = elements.concat(selectedRows.map((el) => el[dataField]));
+                        elements = elements.concat(selectedRows.map((el) => ({ name: el[dataField], selector: el[selectorField] })));
                     }
 
                     this.svgRenderer.triggerElementSelectionByName(elements);
@@ -175,7 +179,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             for (const override of overrideRows) {
                 for (const key in override) {
                     const newRow = {};
-                    if(key.startsWith("override-")) {
+                    if (key.startsWith("override-")) {
                         newRow[key.substr("override-".length)] = override[key];
                     }
                     newRow[this.getProperty("DataIdField")] = override[this.getProperty("DataIdField")];

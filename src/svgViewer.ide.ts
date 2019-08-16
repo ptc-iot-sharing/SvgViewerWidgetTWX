@@ -33,6 +33,11 @@ export class SvgViewerWidget extends TWComposerWidget {
                     defaultValue: 'elementName',
                     description: 'The field in the Data infotable to use for matching with the SVGIdField'
                 },
+                SelectorIdField: {
+                    baseType: 'STRING',
+                    defaultValue: '',
+                    description: 'Use a css selector for this element rather than a match on the element. If this is is set, it has a higher priority than the DataIdField.'
+                },
                 OverrideListField: {
                     baseType: 'FIELDNAME',
                     sourcePropertyName: 'Data',
