@@ -7,13 +7,13 @@
     "thingworxPassword": "Administrator12345",
     "author": "Thingworx RoIcenter placatus",
     "minimumThingWorxVersion": "6.0.0",
-    "homepage": "http://roicentersvn/placatus/SvgViewerWidget",
+    "homepage": "https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX",
     "autoUpdate": {
         "giteaURL": "http://roicentersvn/api/v1/repos/placatus/SvgViewerWidget/releases/latest"
     },
     "repository": {
         "type": "git",
-        "url": "http://roicentersvn.ptcnet.ptc.com/placatus/SvgViewerWidget.git"
+        "url": "https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX.git"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
