@@ -9,6 +9,7 @@
     "minimumThingWorxVersion": "6.0.0",
     "homepage": "https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX",
     "autoUpdate": {
+        "gitHubURL": "https://api.github.com/repos/ptc-iot-sharing/SvgViewerWidgetTWX/releases/latest",
         "giteaURL": "http://roicentersvn/api/v1/repos/placatus/SvgViewerWidget/releases/latest"
     },
     "repository": {
