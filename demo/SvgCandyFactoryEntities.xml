@@ -1,0 +1,1873 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Entities build="b2319" majorVersion="8" minorVersion="4" modelPersistenceProviderPackage="H2PersistenceProviderPackage" revision="4" schemaVersion="1041" universal="password"><StyleDefinitions/><Networks><Network description="" documentationContent="" homeMashup="" lastModifiedDate="2019-08-13T12:10:41.266+03:00" name="BcgAssetNetwork" projectName="BCG" tags=""><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke><Principal isPermitted="true" name="bcg" type="User"/></EventInvoke><EventSubscribe><Principal isPermitted="true" name="bcg" type="User"/></EventSubscribe></Permissions></RunTimePermissions><VisibilityPermissions><Visibility><Principal isPermitted="true" name="Everyone" type="Organization"/></Visibility></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><Connections><Connection connectionType="Contains" from="" to="Cuve1_BCG"/><Connection connectionType="Contains" from="" to="Cuve2_BCG"/><Connection connectionType="Contains" from="" to="Cuve3_BCG"/><Connection connectionType="Contains" from="" to="Cuve4_BCG"/><Connection connectionType="Contains" from="" to="Injecteurs_BCG"/><Connection connectionType="Contains" from="" to="Pompe_C2_C3"/><Connection connectionType="Contains" from="" to="Pompe_C1_C2"/><Connection connectionType="Contains" from="" to="Plaque_Distribution_BCG"/><Connection connectionType="Contains" from="" to="Pompe_Decharge_C3_C4_BCG"/><Connection connectionType="Contains" from="" to="Tremie_BCG"/><Connection connectionType="Contains" from="" to="Tunnel_Refroidissement_BCG"/></Connections><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated, projectName : updated&#10;" timestamp="2019-04-25T01:02:06.234+03:00" user="placatus"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2019-04-25T01:02:23.672+03:00" user="placatus"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2019-04-25T01:22:33.233+03:00" user="placatus"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2019-04-25T15:26:12.091+03:00" user="placatus"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2019-05-08T17:32:20.711+03:00" user="placatus"/><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.266+03:00" user="Administrator"/></ConfigurationChanges></Network></Networks><PersistenceProviderPackages/><Mashups><Mashup aspect.isResponsive="true" aspect.mashupType="mashup" columns="0.0" description="" documentationContent="" homeMashup="" lastModifiedDate="2019-08-13T12:10:41.259+03:00" name="PumpDetailsMashup2" projectName="BCG" rows="0.0" tags=""><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility><Principal isPermitted="true" name="Everyone" type="Organization"/></Visibility></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><ParameterDefinitions><FieldDefinition aspect.ordinal="0" baseType="THINGNAME" description="" name="thingName" ordinal="0"/></ParameterDefinitions><Things><Thing>C01V01-HEX-P4711-Pumps-SP570CBE2AF8344DD29AF899EE341A7808-Thing</Thing></Things><ThingShapes/><ThingTemplates><ThingTemplate>GenericThing</ThingTemplate></ThingTemplates><mashupContent><![CDATA[{
+  "CustomMashupCss" : ".component-table .property-name {\n    font-weight: bold !important;\n    font-size: 14px !important;\n}\n\n.component-table .property-value {\n    font-size: 13px !important;\n}\n",
+  "Data" : {
+    "DynamicThingTemplates_GenericThing" : {
+      "DataName" : "DynamicThingTemplates_GenericThing",
+      "EntityName" : "GenericThing",
+      "EntityType" : "DynamicThingTemplates",
+      "Id" : "ce1f29bb-adbc-4cba-94d9-c2bcc6309fe0",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "a71be3eb-1c7b-4c2d-a41e-f97d671c0b0c",
+        "Name" : "GetPropertyValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetPropertyValues"
+      } ]
+    },
+    "Session" : {
+      "DataName" : "Session",
+      "EntityName" : "",
+      "EntityType" : "Session",
+      "Id" : "session",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "SessionInterface",
+        "Name" : "GetGlobalSessionValues",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetGlobalSessionValues"
+      } ]
+    },
+    "Things_C01V01-HEX-P4711-Pumps-SP570CBE2AF8344DD29AF899EE341A7808-Thing" : {
+      "DataName" : "Things_C01V01-HEX-P4711-Pumps-SP570CBE2AF8344DD29AF899EE341A7808-Thing",
+      "EntityName" : "C01V01-HEX-P4711-Pumps-SP570CBE2AF8344DD29AF899EE341A7808-Thing",
+      "EntityType" : "Things",
+      "Id" : "3e2e72e3-f87e-4565-bd68-4575b8ff4cd2",
+      "Services" : [ {
+        "APIMethod" : "get",
+        "Characteristic" : "Services",
+        "Id" : "14f25b87-82fb-41f4-b13d-009b72e3d598",
+        "Name" : "GetProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetProperties"
+      } ]
+    },
+    "UserExtensions" : {
+      "DataName" : "UserExtensions",
+      "EntityName" : "",
+      "EntityType" : "UserExtensions",
+      "Id" : "UserExtensions",
+      "Services" : [ {
+        "APIMethod" : "post",
+        "Characteristic" : "Services",
+        "Id" : "UserExtensionInterface",
+        "Name" : "GetCurrentUserExtensionProperties",
+        "Parameters" : { },
+        "RefreshInterval" : 0,
+        "Target" : "GetCurrentUserExtensionProperties"
+      } ]
+    }
+  },
+  "DataBindings" : [ {
+    "Id" : "6cbb94f5-fb58-494b-910b-35d51b186c0b",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "spareParts",
+      "SourcePropertyBaseType" : "INFOTABLE",
+      "SourcePropertyType" : "Property",
+      "TargetProperty" : "Data",
+      "TargetPropertyBaseType" : "INFOTABLE",
+      "TargetPropertyType" : "property"
+    } ],
+    "SourceArea" : "Data",
+    "SourceDetails" : "AllData",
+    "SourceId" : "GetProperties",
+    "SourceSection" : "Things_C01V01-HEX-P4711-Pumps-SP570CBE2AF8344DD29AF899EE341A7808-Thing",
+    "TargetArea" : "UI",
+    "TargetId" : "dhxgrid-50",
+    "TargetSection" : ""
+  }, {
+    "Id" : "02b75594-5b14-444f-ace5-5d0e711c2c66",
+    "PropertyMaps" : [ {
+      "SourceProperty" : "thingName",
+      "SourcePropertyBaseType" : "THINGNAME",
+      "TargetProperty" : "value",
+      "TargetPropertyBaseType" : "THINGNAME",
+      "TargetPropertyType" : "Entity"
+    } ],
+    "SourceArea" : "Mashup",
+    "SourceId" : "mashup-root",
+    "SourceSection" : "",
+    "TargetArea" : "Data",
+    "TargetId" : "EntityName",
+    "TargetSection" : "DynamicThingTemplates_GenericThing"
+  } ],
+  "DesignTimePermissions" : {
+    "Create" : [ ],
+    "Delete" : [ ],
+    "Metadata" : [ ],
+    "Read" : [ ],
+    "Update" : [ ]
+  },
+  "Events" : [ {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "Things_C01V01-HEX-P4711-Pumps-SP570CBE2AF8344DD29AF899EE341A7808-Thing",
+    "EventHandlerService" : "GetProperties",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "17a7fbad-a1d2-43cb-898e-f1c5009ff392"
+  }, {
+    "EventHandlerArea" : "UI",
+    "EventHandlerId" : "statusmessage-52",
+    "EventHandlerService" : "ShowMessage",
+    "EventTriggerArea" : "UI",
+    "EventTriggerEvent" : "Clicked",
+    "EventTriggerId" : "button-51",
+    "EventTriggerSection" : "",
+    "Id" : "e7c3c0a4-33a9-4f53-beb5-8ddd896cc09a"
+  }, {
+    "EventHandlerArea" : "Data",
+    "EventHandlerId" : "DynamicThingTemplates_GenericThing",
+    "EventHandlerService" : "GetPropertyValues",
+    "EventTriggerArea" : "Mashup",
+    "EventTriggerEvent" : "Loaded",
+    "EventTriggerId" : "mashup-root",
+    "EventTriggerSection" : "",
+    "Id" : "8e06e1ca-c65d-41f4-a022-a46a844d05df"
+  } ],
+  "RunTimePermissions" : {
+    "permissions" : [ ]
+  },
+  "UI" : {
+    "Properties" : {
+      "AddToDashboardButton" : "SimplePlus",
+      "AddToDashboardButtonStyle" : "DefaultAddToDashboardButtonStyle",
+      "Area" : "Mashup",
+      "BGImage" : "",
+      "BGImageRepeat" : "no-repeat",
+      "BGImageSize" : "auto",
+      "Columns" : 0,
+      "ConfigureGadgetButton" : "SimpleGear",
+      "ConfigureGadgetButtonStyle" : "DefaultConfigureGadgetButtonStyle",
+      "DisplayName" : "Mashup",
+      "EnableParameterEditing" : false,
+      "Height" : 618,
+      "Id" : "mashup-root",
+      "IgnoreWarningsInViewMashup" : false,
+      "IsPrintLayout" : false,
+      "Left" : 0,
+      "MashupToEditGadget" : "DefaultMashupToEditGadget",
+      "MinHeight" : 0,
+      "MinWidth" : 0,
+      "ResponsiveLayout" : true,
+      "Rows" : 0,
+      "ShowDataLoading" : true,
+      "Style" : "DefaultMashupStyle",
+      "StyleTheme" : "Base Theme",
+      "Title" : "",
+      "TitleBar" : false,
+      "TitleBarStyle" : "DefaultTitleBarStyle",
+      "TitleBarText" : "Gadget Title Here",
+      "Top" : 0,
+      "Type" : "mashup",
+      "UseTheme" : false,
+      "UseThemeForHybrids" : false,
+      "Visible" : true,
+      "Width" : 1024,
+      "Z-index" : 10,
+      "__TypeDisplayName" : "Mashup",
+      "_currentParameterDefs" : [ {
+        "BaseType" : "THINGNAME",
+        "Description" : "",
+        "ParameterName" : "thingName"
+      } ],
+      "id_index" : 52,
+      "supportsAutoResize" : true
+    },
+    "Widgets" : [ {
+      "Properties" : {
+        "Area" : "UI",
+        "Columns" : 0,
+        "DisplayName" : "layout-1",
+        "Footer" : false,
+        "FooterHeight" : 0,
+        "Header" : true,
+        "HeaderHeight" : 200,
+        "Id" : "layout-1",
+        "IncludeSpacingInFixedAreas" : false,
+        "IsPrintLayout" : false,
+        "Left" : 375,
+        "LeftSidebar" : false,
+        "LeftSidebarWidth" : 0,
+        "Orientation" : "vertical",
+        "PctColumn1" : 50,
+        "PctColumn2" : 50,
+        "PctColumn3" : 1,
+        "PctColumn4" : 1,
+        "PctColumn5" : 1,
+        "PctColumn6" : 1,
+        "PctColumn7" : 1,
+        "PctColumn8" : 1,
+        "PctRow1" : 100,
+        "PctRow2" : 33.33333333333333,
+        "PctRow3" : 33.33333333333333,
+        "PctRow4" : -7.105427357601002E-15,
+        "PctRow5" : 0,
+        "PctRow6" : 0,
+        "PctRow7" : 0,
+        "PctRow8" : 0,
+        "PrintMarginLeftRight" : 0.5,
+        "PrintMarginTopBottom" : 0.5,
+        "PrintWidth" : 650,
+        "ResponsiveLayout" : true,
+        "RightSidebar" : false,
+        "RightSidebarWidth" : 0,
+        "Rows" : 1,
+        "ShowDataLoading" : true,
+        "Spacing" : 2,
+        "Top" : 225,
+        "Type" : "layout",
+        "Visible" : true,
+        "Z-index" : 10,
+        "__TypeDisplayName" : "Layout"
+      },
+      "Widgets" : [ {
+        "Properties" : {
+          "AnimateExpandCollapse" : true,
+          "Area" : "UI",
+          "BGImageRepeat" : "no-repeat",
+          "BGImageSize" : "auto",
+          "DisplayName" : "Header",
+          "ExpandCollapseTabLocation" : "outside",
+          "Expanded" : true,
+          "Id" : "container-2",
+          "MinHeight" : 0,
+          "MinWidth" : 0,
+          "Overlay" : false,
+          "OverlayIsTransparent" : false,
+          "ResponsiveLayout" : true,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "Style" : "DefaultContainerStyle",
+          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+          "TabExpandStyle" : "DefaultTabExpandStyle",
+          "TabHeight" : 36,
+          "TabLocation" : "center",
+          "TabOffset" : 0,
+          "TabWidth" : 36,
+          "Type" : "container",
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Container",
+          "userCannotRemove" : true
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "Area" : "UI",
+            "Columns" : 0,
+            "DisplayName" : "layout-18",
+            "Footer" : false,
+            "FooterHeight" : 0,
+            "Header" : false,
+            "HeaderHeight" : 0,
+            "Id" : "layout-18",
+            "IncludeSpacingInFixedAreas" : false,
+            "IsPrintLayout" : false,
+            "Left" : 220,
+            "LeftSidebar" : false,
+            "LeftSidebarWidth" : 0,
+            "Orientation" : "vertical",
+            "PctColumn1" : 50,
+            "PctColumn2" : 50,
+            "PctColumn3" : 1,
+            "PctColumn4" : 1,
+            "PctColumn5" : 1,
+            "PctColumn6" : 1,
+            "PctColumn7" : 1,
+            "PctColumn8" : 1,
+            "PctRow1" : 100,
+            "PctRow2" : 50,
+            "PctRow3" : 0,
+            "PctRow4" : 0,
+            "PctRow5" : 0,
+            "PctRow6" : 0,
+            "PctRow7" : 0,
+            "PctRow8" : 0,
+            "PrintMarginLeftRight" : 0.5,
+            "PrintMarginTopBottom" : 0.5,
+            "PrintWidth" : 650,
+            "ResponsiveLayout" : true,
+            "RightSidebar" : false,
+            "RightSidebarWidth" : 0,
+            "Rows" : 1,
+            "ShowDataLoading" : true,
+            "Spacing" : 2,
+            "Top" : 50,
+            "Type" : "layout",
+            "Visible" : true,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "Layout"
+          },
+          "Widgets" : [ {
+            "Properties" : {
+              "AnimateExpandCollapse" : true,
+              "Area" : "UI",
+              "BGImageRepeat" : "no-repeat",
+              "BGImageSize" : "auto",
+              "DisplayName" : "Row 1",
+              "ExpandCollapseTabLocation" : "outside",
+              "Expanded" : true,
+              "Id" : "container-19",
+              "MinHeight" : 0,
+              "MinWidth" : 0,
+              "Overlay" : false,
+              "OverlayIsTransparent" : false,
+              "ResponsiveLayout" : true,
+              "ShowDataLoading" : true,
+              "ShowExpandCollapseTab" : false,
+              "Style" : "DefaultContainerStyle",
+              "TabCollapseStyle" : "DefaultTabCollapseStyle",
+              "TabExpandStyle" : "DefaultTabExpandStyle",
+              "TabHeight" : 36,
+              "TabLocation" : "center",
+              "TabOffset" : 0,
+              "TabWidth" : 36,
+              "Type" : "container",
+              "Visible" : true,
+              "Z-index" : 10,
+              "__TypeDisplayName" : "Container",
+              "userCannotRemove" : true
+            },
+            "Widgets" : [ {
+              "Properties" : {
+                "Area" : "UI",
+                "Columns" : 1,
+                "DisplayName" : "layout-6",
+                "Footer" : false,
+                "FooterHeight" : 0,
+                "Header" : false,
+                "HeaderHeight" : 0,
+                "Id" : "layout-6",
+                "IncludeSpacingInFixedAreas" : false,
+                "IsPrintLayout" : false,
+                "Left" : 515,
+                "LeftSidebar" : true,
+                "LeftSidebarWidth" : 300,
+                "Orientation" : "horizontal",
+                "PctColumn1" : 100,
+                "PctColumn2" : 0,
+                "PctColumn3" : 1,
+                "PctColumn4" : 1,
+                "PctColumn5" : 1,
+                "PctColumn6" : 1,
+                "PctColumn7" : 1,
+                "PctColumn8" : 1,
+                "PctRow1" : 50,
+                "PctRow2" : 50,
+                "PctRow3" : 0,
+                "PctRow4" : 0,
+                "PctRow5" : 0,
+                "PctRow6" : 0,
+                "PctRow7" : 0,
+                "PctRow8" : 0,
+                "PrintMarginLeftRight" : 0.5,
+                "PrintMarginTopBottom" : 0.5,
+                "PrintWidth" : 650,
+                "ResponsiveLayout" : true,
+                "RightSidebar" : true,
+                "RightSidebarWidth" : 90,
+                "Rows" : 0,
+                "ShowDataLoading" : true,
+                "Spacing" : 2,
+                "Top" : 55,
+                "Type" : "layout",
+                "Visible" : true,
+                "Z-index" : 10,
+                "__TypeDisplayName" : "Layout"
+              },
+              "Widgets" : [ {
+                "Properties" : {
+                  "AnimateExpandCollapse" : true,
+                  "Area" : "UI",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "DisplayName" : "Left Sidebar",
+                  "ExpandCollapseTabLocation" : "outside",
+                  "Expanded" : true,
+                  "Id" : "container-7",
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "Overlay" : false,
+                  "OverlayIsTransparent" : false,
+                  "ResponsiveLayout" : true,
+                  "ShowDataLoading" : true,
+                  "ShowExpandCollapseTab" : false,
+                  "Style" : "DefaultContainerStyle",
+                  "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                  "TabExpandStyle" : "DefaultTabExpandStyle",
+                  "TabHeight" : 36,
+                  "TabLocation" : "center",
+                  "TabOffset" : 0,
+                  "TabWidth" : 36,
+                  "Type" : "container",
+                  "Visible" : true,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Container",
+                  "userCannotRemove" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "AlternateText" : "",
+                    "Area" : "UI",
+                    "BorderStyle" : "DefaultImageBorderStyle",
+                    "DisplayName" : "image-9",
+                    "Height" : 100,
+                    "Id" : "image-9",
+                    "Left" : 25,
+                    "PreventCaching" : false,
+                    "ResponsiveLayout" : true,
+                    "Scaling" : "width",
+                    "ShowDataLoading" : true,
+                    "SourceURL" : "FlowservePumpImage",
+                    "ToolTipField" : "",
+                    "ToolTipStyle" : "DefaultTooltipStyle",
+                    "Top" : 65,
+                    "Type" : "image",
+                    "Visible" : true,
+                    "Width" : 100,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Image",
+                    "__supportsTooltip" : true
+                  },
+                  "Widgets" : [ ]
+                } ]
+              }, {
+                "Properties" : {
+                  "AnimateExpandCollapse" : true,
+                  "Area" : "UI",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "DisplayName" : "Column",
+                  "ExpandCollapseTabLocation" : "outside",
+                  "Expanded" : true,
+                  "Id" : "container-8",
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "Overlay" : false,
+                  "OverlayIsTransparent" : false,
+                  "ResponsiveLayout" : true,
+                  "ShowDataLoading" : true,
+                  "ShowExpandCollapseTab" : false,
+                  "Style" : "DefaultContainerStyle",
+                  "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                  "TabExpandStyle" : "DefaultTabExpandStyle",
+                  "TabHeight" : 36,
+                  "TabLocation" : "center",
+                  "TabOffset" : 0,
+                  "TabWidth" : 36,
+                  "Type" : "container",
+                  "Visible" : true,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Container",
+                  "userCannotRemove" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "Columns" : 0,
+                    "DisplayName" : "layout-33",
+                    "Footer" : false,
+                    "FooterHeight" : 0,
+                    "Header" : true,
+                    "HeaderHeight" : 80,
+                    "Id" : "layout-33",
+                    "IncludeSpacingInFixedAreas" : false,
+                    "IsPrintLayout" : false,
+                    "Left" : 360,
+                    "LeftSidebar" : false,
+                    "LeftSidebarWidth" : 0,
+                    "Orientation" : "vertical",
+                    "PctColumn1" : 50,
+                    "PctColumn2" : 50,
+                    "PctColumn3" : 1,
+                    "PctColumn4" : 1,
+                    "PctColumn5" : 1,
+                    "PctColumn6" : 1,
+                    "PctColumn7" : 1,
+                    "PctColumn8" : 1,
+                    "PctRow1" : 100,
+                    "PctRow2" : 0,
+                    "PctRow3" : 0,
+                    "PctRow4" : 0,
+                    "PctRow5" : 0,
+                    "PctRow6" : 0,
+                    "PctRow7" : 0,
+                    "PctRow8" : 0,
+                    "PrintMarginLeftRight" : 0.5,
+                    "PrintMarginTopBottom" : 0.5,
+                    "PrintWidth" : 650,
+                    "ResponsiveLayout" : true,
+                    "RightSidebar" : false,
+                    "RightSidebarWidth" : 0,
+                    "Rows" : 1,
+                    "ShowDataLoading" : true,
+                    "Spacing" : 0,
+                    "Top" : 80,
+                    "Type" : "layout",
+                    "Visible" : true,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Layout"
+                  },
+                  "Widgets" : [ {
+                    "Properties" : {
+                      "AnimateExpandCollapse" : true,
+                      "Area" : "UI",
+                      "BGImageRepeat" : "no-repeat",
+                      "BGImageSize" : "auto",
+                      "DisplayName" : "Header",
+                      "ExpandCollapseTabLocation" : "outside",
+                      "Expanded" : true,
+                      "Id" : "container-34",
+                      "MinHeight" : 0,
+                      "MinWidth" : 0,
+                      "Overlay" : false,
+                      "OverlayIsTransparent" : false,
+                      "ResponsiveLayout" : true,
+                      "ShowDataLoading" : true,
+                      "ShowExpandCollapseTab" : false,
+                      "Style" : "DefaultContainerStyle",
+                      "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                      "TabExpandStyle" : "DefaultTabExpandStyle",
+                      "TabHeight" : 36,
+                      "TabLocation" : "center",
+                      "TabOffset" : 0,
+                      "TabWidth" : 36,
+                      "Type" : "container",
+                      "Visible" : true,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Container",
+                      "userCannotRemove" : true
+                    },
+                    "Widgets" : [ {
+                      "Properties" : {
+                        "Area" : "UI",
+                        "Columns" : 1,
+                        "DisplayName" : "layout-40",
+                        "Footer" : false,
+                        "FooterHeight" : 0,
+                        "Header" : false,
+                        "HeaderHeight" : 0,
+                        "Id" : "layout-40",
+                        "IncludeSpacingInFixedAreas" : false,
+                        "IsPrintLayout" : false,
+                        "Left" : 215,
+                        "LeftSidebar" : false,
+                        "LeftSidebarWidth" : 0,
+                        "Orientation" : "horizontal",
+                        "PctColumn1" : 100,
+                        "PctColumn2" : 0,
+                        "PctColumn3" : 1,
+                        "PctColumn4" : 1,
+                        "PctColumn5" : 1,
+                        "PctColumn6" : 1,
+                        "PctColumn7" : 1,
+                        "PctColumn8" : 1,
+                        "PctRow1" : 50,
+                        "PctRow2" : 50,
+                        "PctRow3" : 0,
+                        "PctRow4" : 0,
+                        "PctRow5" : 0,
+                        "PctRow6" : 0,
+                        "PctRow7" : 0,
+                        "PctRow8" : 0,
+                        "PrintMarginLeftRight" : 0.5,
+                        "PrintMarginTopBottom" : 0.5,
+                        "PrintWidth" : 650,
+                        "ResponsiveLayout" : true,
+                        "RightSidebar" : true,
+                        "RightSidebarWidth" : 100,
+                        "Rows" : 0,
+                        "ShowDataLoading" : true,
+                        "Spacing" : 2,
+                        "Top" : 45,
+                        "Type" : "layout",
+                        "Visible" : true,
+                        "Z-index" : 10,
+                        "__TypeDisplayName" : "Layout"
+                      },
+                      "Widgets" : [ {
+                        "Properties" : {
+                          "AnimateExpandCollapse" : true,
+                          "Area" : "UI",
+                          "BGImageRepeat" : "no-repeat",
+                          "BGImageSize" : "auto",
+                          "DisplayName" : "Column 1",
+                          "ExpandCollapseTabLocation" : "outside",
+                          "Expanded" : true,
+                          "Id" : "container-41",
+                          "MinHeight" : 0,
+                          "MinWidth" : 0,
+                          "Overlay" : false,
+                          "OverlayIsTransparent" : false,
+                          "ResponsiveLayout" : true,
+                          "ShowDataLoading" : true,
+                          "ShowExpandCollapseTab" : false,
+                          "Style" : "DefaultContainerStyle",
+                          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                          "TabExpandStyle" : "DefaultTabExpandStyle",
+                          "TabHeight" : 36,
+                          "TabLocation" : "center",
+                          "TabOffset" : 0,
+                          "TabWidth" : 36,
+                          "Type" : "container",
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Container",
+                          "userCannotRemove" : true
+                        },
+                        "Widgets" : [ {
+                          "Properties" : {
+                            "Alignment" : "left",
+                            "Area" : "UI",
+                            "BackgroundFill" : "content",
+                            "DisplayName" : "valuedisplay-11",
+                            "Height" : 22,
+                            "Id" : "valuedisplay-11",
+                            "ImageScaling" : "Width",
+                            "Label" : "",
+                            "LabelAlignment" : "left",
+                            "Left" : 205,
+                            "Overflow" : "hidden",
+                            "ResponsiveLayout" : true,
+                            "ShowDataLoading" : true,
+                            "TextIfNoValue" : "Flowserve Mark 3 STD",
+                            "TextIfNoValueOffset" : 0,
+                            "TextIfNoValueStyle" : {
+                              "backgroundColor" : "",
+                              "displayString" : "",
+                              "fontEmphasisBold" : true,
+                              "fontEmphasisItalic" : false,
+                              "fontEmphasisUnderline" : false,
+                              "foregroundColor" : "",
+                              "image" : "",
+                              "lineColor" : "",
+                              "lineStyle" : "solid",
+                              "lineThickness" : 1,
+                              "secondaryBackgroundColor" : "",
+                              "textSize" : "xxl"
+                            },
+                            "TextWrap" : true,
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 10,
+                            "Type" : "valuedisplay",
+                            "UseTheme" : false,
+                            "ValueDisplayLabelStyle" : "DefaultWidgetLabelStyle",
+                            "ValueDisplayStyle" : "DefaultValueDisplayStyle",
+                            "VerticalAlignment" : "middle",
+                            "Visible" : true,
+                            "Width" : 100,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Value Display",
+                            "__supportsLabel" : true,
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        } ]
+                      }, {
+                        "Properties" : {
+                          "AnimateExpandCollapse" : true,
+                          "Area" : "UI",
+                          "BGImageRepeat" : "no-repeat",
+                          "BGImageSize" : "auto",
+                          "DisplayName" : "Right Sidebar",
+                          "ExpandCollapseTabLocation" : "outside",
+                          "Expanded" : true,
+                          "Id" : "container-42",
+                          "MinHeight" : 0,
+                          "MinWidth" : 0,
+                          "Overlay" : false,
+                          "OverlayIsTransparent" : false,
+                          "ResponsiveLayout" : true,
+                          "ShowDataLoading" : true,
+                          "ShowExpandCollapseTab" : false,
+                          "Style" : "DefaultContainerStyle",
+                          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                          "TabExpandStyle" : "DefaultTabExpandStyle",
+                          "TabHeight" : 36,
+                          "TabLocation" : "center",
+                          "TabOffset" : 0,
+                          "TabWidth" : 36,
+                          "Type" : "container",
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Container",
+                          "userCannotRemove" : true
+                        },
+                        "Widgets" : [ {
+                          "Properties" : {
+                            "AlternateText" : "",
+                            "Area" : "UI",
+                            "BorderStyle" : "DefaultImageBorderStyle",
+                            "DisplayName" : "image-43",
+                            "Height" : 100,
+                            "Id" : "image-43",
+                            "Left" : 65,
+                            "PreventCaching" : false,
+                            "ResponsiveLayout" : true,
+                            "Scaling" : "width",
+                            "ShowDataLoading" : true,
+                            "SourceURL" : "https://upload.wikimedia.org/wikipedia/commons/3/32/Flowserve.svg",
+                            "ToolTipField" : "",
+                            "ToolTipStyle" : "DefaultTooltipStyle",
+                            "Top" : 45,
+                            "Type" : "image",
+                            "Visible" : true,
+                            "Width" : 100,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Image",
+                            "__supportsTooltip" : true
+                          },
+                          "Widgets" : [ ]
+                        } ]
+                      } ]
+                    } ]
+                  }, {
+                    "Properties" : {
+                      "AnimateExpandCollapse" : true,
+                      "Area" : "UI",
+                      "BGImageRepeat" : "no-repeat",
+                      "BGImageSize" : "auto",
+                      "DisplayName" : "Row 1",
+                      "ExpandCollapseTabLocation" : "outside",
+                      "Expanded" : true,
+                      "Id" : "container-35",
+                      "MinHeight" : 0,
+                      "MinWidth" : 0,
+                      "Overlay" : false,
+                      "OverlayIsTransparent" : false,
+                      "ResponsiveLayout" : true,
+                      "ShowDataLoading" : true,
+                      "ShowExpandCollapseTab" : false,
+                      "Style" : "DefaultContainerStyle",
+                      "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                      "TabExpandStyle" : "DefaultTabExpandStyle",
+                      "TabHeight" : 36,
+                      "TabLocation" : "center",
+                      "TabOffset" : 0,
+                      "TabWidth" : 36,
+                      "Type" : "container",
+                      "Visible" : true,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Container",
+                      "userCannotRemove" : true
+                    },
+                    "Widgets" : [ {
+                      "Properties" : {
+                        "Area" : "UI",
+                        "Columns" : 2,
+                        "DisplayName" : "layout-37",
+                        "Footer" : false,
+                        "FooterHeight" : 0,
+                        "Header" : false,
+                        "HeaderHeight" : 0,
+                        "Id" : "layout-37",
+                        "IncludeSpacingInFixedAreas" : false,
+                        "IsPrintLayout" : false,
+                        "Left" : 350,
+                        "LeftSidebar" : false,
+                        "LeftSidebarWidth" : 0,
+                        "Orientation" : "horizontal",
+                        "PctColumn1" : 40,
+                        "PctColumn2" : 60,
+                        "PctColumn3" : 1,
+                        "PctColumn4" : 1,
+                        "PctColumn5" : 1,
+                        "PctColumn6" : 1,
+                        "PctColumn7" : 1,
+                        "PctColumn8" : 1,
+                        "PctRow1" : 50,
+                        "PctRow2" : 50,
+                        "PctRow3" : 0,
+                        "PctRow4" : 0,
+                        "PctRow5" : 0,
+                        "PctRow6" : 0,
+                        "PctRow7" : 0,
+                        "PctRow8" : 0,
+                        "PrintMarginLeftRight" : 0.5,
+                        "PrintMarginTopBottom" : 0.5,
+                        "PrintWidth" : 650,
+                        "ResponsiveLayout" : true,
+                        "RightSidebar" : false,
+                        "RightSidebarWidth" : 0,
+                        "Rows" : 0,
+                        "ShowDataLoading" : true,
+                        "Spacing" : 2,
+                        "Top" : 40,
+                        "Type" : "layout",
+                        "Visible" : true,
+                        "Z-index" : 10,
+                        "__TypeDisplayName" : "Layout"
+                      },
+                      "Widgets" : [ {
+                        "Properties" : {
+                          "AnimateExpandCollapse" : true,
+                          "Area" : "UI",
+                          "BGImageRepeat" : "no-repeat",
+                          "BGImageSize" : "auto",
+                          "DisplayName" : "Column 1",
+                          "ExpandCollapseTabLocation" : "outside",
+                          "Expanded" : true,
+                          "Id" : "container-38",
+                          "MinHeight" : 0,
+                          "MinWidth" : 0,
+                          "Overlay" : false,
+                          "OverlayIsTransparent" : false,
+                          "ResponsiveLayout" : true,
+                          "ShowDataLoading" : true,
+                          "ShowExpandCollapseTab" : false,
+                          "Style" : "DefaultContainerStyle",
+                          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                          "TabExpandStyle" : "DefaultTabExpandStyle",
+                          "TabHeight" : 36,
+                          "TabLocation" : "center",
+                          "TabOffset" : 0,
+                          "TabWidth" : 36,
+                          "Type" : "container",
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Container",
+                          "userCannotRemove" : true
+                        },
+                        "Widgets" : [ {
+                          "Properties" : {
+                            "Area" : "UI",
+                            "DisplayName" : "panel-45",
+                            "Height" : 200,
+                            "HideScrollbars" : false,
+                            "HorizontalAnchor" : "left",
+                            "Id" : "panel-45",
+                            "Left" : 120,
+                            "ResponsiveLayout" : true,
+                            "ShowDataLoading" : true,
+                            "Style" : "DefaultContainerStyle",
+                            "Top" : 60,
+                            "Type" : "panel",
+                            "VerticalAnchor" : "top",
+                            "Visible" : true,
+                            "Width" : 300,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Panel"
+                          },
+                          "Widgets" : [ {
+                            "Properties" : {
+                              "Alignment" : "left",
+                              "Area" : "UI",
+                              "DisplayName" : "link-46",
+                              "Height" : 20,
+                              "Id" : "link-46",
+                              "Left" : 130,
+                              "LinkDisplay" : "textOnly",
+                              "LinkHoverStyle" : "DefaultLinkHoverStyle",
+                              "LinkStyle" : "DefaultLinkStyle",
+                              "ResponsiveLayout" : false,
+                              "ShowDataLoading" : true,
+                              "SourceURL" : "https://www.flowserve.com/sites/default/files/2017-09/ps-10-13-ea4.pdf",
+                              "TabSequence" : 0,
+                              "TargetWindow" : "new",
+                              "Text" : "Link",
+                              "ToolTipField" : "",
+                              "ToolTipStyle" : "DefaultTooltipStyle",
+                              "Top" : 17,
+                              "Type" : "link",
+                              "Visible" : true,
+                              "Width" : 35,
+                              "Z-index" : 10,
+                              "__TypeDisplayName" : "Link",
+                              "__supportsTooltip" : true
+                            },
+                            "Widgets" : [ ]
+                          }, {
+                            "Properties" : {
+                              "Alignment" : "left",
+                              "AllowEllipsis" : false,
+                              "Area" : "UI",
+                              "DisplayName" : "label-47",
+                              "Height" : 22,
+                              "Id" : "label-47",
+                              "Left" : 15,
+                              "ResponsiveLayout" : false,
+                              "ShowDataLoading" : true,
+                              "Style" : "DefaultLabelStyle",
+                              "Text" : "Datasheet:",
+                              "ToolTipField" : "",
+                              "ToolTipStyle" : "DefaultTooltipStyle",
+                              "Top" : 15,
+                              "Type" : "label",
+                              "Visible" : true,
+                              "Width" : 75,
+                              "Z-index" : 10,
+                              "__TypeDisplayName" : "Label",
+                              "__supportsTooltip" : true
+                            },
+                            "Widgets" : [ ]
+                          }, {
+                            "Properties" : {
+                              "Alignment" : "left",
+                              "AllowEllipsis" : false,
+                              "Area" : "UI",
+                              "DisplayName" : "label-48",
+                              "Height" : 22,
+                              "Id" : "label-48",
+                              "Left" : 15,
+                              "ResponsiveLayout" : false,
+                              "ShowDataLoading" : true,
+                              "Style" : "DefaultLabelStyle",
+                              "Text" : "Instruction Manual:",
+                              "ToolTipField" : "",
+                              "ToolTipStyle" : "DefaultTooltipStyle",
+                              "Top" : 45,
+                              "Type" : "label",
+                              "Visible" : true,
+                              "Width" : 115,
+                              "Z-index" : 10,
+                              "__TypeDisplayName" : "Label",
+                              "__supportsTooltip" : true
+                            },
+                            "Widgets" : [ ]
+                          }, {
+                            "Properties" : {
+                              "Alignment" : "left",
+                              "Area" : "UI",
+                              "DisplayName" : "link-49",
+                              "Height" : 20,
+                              "Id" : "link-49",
+                              "Left" : 130,
+                              "LinkDisplay" : "textOnly",
+                              "LinkHoverStyle" : "DefaultLinkHoverStyle",
+                              "LinkStyle" : "DefaultLinkStyle",
+                              "ResponsiveLayout" : false,
+                              "ShowDataLoading" : true,
+                              "SourceURL" : "https://www.flowserve.com/sites/default/files/2016-07/71569218-e.pdf",
+                              "TabSequence" : 0,
+                              "TargetWindow" : "new",
+                              "Text" : "Link",
+                              "ToolTipField" : "",
+                              "ToolTipStyle" : "DefaultTooltipStyle",
+                              "Top" : 47,
+                              "Type" : "link",
+                              "Visible" : true,
+                              "Width" : 35,
+                              "Z-index" : 10,
+                              "__TypeDisplayName" : "Link",
+                              "__supportsTooltip" : true
+                            },
+                            "Widgets" : [ ]
+                          } ]
+                        } ]
+                      }, {
+                        "Properties" : {
+                          "AnimateExpandCollapse" : true,
+                          "Area" : "UI",
+                          "BGImageRepeat" : "no-repeat",
+                          "BGImageSize" : "auto",
+                          "DisplayName" : "Column 2",
+                          "ExpandCollapseTabLocation" : "outside",
+                          "Expanded" : true,
+                          "Id" : "container-39",
+                          "MinHeight" : 0,
+                          "MinWidth" : 0,
+                          "Overlay" : false,
+                          "OverlayIsTransparent" : false,
+                          "ResponsiveLayout" : true,
+                          "ShowDataLoading" : true,
+                          "ShowExpandCollapseTab" : false,
+                          "Style" : "DefaultContainerStyle",
+                          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                          "TabExpandStyle" : "DefaultTabExpandStyle",
+                          "TabHeight" : 36,
+                          "TabLocation" : "center",
+                          "TabOffset" : 0,
+                          "TabWidth" : 36,
+                          "Type" : "container",
+                          "Visible" : true,
+                          "Z-index" : 10,
+                          "__TypeDisplayName" : "Container",
+                          "userCannotRemove" : true
+                        },
+                        "Widgets" : [ {
+                          "Properties" : {
+                            "AlignHeader" : false,
+                            "Area" : "UI",
+                            "AutoSelectFirstRow" : false,
+                            "CellTextWrapping" : false,
+                            "ColumnFormat" : {
+                              "formatInfo" : [ {
+                                "Align" : "left",
+                                "AllowEdit" : false,
+                                "FieldName" : "name",
+                                "FormatOptions" : {
+                                  "FormatString" : "full",
+                                  "formatInfo" : {
+                                    "FieldName" : "",
+                                    "StateDefinition" : "",
+                                    "StateDefinitionType" : "fixed",
+                                    "StateFormats" : [ {
+                                      "state" : "",
+                                      "stateName" : "fixed"
+                                    } ]
+                                  },
+                                  "renderer" : "STRING",
+                                  "roundingEnabled" : true
+                                },
+                                "Title" : "Spare Part",
+                                "ValidationExpression" : "",
+                                "ValidationMessage" : "",
+                                "Width" : "auto"
+                              }, {
+                                "Align" : "right",
+                                "AllowEdit" : false,
+                                "FieldName" : "count",
+                                "FormatOptions" : {
+                                  "FormatString" : "0",
+                                  "formatInfo" : {
+                                    "FieldName" : "",
+                                    "StateDefinition" : "",
+                                    "StateDefinitionType" : "fixed",
+                                    "StateFormats" : [ {
+                                      "state" : "",
+                                      "stateName" : "fixed"
+                                    } ]
+                                  },
+                                  "renderer" : "INTEGER",
+                                  "roundingEnabled" : true
+                                },
+                                "Title" : "ERP Number",
+                                "ValidationExpression" : "",
+                                "ValidationMessage" : "",
+                                "Width" : "auto"
+                              } ]
+                            },
+                            "CurrentScrollTop" : 0,
+                            "DisplayName" : "dhxgrid-50",
+                            "FocusStyle" : "DefaultFocusStyle",
+                            "GridBackgroundStyle" : "DefaultGridBackgroundStyle",
+                            "GridEditableFieldStyle" : "DefaultGridEditableFieldStyle",
+                            "GridHeaderStyle" : "DefaultGridHeaderStyle",
+                            "GridHeaderTextCase" : "capitalize",
+                            "GridInvalidFieldStyle" : "DefaultGridInvalidFieldStyle",
+                            "Height" : 200,
+                            "Id" : "dhxgrid-50",
+                            "IsEditable" : false,
+                            "IsPrintLayout" : false,
+                            "Left" : 400,
+                            "MultiSelect" : true,
+                            "ResponsiveLayout" : true,
+                            "RowAlternateBackgroundStyle" : "DefaultRowAlternateBackgroundStyle",
+                            "RowBackgroundStyle" : "DefaultRowBackgroundStyle",
+                            "RowFormat_StateParameters" : [ ],
+                            "RowHeight" : 30,
+                            "RowHoverStyle" : "DefaultRowHoverStyle",
+                            "RowSelectedStyle" : "DefaultRowSelectedStyle",
+                            "ScrollTop" : 0,
+                            "ShowAllColumns" : false,
+                            "ShowDataLoading" : true,
+                            "TabSequence" : 0,
+                            "Top" : 65,
+                            "Type" : "dhxgrid",
+                            "Visible" : true,
+                            "Width" : 400,
+                            "Z-index" : 10,
+                            "__TypeDisplayName" : "Grid"
+                          },
+                          "Widgets" : [ ]
+                        } ]
+                      } ]
+                    } ]
+                  } ]
+                } ]
+              }, {
+                "Properties" : {
+                  "AnimateExpandCollapse" : true,
+                  "Area" : "UI",
+                  "BGImageRepeat" : "no-repeat",
+                  "BGImageSize" : "auto",
+                  "DisplayName" : "Right Sidebar",
+                  "ExpandCollapseTabLocation" : "outside",
+                  "Expanded" : true,
+                  "Id" : "container-28",
+                  "MinHeight" : 0,
+                  "MinWidth" : 0,
+                  "Overlay" : false,
+                  "OverlayIsTransparent" : false,
+                  "ResponsiveLayout" : true,
+                  "ShowDataLoading" : true,
+                  "ShowExpandCollapseTab" : false,
+                  "Style" : "DefaultContainerStyle",
+                  "TabCollapseStyle" : "DefaultTabCollapseStyle",
+                  "TabExpandStyle" : "DefaultTabExpandStyle",
+                  "TabHeight" : 36,
+                  "TabLocation" : "center",
+                  "TabOffset" : 0,
+                  "TabWidth" : 36,
+                  "Type" : "container",
+                  "Visible" : true,
+                  "Z-index" : 10,
+                  "__TypeDisplayName" : "Container",
+                  "userCannotRemove" : true
+                },
+                "Widgets" : [ {
+                  "Properties" : {
+                    "Area" : "UI",
+                    "DisplayName" : "panel-29",
+                    "Height" : 200,
+                    "HideScrollbars" : false,
+                    "HorizontalAnchor" : "left",
+                    "Id" : "panel-29",
+                    "Left" : 75,
+                    "ResponsiveLayout" : true,
+                    "ShowDataLoading" : true,
+                    "Style" : "DefaultContainerStyle",
+                    "Top" : 65,
+                    "Type" : "panel",
+                    "VerticalAnchor" : "top",
+                    "Visible" : true,
+                    "Width" : 300,
+                    "Z-index" : 10,
+                    "__TypeDisplayName" : "Panel"
+                  },
+                  "Widgets" : [ {
+                    "Properties" : {
+                      "ActiveStyle" : "DefaultButtonActiveStyle",
+                      "Area" : "UI",
+                      "AutoRefresh" : true,
+                      "AutoRefreshTabSequence" : 0,
+                      "DisplayName" : "autorefresh-30",
+                      "FocusStyle" : "DefaultButtonFocusStyle",
+                      "Height" : 28,
+                      "HoverStyle" : "DefaultButtonHoverStyle",
+                      "IconAlignment" : "left",
+                      "Id" : "autorefresh-30",
+                      "Label" : "Refresh Now",
+                      "Left" : 75,
+                      "RefreshInterval" : 10,
+                      "RefreshNowTabSequence" : 0,
+                      "RefreshToggleLabel" : "On",
+                      "RefreshToggleLabelOff" : "Off",
+                      "RefreshToggleSliderStyle" : "DefaultAutoRefreshToggleSliderStyle",
+                      "RefreshToggleStyle" : "DefaultAutoRefreshToggleStyle",
+                      "RefreshToggleStyleOff" : "DefaultAutoRefreshToggleOffStyle",
+                      "ResponsiveLayout" : false,
+                      "ShowControls" : false,
+                      "ShowDataLoading" : true,
+                      "Style" : "DefaultButtonStyle",
+                      "Top" : 65,
+                      "Type" : "autorefresh",
+                      "UseTheme" : false,
+                      "Visible" : true,
+                      "Width" : 180,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Auto Refresh"
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "ActiveStyle" : "DefaultButtonActiveStyle",
+                      "Area" : "UI",
+                      "CancelConfirmationButton" : "button2",
+                      "ConfirmationButton1Label" : "Yes",
+                      "ConfirmationButton2Label" : "No",
+                      "ConfirmationPrompt" : "Do Action?",
+                      "ConfirmationRequired" : false,
+                      "ConfirmationTitle" : "Confirm Action",
+                      "ContextId" : "",
+                      "DefaultConfirmationButton" : "button1",
+                      "Disabled" : false,
+                      "DisabledStyle" : "DefaultButtonDisabledStyle",
+                      "DisplayName" : "button-51",
+                      "FocusStyle" : "DefaultButtonFocusStyle",
+                      "Height" : 30,
+                      "HoverStyle" : "DefaultButtonHoverStyle",
+                      "IconAlignment" : "left",
+                      "Id" : "button-51",
+                      "Label" : "Order Selected",
+                      "Left" : 5,
+                      "ResponsiveLayout" : false,
+                      "RoundedCorners" : true,
+                      "ShowDataLoading" : true,
+                      "SingleClickSelectOnTablets" : true,
+                      "Style" : "DefaultButtonStyle",
+                      "TabSequence" : 0,
+                      "ToolTipField" : "",
+                      "ToolTipStyle" : "DefaultTooltipStyle",
+                      "Top" : 80,
+                      "Type" : "button",
+                      "Visible" : true,
+                      "Width" : 75,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Button",
+                      "__supportsTooltip" : true
+                    },
+                    "Widgets" : [ ]
+                  }, {
+                    "Properties" : {
+                      "Area" : "UI",
+                      "DisplayName" : "statusmessage-52",
+                      "Height" : 28,
+                      "Id" : "statusmessage-52",
+                      "Left" : 30,
+                      "Message" : "Order created in ERP!",
+                      "MessageType" : "info",
+                      "ResponsiveLayout" : false,
+                      "ShowDataLoading" : true,
+                      "Top" : 135,
+                      "Type" : "statusmessage",
+                      "Visible" : true,
+                      "Width" : 200,
+                      "Z-index" : 10,
+                      "__TypeDisplayName" : "Status Message"
+                    },
+                    "Widgets" : [ ]
+                  } ]
+                } ]
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "Properties" : {
+          "AnimateExpandCollapse" : true,
+          "Area" : "UI",
+          "BGImageRepeat" : "no-repeat",
+          "BGImageSize" : "auto",
+          "DisplayName" : "Row 2",
+          "ExpandCollapseTabLocation" : "outside",
+          "Expanded" : true,
+          "Id" : "container-4",
+          "MinHeight" : 0,
+          "MinWidth" : 0,
+          "Overlay" : false,
+          "OverlayIsTransparent" : false,
+          "ResponsiveLayout" : true,
+          "ShowDataLoading" : true,
+          "ShowExpandCollapseTab" : false,
+          "Style" : "DefaultContainerStyle",
+          "TabCollapseStyle" : "DefaultTabCollapseStyle",
+          "TabExpandStyle" : "DefaultTabExpandStyle",
+          "TabHeight" : 36,
+          "TabLocation" : "center",
+          "TabOffset" : 0,
+          "TabWidth" : 36,
+          "Type" : "container",
+          "Visible" : true,
+          "Z-index" : 10,
+          "__TypeDisplayName" : "Container",
+          "userCannotRemove" : true
+        },
+        "Widgets" : [ {
+          "Properties" : {
+            "AllowCORSCredentials" : false,
+            "Area" : "UI",
+            "BackgroundStyle" : "DefaultShapeUnfilledBackgroundStyle",
+            "DataFormatter_StateParameters" : [ ],
+            "DefaultPartStyle" : "",
+            "DisplayName" : "thingview-32",
+            "EnablePartSelection" : true,
+            "EnableWindchillFileCache" : false,
+            "Gnomon" : true,
+            "Height" : 200,
+            "Id" : "thingview-32",
+            "Left" : 195,
+            "MouseNavigation" : "CREOVIEW",
+            "OccurrenceField" : "treeId",
+            "Orientation" : "",
+            "Orientations" : "ISO1",
+            "Position" : "",
+            "PreSelection" : "",
+            "ProductToView" : "/Thingworx/FileRepositories/SystemRepository/group_1.pvz",
+            "ResponsiveLayout" : true,
+            "Scale" : "",
+            "Selection" : {
+              "description" : "Selected Parts",
+              "name" : "Selection",
+              "rows" : [ ]
+            },
+            "ShowDataLoading" : true,
+            "SpinCenter" : true,
+            "Top" : 95,
+            "Type" : "thingview",
+            "Visible" : true,
+            "Width" : 300,
+            "WindchillCacheSize" : 1000,
+            "WindchillSourceData" : false,
+            "Z-index" : 10,
+            "__TypeDisplayName" : "ThingView",
+            "acknowledgeStepText" : "",
+            "baseUrl" : "",
+            "mapUrl" : "",
+            "markupUrl" : "",
+            "oid" : "",
+            "sequenceStepName" : "",
+            "sequenceStepNumber" : ""
+          },
+          "Widgets" : [ ]
+        } ]
+      } ]
+    } ]
+  },
+  "mashupType" : "mashup"
+}]]></mashupContent><preview/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated&#10;" timestamp="2018-02-20T17:20:17.698+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-20T17:22:04.658+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-20T17:23:09.798+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-20T17:25:43.640+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T11:50:36.365+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T11:51:17.561+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T12:57:49.395+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T13:25:24.093+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:06:10.895+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:11:59.970+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:12:18.901+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:12:37.927+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:13:18.864+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:15:25.447+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:16:46.531+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:23:42.466+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:24:17.155+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:24:44.456+02:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-02-21T14:25:48.277+02:00" user="Administrator"/><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-05-09T14:22:21.773+03:00" user="placatus"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2019-05-09T14:27:25.789+03:00" user="placatus"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2019-05-09T14:52:58.755+03:00" user="placatus"/><ConfigurationChange changeAction="MODIFY" changeReason="header : projectName : updated&#10;" timestamp="2019-05-09T14:53:08.365+03:00" user="placatus"/><ConfigurationChange changeAction="MODIFY" changeReason="Mashup : design : updated&#10;" timestamp="2019-05-09T14:54:35.615+03:00" user="placatus"/><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.259+03:00" user="Administrator"/></ConfigurationChanges></Mashup></Mashups><ScriptFunctionLibraries/><Projects><Project dependsOn="" description="" documentationContent="" homeMashup="" lastModifiedDate="2019-08-13T12:10:41.265+03:00" name="BCG" packageVersion="1.0.0" projectName="BCG" tags=""><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke><Principal isPermitted="true" name="bcg" type="User"/></EventInvoke><EventSubscribe><Principal isPermitted="true" name="bcg" type="User"/></EventSubscribe></Permissions></RunTimePermissions><VisibilityPermissions><Visibility><Principal isPermitted="true" name="Everyone" type="Organization"/></Visibility></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated&#10;" timestamp="2019-04-17T09:45:15.338+03:00" user="Administrator"/><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.265+03:00" user="Administrator"/></ConfigurationChanges></Project></Projects><Users/><DirectoryServices/><Widgets/><MediaEntities><MediaEntity description="asset" documentationContent="" homeMashup="" lastModifiedDate="2019-08-13T12:10:41.263+03:00" name="bcglogo" projectName="BCG" tags=""><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Content Source Connection information" isMultiRow="false" name="ContentSourceConnectionInformation" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="none" aspect.friendlyName="AuthenticationType" aspect.selectOptions="none:none|basic:basic|SSO:SSO|SessionUser:SessionUser" baseType="STRING" description="Authentication type" name="authenticationType" ordinal="4"/><FieldDefinition aspect.friendlyName="AuthorizationServerID" baseType="STRING" description="Authorization Server ID" name="authorizationServerId" ordinal="7"/><FieldDefinition aspect.friendlyName="Dynamic Content" baseType="BOOLEAN" description="Display dynamic content from external URL" name="dynamicContent" ordinal="0"/><FieldDefinition aspect.friendlyName="Ignore SSL Errors" baseType="BOOLEAN" description="Ignore SSL errors" name="ignoreSSLErrors" ordinal="2"/><FieldDefinition aspect.friendlyName="AuthPassword" baseType="PASSWORD" description="Password for basic authentication" name="password" ordinal="6"/><FieldDefinition aspect.friendlyName="TestConnectionURL" baseType="STRING" description="The URL to test the connection" name="testUrl" ordinal="8"/><FieldDefinition aspect.defaultValue="60.0" aspect.friendlyName="Timeout" baseType="NUMBER" description="Timeout" name="timeout" ordinal="3"/><FieldDefinition aspect.friendlyName="URL" baseType="STRING" description="The URL to the content source" name="url" ordinal="1"/><FieldDefinition aspect.friendlyName="AuthUsername" baseType="STRING" description="Username for basic authentication" name="userId" ordinal="5"/></FieldDefinitions></DataShape><Rows><Row><authenticationType><![CDATA[none]]></authenticationType><authorizationServerId/><dynamicContent>false</dynamicContent><ignoreSSLErrors>false</ignoreSSLErrors><password/><testUrl/><timeout>60.0</timeout><url/><userId/></Row></Rows></ConfigurationTable><ConfigurationTable description="List of authorization server scopes" isMultiRow="true" name="AuthorizationServerScopesSettings" ordinal="1"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="A single scope for the authorization server." name="scope" ordinal="0"/></FieldDefinitions></DataShape><Rows/></ConfigurationTable><ConfigurationTable description="SSL Connection Configuration" isMultiRow="false" name="SSLConnectionConfiguration" ordinal="2"><DataShape><FieldDefinitions><FieldDefinition aspect.friendlyName="SSLKeyStorePassword" baseType="PASSWORD" description="SSL Keystore Password" name="SSLKeyStorePassword" ordinal="2"/><FieldDefinition aspect.friendlyName="SSLKeyStorePath" baseType="STRING" description="Absolute path to the client SSL keystore" name="SSLKeyStorePath" ordinal="1"/><FieldDefinition aspect.friendlyName="SSLTrustStorePassword" baseType="PASSWORD" description="SSL Truststore Password" name="SSLTrustStorePassword" ordinal="4"/><FieldDefinition aspect.friendlyName="SSLTrustStorePath" baseType="STRING" description="Absolute path to the SSL client truststore" name="SSLTrustStorePath" ordinal="3"/></FieldDefinitions></DataShape><Rows><Row><SSLKeyStorePassword/><SSLKeyStorePath/><SSLTrustStorePassword/><SSLTrustStorePath/></Row></Rows></ConfigurationTable><ConfigurationTable description="Session User Configuration" isMultiRow="false" name="SessionUserConfigurationTable" ordinal="3"><DataShape><FieldDefinitions><FieldDefinition aspect.friendlyName="SessionUserQueryParameter" baseType="STRING" description="Session User Query Parameter" name="SessionUserQueryParameter" ordinal="1"/></FieldDefinitions></DataShape><Rows><Row><SessionUserQueryParameter/></Row></Rows></ConfigurationTable></ConfigurationTables><content><![CDATA[/9j/4AAQSkZJRgABAQEAeAB4AAD/4RD+RXhpZgAATU0AKgAAAAgABAE7AAIAAAARAAAISodpAAQA
+AAABAAAIXJydAAEAAAAiAAAQ1OocAAcAAAgMAAAAPgAAAAAc6gAAAAgAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEdlcm1haW4sIExhdXJl
+bnQAAAAFkAMAAgAAABQAABCqkAQAAgAAABQAABC+kpEAAgAAAAMwMwAAkpIAAgAAAAMwMwAA6hwA
+BwAACAwAAAieAAAAABzqAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAxOTowNDoyNSAxODo1MDo1OQAyMDE5OjA0OjI1IDE4OjUw
+OjU5AAAARwBlAHIAbQBhAGkAbgAsACAATABhAHUAcgBlAG4AdAAAAP/hCyNodHRwOi8vbnMuYWRv
+YmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0n77u/JyBpZD0nVzVNME1wQ2VoaUh6cmVT
+ek5UY3prYzlkJz8+DQo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIj48cmRmOlJE
+RiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMi
+PjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSJ1dWlkOmZhZjViZGQ1LWJhM2QtMTFkYS1hZDMx
+LWQzM2Q3NTE4MmYxYiIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEv
+Ii8+PHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9InV1aWQ6ZmFmNWJkZDUtYmEzZC0xMWRhLWFk
+MzEtZDMzZDc1MTgyZjFiIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8i
+Pjx4bXA6Q3JlYXRlRGF0ZT4yMDE5LTA0LTI1VDE4OjUwOjU5LjAyODwveG1wOkNyZWF0ZURhdGU+
+PC9yZGY6RGVzY3JpcHRpb24+PHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9InV1aWQ6ZmFmNWJk
+ZDUtYmEzZC0xMWRhLWFkMzEtZDMzZDc1MTgyZjFiIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3Jn
+L2RjL2VsZW1lbnRzLzEuMS8iPjxkYzpjcmVhdG9yPjxyZGY6U2VxIHhtbG5zOnJkZj0iaHR0cDov
+L3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+PHJkZjpsaT5HZXJtYWluLCBM
+YXVyZW50PC9yZGY6bGk+PC9yZGY6U2VxPg0KCQkJPC9kYzpjcmVhdG9yPjwvcmRmOkRlc2NyaXB0
+aW9uPjwvcmRmOlJERj48L3g6eG1wbWV0YT4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAog
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgPD94cGFja2V0IGVuZD0ndyc/Pv/bAEMABwUFBgUEBwYF
+BggHBwgKEQsKCQkKFQ8QDBEYFRoZGBUYFxseJyEbHSUdFxgiLiIlKCkrLCsaIC8zLyoyJyorKv/b
+AEMBBwgICgkKFAsLFCocGBwqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKv/AABEIAD4APgMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUG
+BwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR
+8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5
+eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj
+5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQAC
+AQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXx
+FxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqS
+k5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T1
+9vf4+fr/2gAMAwEAAhEDEQA/AOI/4SDWf+gvff8AgS/+NH/CQaz/ANBe+/8AAl/8azqKR83zy7mj
+/wAJBrP/AEF77/wJf/Gj/hINZ/6C99/4Ev8A41nUUBzy7mj/AMJBrP8A0F77/wACX/xo/wCEg1n/
+AKC99/4Ev/jWdRQHPLuaP/CQaz/0F77/AMCX/wAaP+Eg1n/oL33/AIEv/jWdRQHPLuaGi6HqPiLV
+E07R7f7RdSAsse9UyAMnliB0rpv+FPeOv+gH/wCTcH/xdWPgr/yU+y/64y/+gGvTvHMPxOfxSx8G
+sy6WY0wd9uAG/i4f5qqSS5fP/gm9ClGpCU5X0dtPRHhWseFNd0HUYrDVdMnguZjiJAu/zT6KVyGP
+0rp7H4L+Mr21E7WUFruGVjuJwHI+gzj6HFfRCj7PoltfeIVgku7G382aVE4Rwnzsuenf8K+edZ+M
+/izUNVefTr0adahv3VvHEjYH+0WBJP6e1Tony9TaeHpUkpzbs9l1OU17wzrHhi/Wz1uye1mcbkyQ
+yuPUMCQa6LSPhD4w1i1W5TT0tInG5DdyCMsP93kj8QK674YJdfELx9c+JfExS5bTYY1iTZhA5ztw
+OnGGb6nNU/G3xc8Rz+LZ9N8Lzm0t7ec28YjiV3ncHbn5ge/QCntZPdmap0uV1G3y9O5wviXwTr/h
+Jk/tyxMMUjFY5kcOjn0yDwfY4NYFep+JfCnxU8XrZ/25pfnfZUKptngTcSeWID4z0HQdK8xubeWz
+u5ra5Ty5oXaORCfusDgj8xU+TMqsOV3iml5nc/BX/kp9l/1xl/8AQDXpvjqL4nP4nc+DC/8AZnlJ
+tw9uPnx833zmvAtH1rUNA1JNQ0i4NtdICFkChsAjB4IIrpP+FteOP+g9J/34i/8AiaqTTUfIuhVj
+ThKEr6u+noj6I0KHUW8H2tn41lhk1C5jaGcAqBJuz8vHBO3rj0NeH638D/FFnqzRaPFFqFkzfu5/
+ORCi/wC2GI5+mf6VxmseK9d8QXUdxq+qXFzJCQY8ttEZ9VUYAPuBW1bfFnxvaW6QRa9IUQYBlgik
+b8WZST+JpOzlzGs69KpFQknZdep7d4H0Cw+GfhuCz1nUbdL3UbkbnLYV5CMBFzyQAOvqfeuI8U/C
+7xPpXjd/EHghIrnzJ2njVjHugdsk8SfKRknB6j8M15PrGvap4gvftes3015N0DSNwo9AOgHsK3NO
++KHjLSrNLWz12byUGFEsccpA9MupOPxp3u+Z7idek4+z5fdW3c940zUta8I+C7vV/iJq0dzcr8yx
+RxxqE4+WMFVG5ifw/U18xXt099f3F3NjzLiVpWx6scn+dX9d8Ua14muFm13UZrxk+4rYVF+ijAH4
+Csmp3lzMzrVlOKhG9l33CiiimcoUUUUAFFFFABRRRQB//9k=]]></content><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : projectName : updated, name : updated, content : updated&#10;" timestamp="2019-04-25T19:53:02.502+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="header : description : updated&#10;" timestamp="2019-04-28T20:53:20.522+03:00" user="Administrator"/><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.263+03:00" user="Administrator"/></ConfigurationChanges></MediaEntity></MediaEntities><Groups/><PersistenceProviders/><NotificationContents/><ModelTags/><LocalizationTables/><Dashboards/><StyleThemes/><DataAnalysisDefinitions/><DataShapes/><Things><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Tremie@BCG" lastModifiedDate="2019-08-13T13:49:58.995+03:00" name="Tremie_BCG" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke><Principal isPermitted="true" name="bcg" type="User"/></EventInvoke><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Chauffe-Inferieure_Command" ordinal="5"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Chauffe-Inferieure_Consigne" ordinal="2"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Chauffe-Inferieure_Mesure" ordinal="6"/><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Chauffe-Superieure_Command" ordinal="3"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Chauffe-Superieure_Consigne" ordinal="7"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Chauffe-Superieure_Mesure" ordinal="4"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve1 we need to dispaly the current chauffe (value and command),
+// the melangur value and the 
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+var overrides = DataShapes["SvgOverrideDatashape"].CreateValues();
+overrides.AddRow({
+    elementName: "tremie",
+    "stroke": elementStatus[Math.min(me["Chauffe-Inferieure_Command"] + me["Chauffe-Superieure_Command"], 2)], 
+    selectable: false
+});
+
+overrides.AddRow({
+    elementName: "TremieMap",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+
+
+overrides.AddRow({
+    elementName: "ChauffeSuperieureText",
+    "text": "ChauffeSuperieure: " + (me["Chauffe-Superieure_Mesure"]/10).toFixed(1) + "/" + (me["Chauffe-Superieure_Consigne"]/10).toFixed(1),
+    "fill": me["Chauffe-Superieure_Command"] ? Things.SvgDataCollectorThing.notWorkingColor : Things.SvgDataCollectorThing.workingColor,
+    selectable: false
+});
+overrides.AddRow({
+    elementName: "ChauffeInfereuireText",
+    "text": "Chauffe-Inferieure: " + (me["Chauffe-Inferieure_Mesure"]/10).toFixed(1) + "/" + (me["Chauffe-Inferieure_Consigne"]/10).toFixed(1),
+    "fill": me["Chauffe-Inferieure_Command"] ? Things.SvgDataCollectorThing.notWorkingColor : Things.SvgDataCollectorThing.workingColor,
+    selectable: false
+});
+var result = overrides;]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Chauffe-Inferieure_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe-Inferieure_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe-Inferieure_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe-Inferieure_Consigne" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe-Inferieure_Mesure" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe-Inferieure_Mesure" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe-Superieure_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe-Superieure_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe-Superieure_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe-Superieure_Consigne" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe-Superieure_Mesure" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe-Superieure_Mesure" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Chauffe-Inferieure_Command"/><AlertDefinitions name="Chauffe-Inferieure_Consigne"/><AlertDefinitions name="Chauffe-Inferieure_Mesure"/><AlertDefinitions name="Chauffe-Superieure_Command"/><AlertDefinitions name="Chauffe-Superieure_Consigne"/><AlertDefinitions name="Chauffe-Superieure_Mesure"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="HistoricalDataEnabledThingShape" type="ThingShape"/><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.559+03:00</Value><Timestamp>2019-07-17T07:05:03.559+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.590+03:00</Value><Timestamp>2019-07-17T07:05:03.590+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.590+03:00</Value><Timestamp>2019-07-17T07:05:03.590+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><historicalProperties><Value><infoTable><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Entity description" name="description" ordinal="2"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entity name" name="name" ordinal="1"/></FieldDefinitions></DataShape><Rows/></infoTable></Value><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></historicalProperties><timelineProperty><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></timelineProperty><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Chauffe-Inferieure_Command><Value>0.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe-Inferieure_Command><Chauffe-Superieure_Consigne><Value>720.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe-Superieure_Consigne><Chauffe-Superieure_Command><Value>false</Value><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></Chauffe-Superieure_Command><Chauffe-Inferieure_Consigne><Value>710.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe-Inferieure_Consigne><Chauffe-Superieure_Mesure><Value>277.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe-Superieure_Mesure><Chauffe-Inferieure_Mesure><Value>280.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe-Inferieure_Mesure></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.277+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;QueryHistory : service deleted&#10;" timestamp="2019-08-13T13:49:58.994+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="PumpDetailsMashup2" identifier="Asset_Pompe_C2_C3@BCG" lastModifiedDate="2019-08-13T13:50:21.002+03:00" name="Pompe_C2_C3" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Transfert_Command" ordinal="2"/><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="INTEGER" category="" description="" isLocalOnly="false" name="Transfert_Consigne" ordinal="3"/><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Vibration3" ordinal="4"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverrideDatashape"].CreateValues();
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+result.AddRow({
+    elementName: "Pompe_C2_C3",
+    "stroke": me.Transfert_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+result.AddRow({
+    elementName: "Pompe_C2_C3Map",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+result.AddRow({
+    elementName: "Pompe_C2_C3Transfert",
+    "text": "Transfert: " + me.Transfert_Consigne.toFixed(1),
+    "fill": me.Transfert_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+]]></code></Row><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverridesGenericDataShape"].CreateValues();
+
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor]
+
+result.AddRow({
+    elementName: "Pompe_C2_C3",
+    "override-stroke": me.Transfert_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name
+});
+
+result.AddRow({
+    elementName: "Pompe_C2_C3Map",
+    thingName: me.name
+});
+
+result.AddRow({
+    elementName: "Pompe_C2_C3Transfert",
+    "override-text": `Transfert: ${me.Transfert_Consigne.toFixed(1)}`,
+    "override-fill": me.Transfert_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name
+})]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Transfert_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Transfert_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Transfert_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Transfert_Consigne" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Vibration3" pushThreshold="0.0" pushType="VALUE" sourceName="Vibration3" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Transfert_Command"/><AlertDefinitions name="Transfert_Consigne"/><AlertDefinitions name="Vibration3"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="HistoricalDataEnabledThingShape" type="ThingShape"/><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.606+03:00</Value><Timestamp>2019-07-17T07:05:03.606+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.621+03:00</Value><Timestamp>2019-07-17T07:05:03.621+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.621+03:00</Value><Timestamp>2019-07-17T07:05:03.621+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><historicalProperties><Value><infoTable><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Entity description" name="description" ordinal="2"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entity name" name="name" ordinal="1"/></FieldDefinitions></DataShape><Rows><Row><description/><name><![CDATA[Vibration3]]></name></Row><Row><description/><name><![CDATA[Transfert_Consigne]]></name></Row></Rows></infoTable></Value><Timestamp>2019-04-25T16:12:27.583+03:00</Timestamp><Quality>GOOD</Quality></historicalProperties><timelineProperty><Value><![CDATA[Transfert_Command]]></Value><Timestamp>2019-04-25T16:08:09.335+03:00</Timestamp><Quality>GOOD</Quality></timelineProperty><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Vibration3><Value>18.373842537403107</Value><Timestamp>2019-05-16T12:49:41.555+03:00</Timestamp><Quality>GOOD</Quality></Vibration3><Transfert_Command><Value>false</Value><Timestamp>2019-07-29T15:52:08.879+03:00</Timestamp><Quality>GOOD</Quality></Transfert_Command><Transfert_Consigne><Value>80</Value><Timestamp>2019-07-30T09:57:16.352+03:00</Timestamp><Quality>GOOD</Quality></Transfert_Consigne></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.286+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;QueryHistory : service deleted&#10;" timestamp="2019-08-13T13:50:21.001+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="ValueStreamThing" enabled="true" homeMashup="StreamMashup" identifier="" lastModifiedDate="2019-08-13T13:52:10.904+03:00" name="ValueStream_Asset_aa" projectName="BCG" published="false" tags="" thingTemplate="ValueStream" valueStream=""><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions/><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Data Thing Configuration" isMultiRow="false" name="DataThingSettings" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Persistence Provider Name" name="persistenceProvider" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><persistenceProvider><![CDATA[ThingworxPersistenceProvider]]></persistenceProvider></Row></Rows></ConfigurationTable><ConfigurationTable description="Configurable options to tune Value Stream performance" isMultiRow="false" name="PersistenceProviderCustomSettings" ordinal="2"><DataShape><FieldDefinitions><FieldDefinition aspect.friendlyName="Persistence Provider Custom Settings Table" baseType="INFOTABLE" description="Persistence Provider Custom Config Table" name="customConfigTable" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><customConfigTable><infoTable><DataShape><FieldDefinitions/></DataShape><Rows/></infoTable></customConfigTable></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions/><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations/><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings/><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations/><ImplementedShapes/><ThingProperties/><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="header : name : updated&#10;" timestamp="2019-08-13T12:09:07.825+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="header : projectName : updated&#10;" timestamp="2019-08-13T13:52:05.208+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2019-08-13T13:52:10.904+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Cuve4@BCG" lastModifiedDate="2019-08-13T13:51:16.049+03:00" name="Cuve4_BCG" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Chauffe_Command" ordinal="2"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverrideDatashape"].CreateValues();
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+result.AddRow({
+    elementName: "Cuve4",
+    "stroke": me.Chauffe_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+result.AddRow({
+    elementName: "Cuve4Map",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+result.AddRow({
+    elementName: "Cuve4Chauffe",
+    "fill": "white",
+    selectable: false
+});
+]]></code></Row><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverridesGenericDataShape"].CreateValues();
+
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor]
+
+result.AddRow({
+    elementName: "Cuve4",
+    "override-stroke": me.Chauffe_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name
+});
+result.AddRow({
+    elementName: "Cuve4Map",
+    thingName: me.name
+});
+
+result.AddRow({
+    elementName: "Cuve4Melangeur",
+    "override-fill": me.Chauffe_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name
+})]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Chauffe_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe_Command" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Chauffe_Command"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.559+03:00</Value><Timestamp>2019-07-17T07:05:03.559+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.559+03:00</Value><Timestamp>2019-07-17T07:05:03.559+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.559+03:00</Value><Timestamp>2019-07-17T07:05:03.559+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Chauffe_Command><Value>false</Value><Timestamp>2019-04-30T16:29:18.989+03:00</Timestamp><Quality>GOOD</Quality></Chauffe_Command></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.305+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;QueryHistory : service deleted&#10;" timestamp="2019-08-13T13:51:16.049+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Cuve3@BCG" lastModifiedDate="2019-08-13T13:51:36.068+03:00" name="Cuve3_BCG" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Chauffe_Command" ordinal="2"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverrideDatashape"].CreateValues();
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+result.AddRow({
+    elementName: "Cuve3",
+    "stroke": me.Chauffe_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,  
+    selectable: false
+});
+result.AddRow({
+    elementName: "Cuve3Map",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+result.AddRow({
+    elementName: "Cuve3Chauffe",
+    "fill": "white",
+    selectable: false
+});
+]]></code></Row><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverridesGenericDataShape"].CreateValues();
+
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor]
+
+result.AddRow({
+    elementName: "Cuve3",
+    "override-stroke": me.Chauffe_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name
+});
+
+result.AddRow({
+    elementName: "Cuve3Map",
+    thingName: me.name
+});
+
+result.AddRow({
+    elementName: "Cuve3Melangeur",
+    "override-fill": me.Chauffe_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name
+})]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Chauffe_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe_Command" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Chauffe_Command"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="HistoricalDataEnabledThingShape" type="ThingShape"/><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.621+03:00</Value><Timestamp>2019-07-17T07:05:03.621+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.637+03:00</Value><Timestamp>2019-07-17T07:05:03.637+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.637+03:00</Value><Timestamp>2019-07-17T07:05:03.637+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><historicalProperties><Value><infoTable><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Entity description" name="description" ordinal="2"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entity name" name="name" ordinal="1"/></FieldDefinitions></DataShape><Rows/></infoTable></Value><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></historicalProperties><timelineProperty><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></timelineProperty><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Chauffe_Command><Value>false</Value><Timestamp>2019-04-30T16:29:33.007+03:00</Timestamp><Quality>GOOD</Quality></Chauffe_Command></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.315+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;QueryHistory : service deleted&#10;" timestamp="2019-08-13T13:51:36.067+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Cuve2@BCG" lastModifiedDate="2019-08-13T13:51:50.214+03:00" name="Cuve2_BCG" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke><Principal isPermitted="true" name="bcg" type="User"/></EventInvoke><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility><Principal isPermitted="true" name="Everyone" type="Organization"/></Visibility></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="PLC" description="" isLocalOnly="false" name="Melangeur_Command" ordinal="3"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="PLC" description="" isLocalOnly="false" name="Melangeur_Consigne" ordinal="2"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverrideDatashape"].CreateValues();
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+result.AddRow({
+    elementName: "Cuve2",
+    "stroke": me.Melangeur_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+result.AddRow({
+    elementName: "Cuve2Map",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+result.AddRow({
+    elementName: "Cuve2Melangeur",
+    "text": "Melangeur: " + me.Melangeur_Consigne.toFixed(1),
+    "fill": me.Melangeur_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+]]></code></Row><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverridesGenericDataShape"].CreateValues();
+
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor]
+
+result.AddRow({
+    elementName: "Cuve2",
+    "override-stroke": me.Melangeur_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name
+});
+
+result.AddRow({
+    elementName: "Cuve2Map",
+    thingName: me.name
+});
+result.AddRow({
+    elementName: "Cuve2Melangeur",
+    "override-text": `Melangeur: ${me.Melangeur_Consigne.toFixed(1)}`,
+    "override-fill": me.Melangeur_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name
+})]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Melangeur_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Melangeur_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Melangeur_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Melangeur_Consigne" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Melangeur_Command"/><AlertDefinitions name="Melangeur_Consigne"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="HistoricalDataEnabledThingShape" type="ThingShape"/><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.606+03:00</Value><Timestamp>2019-07-17T07:05:03.606+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.621+03:00</Value><Timestamp>2019-07-17T07:05:03.621+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.621+03:00</Value><Timestamp>2019-07-17T07:05:03.621+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><historicalProperties><Value><infoTable><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Entity description" name="description" ordinal="2"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entity name" name="name" ordinal="1"/></FieldDefinitions></DataShape><Rows><Row><description/><name><![CDATA[Melangeur_Consigne]]></name></Row></Rows></infoTable></Value><Timestamp>2019-04-25T15:34:19.448+03:00</Timestamp><Quality>GOOD</Quality></historicalProperties><timelineProperty><Value><![CDATA[Melangeur_Command]]></Value><Timestamp>2019-04-25T15:34:27.526+03:00</Timestamp><Quality>GOOD</Quality></timelineProperty><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Melangeur_Consigne><Value>0.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Melangeur_Consigne><Melangeur_Command><Value>false</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Melangeur_Command></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.267+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryHistory : service deleted&#10;" timestamp="2019-08-13T13:49:10.544+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;" timestamp="2019-08-13T13:51:44.858+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Tunnel_Refroidissement@BCG" lastModifiedDate="2019-08-13T13:49:43.608+03:00" name="Tunnel_Refroidissement_BCG" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Refroidissement_Command" ordinal="4"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Refroidissement_Consigne" ordinal="5"/><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="INTEGER" category="" description="" isLocalOnly="false" name="Refroidissement_Consigne2" ordinal="3"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Refroidissement_Mesure" ordinal="2"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve1 we need to dispaly the current chauffe (value and command),
+// the melangur value and the 
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+var overrides = DataShapes["SvgOverrideDatashape"].CreateValues();
+overrides.AddRow({
+    elementName: "Plaque_Distribution_BCG",
+    "stroke": me.Refroidissement_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+
+overrides.AddRow({
+    elementName: "RefroidissmentMap",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+overrides.AddRow({
+    elementName: "RefroidissmentText",
+    "text": "Refroidissment: " + (me.Refroidissement_Mesure/10).toFixed(1) + "/" + (me.Refroidissement_Consigne/10).toFixed(1),
+    "fill": me.Refroidissement_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+
+var result = overrides;]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Refroidissement_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Refroidissement_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Refroidissement_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Refroidissement_Consigne" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Refroidissement_Consigne2" pushThreshold="0.0" pushType="VALUE" sourceName="Refroidissement_Consigne2" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Refroidissement_Mesure" pushThreshold="0.0" pushType="VALUE" sourceName="Refroidissement_Mesure" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Refroidissement_Command"/><AlertDefinitions name="Refroidissement_Consigne"/><AlertDefinitions name="Refroidissement_Consigne2"/><AlertDefinitions name="Refroidissement_Mesure"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="HistoricalDataEnabledThingShape" type="ThingShape"/><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.637+03:00</Value><Timestamp>2019-07-17T07:05:03.637+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.653+03:00</Value><Timestamp>2019-07-17T07:05:03.653+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.653+03:00</Value><Timestamp>2019-07-17T07:05:03.653+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><historicalProperties><Value><infoTable><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Entity description" name="description" ordinal="2"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entity name" name="name" ordinal="1"/></FieldDefinitions></DataShape><Rows/></infoTable></Value><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></historicalProperties><timelineProperty><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></timelineProperty><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Refroidissement_Mesure><Value>287.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Refroidissement_Mesure><Refroidissement_Consigne><Value>80.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Refroidissement_Consigne><Refroidissement_Consigne2><Value>0</Value><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></Refroidissement_Consigne2><Refroidissement_Command><Value>false</Value><Timestamp>2019-07-29T14:29:42.678+03:00</Timestamp><Quality>GOOD</Quality></Refroidissement_Command></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.273+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryHistory : service deleted&#10;QueryNumberPropertyHistoryRemote : service deleted&#10;" timestamp="2019-08-13T13:49:43.607+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Pompe-Decharge_C4@BCG" lastModifiedDate="2019-08-13T13:50:10.428+03:00" name="Pompe_Decharge_C3_C4_BCG" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Decharge_Command" ordinal="3"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Decharge_Consigne" ordinal="2"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverrideDatashape"].CreateValues();
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+result.AddRow({
+    elementName: "Pompe_Decharge_C3_C4_BCG",
+    "stroke": me.Decharge_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name,
+    selectable: false,
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+result.AddRow({
+    elementName: "Pompe_Decharge_C3_C4_BCGMap",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+result.AddRow({
+    elementName: "Cuve4Decharge",
+    "text": "Decharge: " + me.Decharge_Consigne.toFixed(1),
+    "fill": me.Decharge_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Decharge_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Decharge_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Decharge_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Decharge_Consigne" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Decharge_Command"/><AlertDefinitions name="Decharge_Consigne"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.606+03:00</Value><Timestamp>2019-07-17T07:05:03.606+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.606+03:00</Value><Timestamp>2019-07-17T07:05:03.606+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.606+03:00</Value><Timestamp>2019-07-17T07:05:03.606+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Decharge_Command><Value>false</Value><Timestamp>2019-07-29T15:52:09.894+03:00</Timestamp><Quality>GOOD</Quality></Decharge_Command><Decharge_Consigne><Value>20.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Decharge_Consigne></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.283+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;QueryHistory : service deleted&#10;" timestamp="2019-08-13T13:50:10.427+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="Melange/chauffe" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Cuve1@BCG" lastModifiedDate="2019-08-13T13:50:33.695+03:00" name="Cuve1_BCG" projectName="BCG" published="false" tags="" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility><Principal isPermitted="true" name="Everyone" type="Organization"/></Visibility></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeThreshold="0.0" aspect.dataChangeType="VALUE" aspect.isLogged="true" aspect.isPersistent="true" aspect.isReadOnly="false" baseType="NUMBER" category="" description="" isLocalOnly="false" name="availability" ordinal="15"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeThreshold="0.0" aspect.dataChangeType="VALUE" aspect.isLogged="false" aspect.isPersistent="true" aspect.isReadOnly="false" baseType="NUMBER" category="" description="" isLocalOnly="false" name="availabilityTrending" ordinal="14"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="PLC" description="" isLocalOnly="false" name="Chauffe_Command" ordinal="5"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="PLC" description="" isLocalOnly="false" name="Chauffe_Consigne" ordinal="2"/><PropertyDefinition aspect.dataChangeType="ALWAYS" aspect.dataCollectionMethod="time" aspect.dataCollectionValue="300000" aspect.executionInterval="300000" aspect.isLogged="true" aspect.isPersistent="true" aspect.isReadOnly="true" aspect.sourceName="Chauffe_Consigne" aspect.transform="mean" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Chauffe_Consigne_5min" ordinal="8"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="PLC" description="" isLocalOnly="false" name="Chauffe_Mesure" ordinal="3"/><PropertyDefinition aspect.dataChangeType="ALWAYS" aspect.dataCollectionMethod="time" aspect.dataCollectionValue="300000" aspect.executionInterval="300000" aspect.isLogged="true" aspect.isPersistent="true" aspect.isReadOnly="true" aspect.sourceName="Chauffe_Mesure" aspect.transform="mean" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Chauffe_Mesure_5min" ordinal="9"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeThreshold="0.0" aspect.dataChangeType="VALUE" aspect.isLogged="false" aspect.isPersistent="true" aspect.isReadOnly="false" baseType="NUMBER" category="System" description="" isLocalOnly="false" name="durationDowntime" ordinal="9"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeThreshold="0.0" aspect.dataChangeType="VALUE" aspect.isLogged="false" aspect.isPersistent="true" aspect.isReadOnly="false" baseType="NUMBER" category="System" description="" isLocalOnly="false" name="durationUpTime" ordinal="10"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeThreshold="0.0" aspect.dataChangeType="VALUE" aspect.isLogged="true" aspect.isPersistent="true" aspect.isReadOnly="false" baseType="NUMBER" category="" description="" isLocalOnly="false" name="goodCount" ordinal="13"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="PLC" description="" isLocalOnly="false" name="Melangeur_Command" ordinal="6"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="PLC" description="" isLocalOnly="false" name="Melangeur_Consigne" ordinal="4"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="VALUE" aspect.defaultValue="00:00" aspect.isLogged="false" aspect.isPersistent="true" aspect.isReadOnly="false" baseType="STRING" category="" description="" isLocalOnly="false" name="shiftStartTime" ordinal="12"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="VALUE" aspect.isLogged="false" aspect.isPersistent="false" aspect.isReadOnly="false" baseType="DATETIME" category="" description="The time stamp when the the current status was entered." isLocalOnly="false" name="statusTimestamp" ordinal="11"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve1 we need to dispaly the current chauffe (value and command),
+// the melangur value and the 
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+var overrides = DataShapes["SvgOverrideDatashape"].CreateValues();
+overrides.AddRow({
+    elementName: "Cuve1",
+    "stroke": elementStatus[Math.min(me.Chauffe_Command + me.Melangeur_Command, 2)],
+    selectable: false
+});
+
+overrides.AddRow({
+    elementName: "Cuve1Map",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+overrides.AddRow({
+    elementName: "Cuve1Melangeur",
+    "text": "Melangeur: " + (me.Melangeur_Consigne/10).toFixed(1),
+    "fill": me.Melangeur_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+overrides.AddRow({
+    elementName: "Cuve1Chauffe",
+    "text": "Chauffe: " + (me.Chauffe_Mesure/10).toFixed(1) + "/" + (me.Chauffe_Consigne/10).toFixed(1)+" °C",
+    "fill": me.Chauffe_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+var result = overrides;]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="availability" pushThreshold="0.0" pushType="VALUE" sourceName="availability" timeout="0"/><RemotePropertyBinding foldType="NONE" name="availabilityTrending" pushThreshold="0.0" pushType="VALUE" sourceName="availabilityTrending" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe_Consigne" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe_Mesure" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe_Mesure" timeout="0"/><RemotePropertyBinding foldType="NONE" name="durationDowntime" pushThreshold="0.0" pushType="VALUE" sourceName="durationDowntime" timeout="0"/><RemotePropertyBinding foldType="NONE" name="durationUpTime" pushThreshold="0.0" pushType="VALUE" sourceName="durationUpTime" timeout="0"/><RemotePropertyBinding foldType="NONE" name="goodCount" pushThreshold="0.0" pushType="VALUE" sourceName="goodCount" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Melangeur_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Melangeur_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Melangeur_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Melangeur_Consigne" timeout="0"/><RemotePropertyBinding foldType="NONE" name="shiftStartTime" pushThreshold="0.0" pushType="VALUE" sourceName="shiftStartTime" timeout="0"/><RemotePropertyBinding foldType="NONE" name="statusTimestamp" pushThreshold="0.0" pushType="VALUE" sourceName="statusTimestamp" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="availability"/><AlertDefinitions name="availabilityTrending"/><AlertDefinitions name="Chauffe_Command"/><AlertDefinitions name="Chauffe_Consigne"/><AlertDefinitions name="Chauffe_Consigne_5min"/><AlertDefinitions name="Chauffe_Mesure"/><AlertDefinitions name="Chauffe_Mesure_5min"/><AlertDefinitions name="durationDowntime"/><AlertDefinitions name="durationUpTime"/><AlertDefinitions name="goodCount"/><AlertDefinitions name="Melangeur_Command"/><AlertDefinitions name="Melangeur_Consigne"/><AlertDefinitions name="shiftStartTime"/><AlertDefinitions name="statusTimestamp"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="HistoricalDataEnabledThingShape" type="ThingShape"/><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.621+03:00</Value><Timestamp>2019-07-17T07:05:03.621+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.621+03:00</Value><Timestamp>2019-07-17T07:05:03.621+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.621+03:00</Value><Timestamp>2019-07-17T07:05:03.621+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><historicalProperties><Value><infoTable><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Entity description" name="description" ordinal="2"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entity name" name="name" ordinal="1"/></FieldDefinitions></DataShape><Rows><Row><description/><name><![CDATA[Chauffe_Mesure_5min]]></name></Row><Row><description/><name><![CDATA[Chauffe_Consigne_5min]]></name></Row><Row><description/><name><![CDATA[Melangeur_Consigne]]></name></Row></Rows></infoTable></Value><Timestamp>2019-04-25T13:44:12.852+03:00</Timestamp><Quality>GOOD</Quality></historicalProperties><timelineProperty><Value><![CDATA[Chauffe_Command]]></Value><Timestamp>2019-04-25T03:09:19.650+03:00</Timestamp><Quality>GOOD</Quality></timelineProperty><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Melangeur_Consigne><Value>350.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Melangeur_Consigne><Chauffe_Consigne><Value>750.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe_Consigne><shiftStartTime><Value><![CDATA[00:00]]></Value><Timestamp>2019-07-15T09:52:42.845+03:00</Timestamp><Quality>GOOD</Quality></shiftStartTime><availability><Value>0.0</Value><Timestamp>2019-07-29T15:48:00.005+03:00</Timestamp><Quality>GOOD</Quality></availability><Chauffe_Consigne_5min><Value>750.0</Value><Timestamp>2019-08-01T17:49:59.831+03:00</Timestamp><Quality>GOOD</Quality></Chauffe_Consigne_5min><durationUpTime><Value>0.0</Value><Timestamp>2019-07-29T15:48:00.005+03:00</Timestamp><Quality>GOOD</Quality></durationUpTime><durationDowntime><Value>3600002.0</Value><Timestamp>2019-08-07T18:48:00.018+03:00</Timestamp><Quality>GOOD</Quality></durationDowntime><Chauffe_Command><Value>false</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe_Command><Chauffe_Mesure><Value>256.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe_Mesure><goodCount><Value>0.0</Value><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></goodCount><Chauffe_Mesure_5min><Value>255.02</Value><Timestamp>2019-08-01T17:49:59.831+03:00</Timestamp><Quality>GOOD</Quality></Chauffe_Mesure_5min><availabilityTrending><Value>0.0</Value><Timestamp>2019-07-29T16:48:00.011+03:00</Timestamp><Quality>GOOD</Quality></availabilityTrending><Melangeur_Command><Value>false</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Melangeur_Command></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.290+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;QueryHistory : service deleted&#10;GenerateChartFields : service deleted&#10;" timestamp="2019-08-13T13:50:33.694+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Injecteurs@BCG" lastModifiedDate="2019-08-13T13:50:46.779+03:00" name="Injecteurs_BCG" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Injecteur1_Command" ordinal="3"/><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Injecteur2_Command" ordinal="2"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve1 we need to dispaly the current chauffe (value and command),
+// the melangur value and the 
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+var overrides = DataShapes["SvgOverrideDatashape"].CreateValues();
+overrides.AddRow({
+    elementName: "injecteur",
+    "stroke": me.Injecteur1_Command ? Things.SvgDataCollectorThing.notWorkingColor : Things.SvgDataCollectorThing.workingColor,
+    selectable: false
+});
+overrides.AddRow({
+    elementName: "Injecteur1Text",
+    "text": "Injecteur1: " + (me.Injecteur1_Command ? "ON" : "OFF"),
+    "fill":  me.Injecteur1_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+overrides.AddRow({
+    elementName: "Injecteur2Text",
+    "text": "Injecteur2: " + (me.Injecteur2_Command ? "ON" : "OFF"),
+    "fill":  me.Injecteur2_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+overrides.AddRow({
+    elementName: "InjecteurMap",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+
+var result = overrides;]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Injecteur1_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Injecteur1_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Injecteur2_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Injecteur2_Command" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Injecteur1_Command"/><AlertDefinitions name="Injecteur2_Command"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="HistoricalDataEnabledThingShape" type="ThingShape"/><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.559+03:00</Value><Timestamp>2019-07-17T07:05:03.559+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.559+03:00</Value><Timestamp>2019-07-17T07:05:03.559+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.559+03:00</Value><Timestamp>2019-07-17T07:05:03.559+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><historicalProperties><Value><infoTable><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Entity description" name="description" ordinal="2"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entity name" name="name" ordinal="1"/></FieldDefinitions></DataShape><Rows/></infoTable></Value><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></historicalProperties><timelineProperty><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></timelineProperty><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Injecteur2_Command><Value>false</Value><Timestamp>2019-07-29T14:05:41.628+03:00</Timestamp><Quality>GOOD</Quality></Injecteur2_Command><Injecteur1_Command><Value>false</Value><Timestamp>2019-07-29T14:05:40.628+03:00</Timestamp><Quality>GOOD</Quality></Injecteur1_Command></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.296+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;QueryHistory : service deleted&#10;" timestamp="2019-08-13T13:50:46.778+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Plaque_Distribution@BCG" lastModifiedDate="2019-08-13T13:51:04.833+03:00" name="Plaque_Distribution_BCG" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar/><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Chauffe_Command" ordinal="3"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Chauffe_Consigne" ordinal="2"/><PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="true" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Chauffe_Mesure" ordinal="4"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve1 we need to dispaly the current chauffe (value and command),
+// the melangur value and the 
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+var overrides = DataShapes["SvgOverrideDatashape"].CreateValues();
+overrides.AddRow({
+    elementName: "PlaqueDistribution",
+    "stroke": me.Chauffe_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+
+overrides.AddRow({
+    elementName: "Plaque_Distribution_BCGMap",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+overrides.AddRow({
+    elementName: "Tunnel1Text",
+    "text": "Chauffe: " + (me.Chauffe_Mesure/10).toFixed(1) + "/" + (me.Chauffe_Consigne/10).toFixed(1),
+    "fill": me.Chauffe_Command ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+
+var result = overrides;]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Chauffe_Command" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe_Command" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe_Consigne" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Chauffe_Mesure" pushThreshold="0.0" pushType="VALUE" sourceName="Chauffe_Mesure" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Chauffe_Command"/><AlertDefinitions name="Chauffe_Consigne"/><AlertDefinitions name="Chauffe_Mesure"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="HistoricalDataEnabledThingShape" type="ThingShape"/><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.590+03:00</Value><Timestamp>2019-07-17T07:05:03.590+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.606+03:00</Value><Timestamp>2019-07-17T07:05:03.606+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.606+03:00</Value><Timestamp>2019-07-17T07:05:03.606+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><historicalProperties><Value><infoTable><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Entity description" name="description" ordinal="2"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entity name" name="name" ordinal="1"/></FieldDefinitions></DataShape><Rows/></infoTable></Value><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></historicalProperties><timelineProperty><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></timelineProperty><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Chauffe_Command><Value>false</Value><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></Chauffe_Command><Chauffe_Mesure><Value>279.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe_Mesure><Chauffe_Consigne><Value>500.0</Value><Timestamp>2019-08-01T17:50:30.854+03:00</Timestamp><Quality>BAD</Quality></Chauffe_Consigne></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.301+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;QueryHistory : service deleted&#10;" timestamp="2019-08-13T13:51:04.832+03:00" user="Administrator"/></ConfigurationChanges></Thing><Thing description="" documentationContent="" effectiveThingPackage="RemoteThing" enabled="true" homeMashup="" identifier="Asset_Pompe_C1_C2@BCG" lastModifiedDate="2019-08-13T13:51:26.674+03:00" name="Pompe_C1_C2" projectName="BCG" published="false" tags="Application:BCG" thingTemplate="RemoteThing" valueStream="ValueStream_Asset_aa"><Owner name="Administrator" type="User"/><avatar><![CDATA[iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAQNElEQVR42rVXCVRT17oO2LfufXe9
+99p3W2utilNBmWcIJJABCCGEQEIGQsIcyERA5imEBAiEQBgCIYR5DqDI4ADOtgWVKmqrtiKoVKso
+trZUW2tBfDuky6UWHG7v22tz1iE5+/zf/r7v//8dCCQgH0LI++Pqlwvxz4eQCiDkwr80KYUQohSC
+l0BI0v+gyd4LUawOK/0vetEqqkwXCHwOrpQV1jqkt7gJW03jNN7Sbu+8Loe0po0clSGp4B1qkSFF
+ZkCRvS0a3aqAfGOeStk38un5qxevzRy5eEN78nL36KUvvrl5YGxC3vP5ttgagMlw2Ze7CNspJbvR
+4k4faU9QWT8qp+NjlhKCE+vYwue+aisrzFXgef8C/7Sy88cOnf3i7Ffnvuo/PNL72fkj41cuXbh8
+8dzFs0cOhWVXQvylq5YFBM1qS207FlIx4JzZGtd4iKbYjZZoo9T7ySW7GRWDqJx2Q5LUgPwWPBmA
+a6BsLSOfxs3gCFLj4pKTd6RkJKWn7EiJEySyuTuo4fyNdBGEXGSw7BtsU5s9xJ0WCXUWCfVeuVqk
+qH0LTw3NaEGIOjB5WiN2JSDpXxAOYIKQZf+gy91IUf44AhLtg3JDOWNp/x1UYKijvGjFhejcLo5m
+iKkcDKvcAwAFlQ2EKQfDK/cgczro5QP82mGrhFrgdMO3xGSgp4oiR5Cj6WQa3o8S4IO3JnIglBID
+coHBK9aujlJu5lUbcVRb+erVEeXvhpWBG2NBzerIig8jK8x21P1vWCnIO4M3h0LR+RrQYLDkp3BO
+koAbFxIazSBRTIPSDchyAOhVb9DlJ0h1YF5wBfck8G+eboJ7MEEteKsqoE94AqgdhZCAAihXXpxf
+lJoijIjkECmM92m5QMrX7A1syGApvZfmEtXP7pf2avDG2a4rMyTpe6FlHinVHIkqt7JVqW6SllTl
+5BWLU0WpUfHvkvOAsV7zwr9SAA2WQPwBWkdzgQFRqmjqvXh6vKFaU1xW2ZmUvReBOekEnzS1vWZs
+tYmYDVxl+BrJ/gIandC+EogfKPRSl2QNI1uTUtxYW11XqdTIpcUieflBX9KF1euurv/k7sebH63d
+EO7BgtBKVgX+OwD9kTXPo/HPXx+tpMu0HhkN9om1KmV1Y1VNS11zubKmpEJdrq5Pr1APo33ObjS+
+vmXb+KZtEntYgzPGkFJkqDP7ysK9KSXA7IGFq4BX9CYLkG5mVw4d/Ky5plYhU+RLFUkJaZ2793bt
+2tPb0buvpvloUdnnydlXrBy/Ndo+YWxWb27nEsTN9WLq6hOxUNcDiCv0gDdwqy57/xZS+i69YKnc
+LfVIvzxeSXuTWhPJig0LjRaL8tT1bUejeLftXb83s5012ja9ZsPEB+vaN2zJNrY4udViYL0Jzo9e
+6MFcRZVbRReiRU3/iKyE6HrAWwIy0KVxAeg7w5zUy0KRNiUfFgx6eAHgnC8qy04XpqdlR0TzM1ic
+aYTXnbVbjlg5p2w1Dt5oDN+01fyTrVtMjC1dEUEY353ObtxwjgxJ9opIEsQK9ojzyimxYHuGbwUI
+cGNIlBqzK2LkbV+YWCyi0U+DAw+G8g2DFBCchJVaKEpJT0/K2JEizAuJnPnnugebTNMY4f9jsi2A
+FuIER203s7Q0s0Jj/URkZpczQtum3UkOCgmOYApStBh8nTkSEly+KlC6IiB9BTKkgkwueoem00XH
+J0HKzywaHBgshbrdt7P7jkSczc5Obt7nL2lRNHdlykqyZIrsSs1AXPKxNRtazW3ZcKS5jW1mSla+
+pBC4yt0VhcQSyhmshPdWHxwdvXL8U2ZQCIkj2I/HCaGBEHr5O38GBGKDCXDo/gFpDE4d4OzhkwPx
+yzcg5ltxykSKqm5VswTh1WNheYeAO8fm9TR3HCqrGUoXH45JvBDGP4Xwvmtmc3LjtkpbJ4K1vSMM
+GS8AuiTGCZIykzIjkjPa6GHBf/9PZX3dzWvXqxQl5Y3Nl1xgse4h7zAr/qavvc+7G4LN0U28BAi0
+JrLCKrEel9/NrtnPLu0Sq1o7tDsHZGWXnNxPbtle5QA7aGY74uh6zNLy4PatvdvX1ZqvqUR9dNF6
+4+MPN49vNGmycfB1gaG8fAX8hMgINjsmNpYde8SHdMHCjv7Jtoxs8fT4uYqUdHV4zOl1200QfAgu
+T7d50KYCwRFApqcGEq3er9x3eujs1OXvvp/75benS+PezZv1msY9iorj6cLZjSY/rDW6Z/TJtc1b
+xO7rElAfR3uvp+PXE7BrSTgjLt/mMtLk0fsbz6436rN1JvsQESgMcHrCjlQ2WxDFDBdC4Xbvv+8G
+h0eGhMXzY0kkSkWJ8si5KcXe01zNEDj5bOFV/50u1ymjp+bpn8aTxcU9A/vYSVkNUPTIVouZNZtn
+NhjPrjGa3moWhzelEtYxcJvomA10jw9pGAsUAlboBT8nlHzJju+3daExI7kxsTxunERckJcrq66u
+L66uNzI28fD08CMQfHx8/P1JLS2dz4d7PL/w7b25YxemVUNnADuQ+YUnYC48eQJwgD/wxI/3f8oX
+FzA5cb1ObpcsnM6xeDeMtkw5OB92cpJ4bIoM3BSG/SjUZy3D4wM/T2cYFEplUPr7d89du5lGxwfT
+gxo0DWmpWcPDR3f37t0Rn9Leom1qaFIqlTk5ORgMxscHp6pSLfw+//jRo3kQeHHxJTpeYGhx6esb
+N74TZUqScqRHXRA//XNdZzj7fEXVN9qBnS114TTTxBCnhBDXWLpjfCgqJTZGmJpUWpA/2LsLLDx+
+aFd3a+OZsTP9fXvrapqqVXXZwtyy0qrPPvu8traWx+W5u7sjEQh1TS0Is/As6JImAJqemhcA6Rm6
+MjEpyszNKVZdQvhkfmSERHtduzz149zcD/d+aK1X7da2jBw6PHr8+JmxU9NXJ+7dunX98uT58bNg
+7YOf565NTly5MqVW1Qli4g4dPD60/3BqqjAmOgaPwyERSDs7OzgMXiyvenpq7LcyxfzMbcABiLoi
+QwsLOtxfnr/AieGJ81L67Gw5OIK8oHjq8pUluE/u3rkz//v880t+ffz46tTVof7BK5cm+7o60+LD
+lcpKAYcfERyprqiR5hXF8xPt4e7GVtaeGB9PpCfKA9PlguhwhPV98P5voqwnS1FXBKQfU1PTsdwY
+VQlnV1lWfani1OejZ06eAp//9ujRre9u/3h/7vat219/dWHk2JGDQ4PtjfWqEkVrraaztbskPdMP
+A09ITI4MiQgLjiDiA12g7mHMqCwT87oP1ubZOJLwRLYjlOHqZonyxKO9v7Uxezp9XS/NMoCAgR48
+eDA///vc3IO5+3N3b3976evxnv6+wb7B/b19Ol3Gxnf19LS11PQ0Vh0b7Dl74vixA719vS2aBk1N
+nVojk+8ih5SamZOCGH6+RBKRBoMBw3hFh7NkYazSaN6nFg5Qa5tMe4cES0tze0dKOKfJBTYryV58
+kSTI83qNjozdmfl+avL6mdNfars6M1h+jRi33NS0QoVyf8/AYH1bd4l8fLj/5OiBz47379nVqMlP
+FdEJRSRsTzjzCz+/S1CHk1bmVDsnJze0BxIDaqNEUsAOY4tzZTGi/GZPbMq6j2n0qE64i5Wjq0Qk
+pVEZnY0Nz6zyAiB9fg3tPyDKFguzxEnJWWQCGufloonhDXi57wrATzNoNzDuv1iaTHjCmyOJ9T7O
+NUhnNRpZ6UfYmZTSXVm/J4j+68aPBpycFNY2MDTOxQmelioUZedhsQRXKNwV6hpICR6ytvShhncF
+UIj2Do4wFI1C++HHnxaXxvKSPfzl4eTkFXFOLpPJYgYRMB7IbGnpCX/cSRT8prXxWQezLi8vTQBV
+zgjP5caBPp+YJkzIFPf0Dw+PXxhOEj39aO0Be7taqHM0Fo8n0X0woCyFubq4m243s4W6pmF9v7Yx
+T0eiskIFWl9cVnHZ1cnJZ1y8ytTXrl3j8QTRrFjQjHJE0pykNCqVwWJGiHOL6nsG6azYHRni+OTM
+hMT05MS0HYKklvpWVhy/IoJ1x9Z+ynTbLRPjdhjcNyg0KJAeBM4hjk7OzjCBg8NdK7NbVhbt1lam
+7NzB6PinN3V2Xnwx55cBpJdz377hYHq4plJTXFAWw4nHYvH+AVRhpmRs5AtmUGhKUjo4WiQlpqcm
+Z/F5CXm50pCw4NS4eBYrdsTFZcF484CVBT04jOAXaGVpD3Nxg2PwYw72N6zNZmxM727f1Onl+7md
+w9zwPl2ZfjHnlwGkV3Rm5g6XGycSSqhkBtYb7+3li8cFhDAjT4ye5rLjAJSU5EzQFnjceCqFGRPN
+lcnkEREsWyd4JIkS6onFeGHt7aAR4WxvDB7t7ukdQCui0e+bf/KdveWc5dbZbUZH0fD7vzz8s17L
+S7aoa2oLtbUN7BhBeFi0p4ePBxrr5Ykjk+igFZCXhAjwp2C8fNEob2cnOGjsBdJiKoXh5orE4ogw
+JAZ8BYW6AzRgOeCJyYiMYcfVoT3ECBTPG+sGdStX1Syp8eTP0Zfr9ksNZHr6RlqqiEZlmphsMze3
+cHBwDA5mwEE0L1+stx8OtG0CGYADV+BcYgCVgA9Eo7BuMJS/DkEEOJ0lJqTHRPNDQ6IArIgINhof
+iPAhoLH+nt64mdsz+tL/RoCeMXln5s7IyGhjY2NHR0d3d09WVra1lQNgBeHuCeSjkIOJAUGBpCAq
+hc7lxKKQnpYWtu5uHhnpInAe4vN2EAPIbnAkoDYiPIZGYWA8sEQCGQZFqKrUOjTL0bMioJfUHR05
+wYrigeIL5LOzdbYwtwFhMtKze7p7T5w4OTU1+fjxY3WN2tHRycrCHg5DgY5hut3S1NTUz8+vvKyK
+FcUFyoLPAbV++MBDB48uueItAekxgUgg7+TyYjNTa0CGLy4AYALT2cmts1P70vPnz59vbm4ZPzM+
+MXElK0voYO9CIVP4fD4Khfbw8ACpCnQE/PX17VlJr9cA0lcBAKuoqMTayhHq7CbOkTbUtyorqmWF
+ivY2LXAleED/6oU/JfDY2Onr16fv3r1769atX3/9VZiVk5khzs8r0nb2vFSd3wLQou789DRbKAFo
+HB1c4+OS62qbi+XlAFmNuvGllwJkenzL7r6sTJmZkQPWdnZ0L5vwbwTo0aNHY6fOcDkCFAoDvBwV
+yakoVylKlEWysuqqOiDoK9bqkYHA4KgKrm2tnfKi8i5tb0/37p9+mltp1WtM/eDnBwUF8gACBbjS
+zs4hLJSlqqotL1OBg6myQv3zzw9esdeXqv/ePftp1BDAEBC9q6t3YmLyTQvjS5gmJyfT04QKRfmh
+Qwf37ztQLK8AUACmUkXlvXvfv8INL1X/hw8f1moaQE0CwgF3HzhweFlrv0ayl8bk5NUiWWmtpqm+
+rkVdXQ9+DrwJQ8+PL89/NTp64t69e/+ih57tbx4YYWHhxo2bzU0d7W3dXdpdAJOqSjM7C179RpiW
+jvOvf+xNGdKHnJ2dLZDKGxvaASzwK0fAT2ppaX9FUXmF0/8qID2m33+f79LujOUnLJW47JKS8tOn
+x99WtX8PQ8+Pr7/+BpxPFhaePP1/GP8Hk69plm/LPmQAAAAASUVORK5CYII=]]></avatar><DesignTimePermissions><Create/><Read/><Update/><Delete/><Metadata/></DesignTimePermissions><RunTimePermissions><Permissions resourceName="*"><PropertyRead><Principal isPermitted="true" name="bcg" type="User"/></PropertyRead><PropertyWrite><Principal isPermitted="true" name="bcg" type="User"/></PropertyWrite><ServiceInvoke><Principal isPermitted="true" name="bcg" type="User"/></ServiceInvoke><EventInvoke/><EventSubscribe/></Permissions></RunTimePermissions><VisibilityPermissions><Visibility/></VisibilityPermissions><ConfigurationTableDefinitions/><ConfigurationTables><ConfigurationTable description="Reporting Settings" isMultiRow="false" name="ReportingConfiguration" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition aspect.defaultValue="NotReporting" aspect.isPrimaryKey="true" aspect.isReadOnly="false" aspect.thingTemplate="ReportingStrategy" baseType="THINGNAME" description="Strategy to determine health" name="reportingStrategy" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><reportingStrategy><![CDATA[AlwaysOnReporting]]></reportingStrategy></Row></Rows></ConfigurationTable></ConfigurationTables><ThingShape><PropertyDefinitions><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="Transfert_Commande" ordinal="2"/><PropertyDefinition aspect.isLogged="true" aspect.isPersistent="true" baseType="INTEGER" category="" description="" isLocalOnly="false" name="Transfert_Consigne" ordinal="3"/></PropertyDefinitions><ServiceDefinitions/><EventDefinitions/><ServiceMappings/><ServiceImplementations><ServiceImplementation description="" handlerName="Script" name="GetSvgOverrides"><ConfigurationTables><ConfigurationTable description="" isMultiRow="false" name="Script" ordinal="0"><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/></FieldDefinitions></DataShape><Rows><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverrideDatashape"].CreateValues();
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor];
+result.AddRow({
+    elementName: "Pompe_C1_C2",
+    "stroke": me.Transfert_Commande ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name,
+    selectable: false
+});
+result.AddRow({
+    elementName: "Pompe_C1_C2Map",
+    "fill": Things.SvgDataCollectorThing.selectableColor
+});
+result.AddRow({
+    elementName: "Pompe_C1_C2Transfert",
+    "text": "Transfert: " + me.Transfert_Consigne.toFixed(1),
+    "fill": me.Transfert_Commande ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    selectable: false
+});
+]]></code></Row><Row><code><![CDATA[// for the cuve2 we need to dispaly the melangur value and the 
+var result = DataShapes["SvgOverridesGenericDataShape"].CreateValues();
+
+var elementStatus = [Things.SvgDataCollectorThing.notWorkingColor, Things.SvgDataCollectorThing.partlyWorkingColor, Things.SvgDataCollectorThing.workingColor]
+
+result.AddRow({
+    elementName: "Pompe_C1_C2",
+    "override-stroke": me.Transfert_Commande ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name
+});
+result.AddRow({
+    elementName: "Pompe_C1_C2Map",
+    thingName: me.name
+});
+
+result.AddRow({
+    elementName: "Pompe_C1_C2Transfert",
+    "override-text": `Transfert: ${me.Transfert_Consigne.toFixed(1)}`,
+    "override-fill": me.Transfert_Commande ? Things.SvgDataCollectorThing.workingColor : Things.SvgDataCollectorThing.notWorkingColor,
+    thingName: me.name  
+})]]></code></Row></Rows></ConfigurationTable></ConfigurationTables></ServiceImplementation></ServiceImplementations><Subscriptions/></ThingShape><PropertyBindings/><RemotePropertyBindings><RemotePropertyBinding foldType="NONE" name="Transfert_Commande" pushThreshold="0.0" pushType="VALUE" sourceName="Transfert_Commande" timeout="0"/><RemotePropertyBinding foldType="NONE" name="Transfert_Consigne" pushThreshold="0.0" pushType="VALUE" sourceName="Transfert_Consigne" timeout="0"/></RemotePropertyBindings><RemoteServiceBindings/><RemoteEventBindings/><AlertConfigurations><AlertDefinitions name="Transfert_Commande"/><AlertDefinitions name="Transfert_Consigne"/></AlertConfigurations><ImplementedShapes><ImplementedShape name="HistoricalDataEnabledThingShape" type="ThingShape"/><ImplementedShape name="SvgEnabledThingShape" type="ThingShape"/></ImplementedShapes><ThingProperties><lastConnection><Value>2019-07-17T07:05:03.590+03:00</Value><Timestamp>2019-07-17T07:05:03.590+03:00</Timestamp><Quality>GOOD</Quality></lastConnection><reportingLastEvaluation><Value>2019-07-17T07:05:03.606+03:00</Value><Timestamp>2019-07-17T07:05:03.606+03:00</Timestamp><Quality>GOOD</Quality></reportingLastEvaluation><reportingLastChange><Value>2019-07-17T07:05:03.606+03:00</Value><Timestamp>2019-07-17T07:05:03.606+03:00</Timestamp><Quality>GOOD</Quality></reportingLastChange><historicalProperties><Value><infoTable><DataShape><FieldDefinitions><FieldDefinition baseType="STRING" description="Entity description" name="description" ordinal="2"/><FieldDefinition aspect.isPrimaryKey="true" baseType="STRING" description="Entity name" name="name" ordinal="1"/></FieldDefinitions></DataShape><Rows><Row><description/><name><![CDATA[Transfert_Consigne]]></name></Row></Rows></infoTable></Value><Timestamp>2019-04-25T16:05:22.664+03:00</Timestamp><Quality>GOOD</Quality></historicalProperties><timelineProperty><Value><![CDATA[Transfert_Commande]]></Value><Timestamp>2019-04-25T16:05:10.336+03:00</Timestamp><Quality>GOOD</Quality></timelineProperty><svgId><Value/><Timestamp>1970-01-01T02:00:00.000+02:00</Timestamp><Quality>UNKNOWN</Quality></svgId><Transfert_Commande><Value>false</Value><Timestamp>2019-07-29T15:43:17.863+03:00</Timestamp><Quality>GOOD</Quality></Transfert_Commande><Transfert_Consigne><Value>500</Value><Timestamp>2019-07-29T14:15:37.648+03:00</Timestamp><Quality>GOOD</Quality></Transfert_Consigne></ThingProperties><ConfigurationChanges><ConfigurationChange changeAction="CREATE" changeReason="" timestamp="2019-08-13T12:10:41.308+03:00" user="Administrator"/><ConfigurationChange changeAction="MODIFY" changeReason="services : QueryNumberPropertyHistoryRemote : service deleted&#10;QueryHistory : service deleted&#10;" timestamp="2019-08-13T13:51:26.673+03:00" user="Administrator"/></ConfigurationChanges></Thing></Things><Logs/><Authenticators/><ThingPackages/><NotificationDefinitions/><ApplicationKeys/><StateDefinitions/><ThingTemplates/><ExtensionPackages/><Organizations/><Menus/><Resources/><DataTags/><ThingShapes/><Subsystems/></Entities>
