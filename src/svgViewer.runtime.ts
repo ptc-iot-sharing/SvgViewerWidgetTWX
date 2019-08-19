@@ -54,7 +54,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         return {
             overrideIdField: this.getProperty("DataIdField") || "elementName",
             idField: this.getProperty("SVGIdField") || "id",
-            selectorField: this.getProperty("SelectorIdField") || "",
+            selectorField: this.getProperty("DataSelectorField") || "",
             imageHeight: this.getProperty("ImageHeight") || "100%",
             imageWidth: this.getProperty("ImageWidth") || "100%",
             zoomPanOptions: {
@@ -145,7 +145,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
                     let elements: SvgElementIdentifier[] = [];
                     const overrideField = this.getProperty("OverrideListField");
                     const dataField = this.getProperty("DataIdField");
-                    const selectorField = this.getProperty("SelectorIdField");
+                    const selectorField = this.getProperty("DataSelectorField");
                     if (overrideField) {
                         elements = elements.concat(selectedRows.reduce((ac, el) => ac.concat(el[overrideField].rows.filter((x) => x.selectable !== false).map(x => ({ name: x[dataField], selector: x[selectorField] }))), []));
                     } else {
