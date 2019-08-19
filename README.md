@@ -4,9 +4,23 @@ View dynamic responsive SVG files within Thingworx, in order to show plant layou
 
 # Index
 
-[TOC]
-
-
+- [About](#about)
+- [Usage](#usage)
+    + [1. <a name='TheSVGfile'></a>The SVG file](#1--a-name--thesvgfile----a-the-svg-file)
+    + [2. <a name='Thedatainfotable'></a>The data infotable](#2--a-name--thedatainfotable----a-the-data-infotable)
+      - [2.1. <a name='Overridesinanestedinfotable'></a>Overrides in a nested infotable](#21--a-name--overridesinanestedinfotable----a-overrides-in-a-nested-infotable)
+      - [2.2. <a name='Typesofoverrides'></a>Types of overrides](#22--a-name--typesofoverrides----a-types-of-overrides)
+    + [3. <a name='Bindingsandproperties'></a>Bindings and properties](#3--a-name--bindingsandproperties----a-bindings-and-properties)
+    + [4. <a name='Installation'></a>Installation](#4--a-name--installation----a-installation)
+- [Development](#development)
+  * [1. <a name='Build'></a>Build](#1--a-name--build----a-build)
+- [Resources](#resources)
+  * [2. <a name='SVGDemostarterkit'></a>SVG Demo starter kit](#2--a-name--svgdemostarterkit----a-svg-demo-starter-kit)
+    + [2.1. <a name='Installation-1'></a>Installation](#21--a-name--installation-1----a-installation)
+    + [2.2. <a name='Usage'></a>Usage](#22--a-name--usage----a-usage)
+- [Gallery](#gallery)
+- [Credit/Acknowledgment](#credit-acknowledgment)
+- [License](#license)
 
 # About
 This is a Thingworx widget allowing visualization of dynamic [SVG](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) files. It works by receiving an SVG file and an InfoTable dataset containing "overrides". Using this "overrides" you can modify the attributes of any SVG element to do stuff like changing colors, strings or even dimensions of an element.
@@ -16,7 +30,7 @@ Additionally, it has features like dynamic pan and zoom and synchronized selecti
 
 Here is how to use the with a simple SVG file and a dataset:
 
-### The SVG file
+###  1. <a name='TheSVGfile'></a>The SVG file
 
 The widget accepts any standard SVG file, either generated manually, via a Vector based tool like Adobe Illustrator, Corel Draw or Inkscape, or transformed from another format. For example, you can convert PDF or DWG schematics to SVG using online tools, and use that SVG in the widget.
 
@@ -49,12 +63,12 @@ This file contains 3 main "elements". The path with "Text1" written underneath i
 
 The SVG file can be stored either in a FileRepository, as a MediaEntity, or, eternal to Thingworx, by adding a complete URI.
 
-### The data infotable
+###  2. <a name='Thedatainfotable'></a>The data infotable
 By default your SVG will be static, meaning that it will show up as designed. However you can change it's appearance by using an infotable that contains “overrides”.
 
 There are two ways of declaring this overrides:
 
-#### Overrides in a nested infotable
+####  2.1. <a name='Overridesinanestedinfotable'></a>Overrides in a nested infotable
 
 The best way to do it is to use a nested infotable for your overrides. By using a nested infotable, you can group together multiple elements in the SVG under the same row. A common usecase is when you want to have synchronized selection between _multiple_ elements in the SVG and one element in a list/grid.
 
@@ -103,7 +117,7 @@ The only required column is `ElementName`. This column maps the override rows to
 
 The elements in the infotable also dictate what elements are clickable. 
 
-#### Types of overrides 
+####  2.2. <a name='Typesofoverrides'></a>Types of overrides 
 
 It's also important to note that the overrides for  `fill`, `stroke` are just examples. You can override any attribute of the svg, including dimensions like `width` or `height`, position like `x` and `y`. However, there are a couple of special `overrides` that you can include:
    * `tooltip`: Specify a tooltip for an element. This is visible when hovering.
@@ -112,7 +126,7 @@ It's also important to note that the overrides for  `fill`, `stroke` are just ex
    * `class`: Class to add to the element. The exiting classes are not removed, but rather the new class is appended.
    * `selectable`: Marks the element as clickable, meaning that it can drive the synchronized selection. 
 
-### Bindings and properties
+###  3. <a name='Bindingsandproperties'></a>Bindings and properties
 
 * `SVGFileUrl`: Do not select a MediaEntity using the entity picker. A binding must be created.  The SVG file can be stored either in a FileRepository, as a MediaEntity, or, eternal to Thingworx, by adding a complete URI.
 * `Data`: An infotable containing the overrides for elements in the SVG. See the section above for information about the possible structures of this overrides tables. Keep in mind that synchronized selection is supported on this property.
@@ -135,7 +149,7 @@ The following service is available:
 * `PanOntoSelected`: Pans onto the selected element, as to bring it into the center of the screen. `ZoomPanEnabled` must be set to true for this to work.
 
 
-### Installation
+###  4. <a name='Installation'></a>Installation
 - Navigate to the [releases page](/releases)
 - Under the latest release, view all the assets
 - Download the file `svgViewer-min-<VERSION>.zip`
@@ -144,7 +158,7 @@ The following service is available:
 # Development
 This projects welcomes contributions. For details about pre-requisites, development environment and file structure, please see stefan-lacatus/ThingworxDemoWebpackWidget. 
 
-## Build
+##  1. <a name='Build'></a>Build
 
 The following commands allow you to build and compile your widget:
 
@@ -153,7 +167,7 @@ The following commands allow you to build and compile your widget:
 * `npm run upload`: creates a build, and uploads the extension zip to the thingworx server configured in `package.json`.
 
 #  Resources
-## SVG Demo starter kit
+##  2. <a name='SVGDemostarterkit'></a>SVG Demo starter kit
 
 Inside this repository, under `/demo` you can also find a Thingworx starter project that can help you get started with the widget. The demo is based on the [WebDesignKit by Dumitru Zanfir](https://marketplace.ptc.com/apps/201557/web-design-kit#!overview)
 
@@ -163,7 +177,7 @@ The goal of the demo is to provide a starting point for creating a ThingModel th
 
 The prebuilt mashup, `SvgVisualizationWebDesign`, uses the `SvgDataCollectorThing` that _collects_ data from all the things in a network with the `SvgEnabledThingShape` and generates a nested overrides Dataset.
 
-### Installation
+###  2.1. <a name='Installation-1'></a>Installation
 
 1. Install the [WebDesignKit by Dumitru Zanfir](https://marketplace.ptc.com/apps/201557/web-design-kit#!overview)
 2. Install the [D3RangeChart Widget](https://github.com/ptc-iot-sharing/D3RangeChart)
@@ -173,7 +187,7 @@ The prebuilt mashup, `SvgVisualizationWebDesign`, uses the `SvgDataCollectorThin
 6. Upload the 3 svg files in demo to the `SvgFileRepository`
 7. View the `SvgVisualizationWebDesign` mashup
 
-### Usage
+###  2.2. <a name='Usage'></a>Usage
 
 1. Upload your own SVG file into `SvgFileRepository`
 2. On your things, add the `SvgEnabledThingShape`, and override the service `GetSvgOverrides` . Use the existing things as an example.
