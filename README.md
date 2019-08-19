@@ -42,7 +42,7 @@ Here is the [SVG](example/sample.svg) file in this example:
 ```
 
 ```
-![SVG Example](example/sample.svg)
+![SVG Example](demo/sample.svg)
 ```
 
 This file contains 3 main "elements". The path with "Text1" written underneath it, a complex shape labeled "Text2" and a line between them.
@@ -157,7 +157,7 @@ The following commands allow you to build and compile your widget:
 
 Inside this repository, under `/demo` you can also find a Thingworx starter project that can help you get started with the widget. The demo is based on the [WebDesignKit by Dumitru Zanfir](https://marketplace.ptc.com/apps/201557/web-design-kit#!overview)
 
-![SvgDemo](demo/img/2019-08-19 10_12_32-Web Design Kit.png)
+![SvgDemo](demo/img/svgDemo.png)
 
 The goal of the demo is to provide a starting point for creating a ThingModel that easily ties in with the SvgWidget. So, we have a Network of Things, each implementing the `SvgEnabledThingShape`. Then, each thing, via the `GetSvgOverrides` service returns the specific overrides of that thing.
 
