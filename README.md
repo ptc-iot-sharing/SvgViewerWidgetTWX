@@ -87,7 +87,7 @@ The second row means that the contents of element with the `identifier` equal to
 | myText2            |                 | New Text2! | red    |                        | FALSE      |
 | elementSelectable2 |                 |            |        | rbga(107,249,236,0.05) | TRUE       |
 
-####Overrides in a flat infotable
+#### Overrides in a flat infotable
 
 If synchronized selection between an external list and the svg widget is not needed, you can also use a flat infotable for the overrides.  However, you lose the capability to disable selection on some elements.
 
