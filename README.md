@@ -6,18 +6,18 @@ View dynamic responsive SVG files within Thingworx, in order to show plant layou
 
 - [About](#about)
 - [Usage](#usage)
-    + [1. <a name='TheSVGfile'></a>The SVG file](#1--a-name--thesvgfile----a-the-svg-file)
-    + [2. <a name='Thedatainfotable'></a>The data infotable](#2--a-name--thedatainfotable----a-the-data-infotable)
-      - [2.1. <a name='Overridesinanestedinfotable'></a>Overrides in a nested infotable](#21--a-name--overridesinanestedinfotable----a-overrides-in-a-nested-infotable)
-      - [2.2. <a name='Typesofoverrides'></a>Types of overrides](#22--a-name--typesofoverrides----a-types-of-overrides)
-    + [3. <a name='Bindingsandproperties'></a>Bindings and properties](#3--a-name--bindingsandproperties----a-bindings-and-properties)
-    + [4. <a name='Installation'></a>Installation](#4--a-name--installation----a-installation)
+    + [The SVG file](#1-the-svg-file)
+    + [The data infotable](#2-the-data-infotable)
+      - [Overrides in a nested infotable](#21-overrides-in-a-nested-infotable)
+      - [Overrides in a flat infotable](#overrides-in-a-flat-infotable)
+      - [Types of overrides](#22-types-of-overrides)
+    + [Bindings and properties](#3-bindings-and-properties)
+    + [Installation](#4-installation)
 - [Development](#development)
-  * [1. <a name='Build'></a>Build](#1--a-name--build----a-build)
 - [Resources](#resources)
-  * [2. <a name='SVGDemostarterkit'></a>SVG Demo starter kit](#2--a-name--svgdemostarterkit----a-svg-demo-starter-kit)
-    + [2.1. <a name='Installation-1'></a>Installation](#21--a-name--installation-1----a-installation)
-    + [2.2. <a name='Usage'></a>Usage](#22--a-name--usage----a-usage)
+  * [SVG Demo starter kit](#2-svg-demo-starter-kit)
+    + [Installation](#21-installation)
+    + [Usage](#22-usage)
 - [Gallery](#gallery)
 - [Credit/Acknowledgment](#credit-acknowledgment)
 - [License](#license)
@@ -28,7 +28,8 @@ Additionally, it has features like dynamic pan and zoom and synchronized selecti
 
 # Usage
 
-Here is how to use the with a simple SVG file and a dataset:
+It's highly recommended to use the starter kit if you want to use the widget. See more details about it [here](#2-svg-demo-starter-kit).
+For a simple example on how the widget works on its own, here is how to use the with a simple SVG file and a dataset:
 
 ###  1. <a name='TheSVGfile'></a>The SVG file
 
@@ -38,20 +39,20 @@ To illustrate the features of the SVG widget, assume the following SVG file, whe
 Here is the [SVG](example/sample.svg) file in this example:
 
 ```svg
-<svg width="580" height="400" 
+<svg width="100%" height="100%"
     xmlns="http://www.w3.org/2000/svg">
-    <path fill="none" stroke="#000" stroke-width="1.5" d="m132.5,66.4375l-36.5,103.5625l62,-48l24,-45l-49.5,-10.5625z" identifier="myPath1"/>
+    <path fill="transparent" stroke="#000" stroke-width="1.5" d="m132.5,66.4375l-36.5,103.5625l62,-48l24,-45l-49.5,-10.5625z" identifier="myPath1"/>
     <text fill="#000000" stroke="#000" stroke-width="0" x="133.5" y="159.4375" identifier="myText1" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="start">Text1</text>
     <g identifier="myGroup2">
-        <line fill="none" stroke="#000" stroke-width="1.5" x1="358.5" y1="86.4375" x2="340.5" y2="172.4375"/>
-        <line fill="none" stroke="#000" stroke-width="1.5" x1="415.5" y1="180.4375" x2="336.5" y2="167.4375"/>
-        <line fill="none" stroke="#000" stroke-width="1.5" x1="366.5" y1="84.4375" x2="414.5" y2="170.4375"/>
-        <ellipse fill="none" stroke="#000" stroke-width="1.5" cx="396" cy="112.4375" rx="13.5" ry="16"/>
+        <line stroke-width="1.5" x1="358.5" y1="86.4375" x2="340.5" y2="172.4375"/>
+        <line stroke-width="1.5" x1="415.5" y1="180.4375" x2="336.5" y2="167.4375"/>
+        <line stroke-width="1.5" x1="366.5" y1="84.4375" x2="414.5" y2="170.4375"/>
+        <ellipse stroke-width="1.5" cx="396" cy="112.4375" rx="13.5" ry="16"/>
     </g>
     <rect fill="none" stroke-width="1.5" x="329.5" y="79.4375" width="94" height="110" stroke="#000" identifier="elementSelectable2"/>
     <text fill="#000000" stroke="#000" stroke-width="0" x="348.5" y="216.4375" identifier="myText2" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="start">Text2</text>
-    <line fill="none" stroke="#000" stroke-width="1.5" x1="165.5" y1="107.4375" x2="330.5" y2="140.4375" identifier="myLine3" class="test"/>
-    <path fill="none" stroke="#000" stroke-width="1.5" d="m218.5,125.4375l5.5,-22.4375l16,18l-21.5,4.4375z" identifier="myPath3" otherIdentifier="selector4"/>
+    <line fill="none" stroke="#000" stroke-width="1.5" x1="165.5" y1="107.4375" x2="330.5" y2="140.4375" identifier="myText3" class="test"/>
+    <path stroke="#000" stroke-width="1.5" d="m218.5,125.4375l5.5,-22.4375l16,18l-21.5,4.4375z" identifier="myPath4" otherIdentifier="selector1"/>
 </svg>
 ```
 
