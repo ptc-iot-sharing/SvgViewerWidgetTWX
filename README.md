@@ -151,7 +151,7 @@ The following service is available:
 
 
 ###  4. <a name='Installation'></a>Installation
-- Navigate to the [releases page](/releases)
+- Navigate to the [releases page](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/releases)
 - Under the latest release, view all the assets
 - Download the file `svgViewer-min-<VERSION>.zip`
 - Import the widget into Thingworx
