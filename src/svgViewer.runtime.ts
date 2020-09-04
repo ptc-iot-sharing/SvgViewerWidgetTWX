@@ -7,6 +7,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     private svgRenderer: SvgElement;
 
     private needToApplyData = false;
+    private needToApplyDefaultSelection = false;
     private _svgFileUrl: string;
 
     @TWProperty("SVGFileUrl")
@@ -18,6 +19,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
                 this.setProperty("SVGFileUrl", '/Thingworx/MediaEntities/' + TW.encodeEntityName(value));
             }
             this.updateDrawnSvg();
+            this.needToApplyDefaultSelection = true;
         }
     };
 
@@ -25,10 +27,25 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     set svgData(value: TWInfotable) {
         if (this.svgRenderer) {
             this.svgRenderer.applyOverrides(this.transformDataToOverrideList(value.rows));
+            if(this.needToApplyDefaultSelection) {
+                this.selectedElementId = this.getProperty('SelectedElementID');
+            }
         } else {
             this.needToApplyData = true;
         }
     }
+
+    @TWProperty("SelectedElementID")
+    set selectedElementId(value: String) {
+        if (value) {
+            const elements = this.findSvgElementIdentifierFromId(value);
+            if (elements.length > 0) {
+                this.svgRenderer.triggerElementSelectionByName(elements);
+            }
+
+        }
+    }
+
     @TWService("PanOntoSelected")
     PanOntoSelected(): void {
         if (this.svgRenderer) {
@@ -133,6 +150,35 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     updateProperty(info: TWUpdatePropertyInfo): void {
     }
 
+    findSvgElementIdentifierFromId(id: String): SvgElementIdentifier[] {
+        if(this.svgData) {
+            const overrideField = this.getProperty("OverrideListField");
+            const dataField = this.getProperty("DataIdField");
+            const selectorField = this.getProperty("DataSelectorField");
+            if (overrideField) {
+                for (const row of this.svgData.rows) {
+                    if (row[overrideField].rows.some(el => el[dataField] == id)) {
+                        return row[overrideField].rows
+                            .filter(el => el.selectable !== false)
+                            .map(el => ({
+                                name: el[dataField],
+                                selector: el[selectorField]
+                            }));
+                    }
+                }
+            } else {
+                return this.svgData.rows
+                    .filter(el => el[dataField] == id)
+                    .map(el => ({
+                        name: el[dataField],
+                        selector: el[selectorField]
+                    }));
+            }
+        } else {
+            return [];
+        }
+    }
+
     handleSelectionUpdate(propertyName, selectedRows: any[], selectedRowIndices) {
         switch (propertyName) {
             case "Data":
@@ -145,6 +191,11 @@ export class SvgViewerWidget extends TWRuntimeWidget {
                         elements = elements.concat(selectedRows.reduce((ac, el) => ac.concat(el[overrideField].rows.filter((x) => x.selectable !== false).map(x => ({ name: x[dataField], selector: x[selectorField] }))), []));
                     } else {
                         elements = elements.concat(selectedRows.map((el) => ({ name: el[dataField], selector: el[selectorField] })));
+                    }
+                    if(elements.length > 0) {
+                        this.setProperty('SelectedElementID', elements[0].name)
+                    } else {
+                        this.setProperty('SelectedElementID', "")
                     }
 
                     this.svgRenderer.triggerElementSelectionByName(elements);

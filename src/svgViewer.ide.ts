@@ -51,6 +51,7 @@ export class SvgViewerWidget extends TWComposerWidget {
                 SelectedElementID: {
                     description: "The id of the element that was just clicked",
                     isBindingSource: true,
+                    isBindingTarget: true,
                     baseType: "STRING"
                 },
                 SelectedStyle: {
