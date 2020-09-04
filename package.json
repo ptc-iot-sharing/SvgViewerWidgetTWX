@@ -5,7 +5,7 @@
     "thingworxServer": "http://localhost:8015/",
     "thingworxUser": "Administrator",
     "thingworxPassword": "Administrator12345",
-    "author": "Thingworx RoIcenter placatus",
+    "author": "placatus@iqnox.com",
     "minimumThingWorxVersion": "6.0.0",
     "homepage": "https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX",
     "autoUpdate": {
@@ -22,13 +22,18 @@
         "watch": "webpack --watch --mode development",
         "server": "webpack-dev-server --open",
         "upload": "webpack --mode development --env.upload",
-        "init": "webpack --env.init"
+        "init": "webpack --env.init",
+        "prepublishOnly": "rm -rf dist && mkdir dist && yarn run build && mv zip/* dist && yarn run buildDev && mv zip/* dist"
     },
     "license": "ISC",
     "devDependencies": {
         "@babel/core": "^7.5.5",
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/preset-env": "^7.5.5",
+        "@semantic-release/changelog": "^5.0.0",
+        "@semantic-release/exec": "^5.0.0",
+        "@semantic-release/git": "^9.0.0",
+        "@semantic-release/github": "^7.0.5",
         "@types/jquery": "^3.3.31",
         "@types/node": "^10.14.15",
         "@types/webpack-env": "^1.14.0",
