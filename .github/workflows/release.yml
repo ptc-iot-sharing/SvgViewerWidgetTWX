@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     branches:
-      - release
+      - master
     repository_dispatch:
       types: [semantic-release]
 jobs:
