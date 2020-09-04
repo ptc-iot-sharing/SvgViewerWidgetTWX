@@ -121,7 +121,7 @@ export class SvgElement {
 
     panandZoomInstance: any;
 
-    svgElement: HTMLElement;
+    svgElement: SVGSVGElement;
 
     previousOverrideElements: { element: Element, cachedStyle: string, cachedClass: string }[] = [];
 

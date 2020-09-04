@@ -1,13 +1,8 @@
-import { ThingworxRuntimeWidget, TWService, TWProperty } from 'typescriptwebpacksupport'
+import { ThingworxRuntimeWidget, TWService, TWProperty } from 'typescriptwebpacksupport/widgetRuntimeSupport'
 import { SvgElement, SvgRendererOptions, SvgOverride, SvgElementIdentifier } from './svgRenderer/svgRenderer'
 
 @ThingworxRuntimeWidget
 export class SvgViewerWidget extends TWRuntimeWidget {
-
-    serviceInvoked(name: string): void {
-        throw new Error("Method not implemented.");
-    }
-
     // the renderer currently used
     private svgRenderer: SvgElement;
 

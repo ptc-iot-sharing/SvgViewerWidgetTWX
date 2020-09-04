@@ -1,11 +1,10 @@
-// automatically import the css file
-import { ThingworxComposerWidget } from 'typescriptwebpacksupport';
+import { ThingworxComposerWidget } from 'typescriptwebpacksupport/widgetIDESupport';
 
 @ThingworxComposerWidget
 export class SvgViewerWidget extends TWComposerWidget {
 
     widgetIconUrl(): string {
-        return require('advanced-image-loader!./images/icon.png?width=16&height=16&format=png').src;
+        return require('responsive-loader!./images/icon.png?size=16&format=png').src;
     }
 
     widgetProperties(): TWWidgetProperties {
