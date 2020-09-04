@@ -1,6 +1,6 @@
 {
     "name": "svgViewer",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "description": "A svg viewer allowing viewing svg files, as well as interacting with them dynamically.",
     "thingworxServer": "http://localhost:8015/",
     "thingworxUser": "Administrator",
