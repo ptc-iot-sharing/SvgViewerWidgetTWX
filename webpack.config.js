@@ -62,7 +62,14 @@ module.exports = function (env, argv) {
             }),
             // in case we just want to copy some resources directly to the widget package, then do it here
             // in case the extension contains entities, copy them as well
-            new CopyWebpackPlugin([{ from: 'Entities', to: '../../Entities' }]),
+            new CopyWebpackPlugin({
+                patterns: [
+                    // in case we just want to copy some resources directly to the widget package, then do it here
+                    { from: 'src/static', to: 'static', noErrorOnMissing: true },
+                    // in case the extension contains entities, copy them as well
+                    { from: 'Entities/**/*.xml', to: '../../', noErrorOnMissing: true },
+                ],
+            }),
             // generates the metadata xml file and adds it to the archive
             new WidgetMetadataGenerator(),
             new webpack.DefinePlugin({
