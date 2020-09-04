@@ -163,9 +163,9 @@ This projects welcomes contributions. For details about pre-requisites, developm
 
 The following commands allow you to build and compile your widget:
 
-* `npm run build`: builds the extension. Creates a new extension zip file under the `zip` folder.
-* `npm run watch`: watches the source files, and whenever they change, do a build
-* `npm run upload`: creates a build, and uploads the extension zip to the thingworx server configured in `package.json`.
+* `yarn run build`: builds the extension. Creates a new extension zip file under the `zip` folder.
+* `yarn run watch`: watches the source files, and whenever they change, do a build
+* `yarn run upload`: creates a build, and uploads the extension zip to the thingworx server configured in `package.json`.
 
 #  Resources
 ##  2. <a name='SVGDemostarterkit'></a>SVG Demo starter kit
