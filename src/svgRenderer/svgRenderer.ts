@@ -362,7 +362,7 @@ export class SvgElement {
     }
 
     public dispose() {
-        this.panandZoomInstance.dispose();
+        this.panandZoomInstance?.dispose();
     }
 
     /**
