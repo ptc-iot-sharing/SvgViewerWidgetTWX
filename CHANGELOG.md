@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/compare/v1.2.0...v1.2.1) (2021-01-07)
+
+
+### Bug Fixes
+
+* Fix issue with dynamic svg url not working when pan and zom is disabled. Fixes [#20](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/issues/20), fixes [#17](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/issues/17) ([d47f498](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/commit/d47f4984d45535d092cb2deec555a42b51058f02))
+
 # [1.2.0](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/compare/v1.1.2...v1.2.0) (2020-09-04)
 
 
