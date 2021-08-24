@@ -170,7 +170,7 @@ The following commands allow you to build and compile your widget:
 #  Resources
 ##  2. <a name='SVGDemostarterkit'></a>SVG Demo starter kit
 
-Inside this repository, under `/demo` you can also find a Thingworx starter project that can help you get started with the widget. The demo is based on the [WebDesignKit by Dumitru Zanfir](https://marketplace.ptc.com/apps/201557/web-design-kit#!overview)
+Inside this repository, under `/demo` you can also find a Thingworx starter project that can help you get started with the widget. The demo is based on the [WebDesignKit by Dumitru Zanfir](https://github.com/ptc-iot-sharing/WebDesignKit)
 
 ![SvgDemo](demo/img/svgDemo.png)
 
@@ -180,7 +180,7 @@ The prebuilt mashup, `SvgVisualizationWebDesign`, uses the `SvgDataCollectorThin
 
 ###  2.1. <a name='Installation-1'></a>Installation
 
-1. Install the [WebDesignKit by Dumitru Zanfir](https://marketplace.ptc.com/apps/201557/web-design-kit#!overview)
+1. Install the [WebDesignKit by Dumitru Zanfir](https://github.com/ptc-iot-sharing/WebDesignKit)
 2. Install the [D3RangeChart Widget](https://github.com/ptc-iot-sharing/D3RangeChart)
 3. Install the SVG widget
 4. Import the [demo/SvgStarterEntities.xml](demo/SvgStarterEntities.xml)
