@@ -204,7 +204,7 @@ The prebuilt mashup, `SvgVisualizationWebDesign`, uses the `SvgDataCollectorThin
 ![SvgDemo](demo/img/svgDemo2.png)
 
 # Credit/Acknowledgment
-Petrisor Lacatus  (@stefan-lacatus)
+Petrisor Lacatus  (placatus@iqnox.com)
 
 #  License
 [ISC License](LICENSE.MD)
