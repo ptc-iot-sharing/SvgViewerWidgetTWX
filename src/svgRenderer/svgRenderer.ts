@@ -366,6 +366,12 @@ export class SvgElement {
                         (element as SVGAElement).classList.add(override[attrOverride]);
                     } else if (attrOverride == 'text' && override[attrOverride] != undefined) {
                         element.innerHTML = override[attrOverride];
+                    } else if (
+                        // X and Y are attributes on the element itself, not style elements
+                        ['x', 'y'].includes(attrOverride) &&
+                        override[attrOverride] != undefined
+                    ) {
+                        element.setAttribute(attrOverride, override[attrOverride]);
                     } else {
                         // only override if we have a value
                         if (override[attrOverride] || this.options.resetOverrideAttributeIfEmpty) {
