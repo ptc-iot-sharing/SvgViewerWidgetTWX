@@ -121,6 +121,9 @@ export class SvgViewerWidget extends TWComposerWidget {
                 description:
                     'Pans onto the selected element in the svg. PanAndZoom must be enabled for this to work.',
             },
+            ResetSelection: {
+                description: 'Resets the selection, and leaves no element selected',
+            },
         };
     }
 

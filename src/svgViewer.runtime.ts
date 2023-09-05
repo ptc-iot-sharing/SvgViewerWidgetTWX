@@ -3,9 +3,6 @@
 import {
     TWWidgetDefinition,
     property,
-    canBind,
-    TWEvent,
-    event,
     service,
 } from 'typescriptwebpacksupport/widgetRuntimeSupport';
 import {
@@ -69,6 +66,13 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             this.svgRenderer.panOntoElement();
         }
     }
+
+    @service('ResetSelection')
+    ResetSelection(): void {
+        this.svgRenderer.triggerElementSelectionByName([]);
+        this.updateSelection('Data', []);
+    }
+
     renderHtml(): string {
         require('./styles/runtime.css');
 
