@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/compare/v1.3.0...v1.3.1) (2023-09-05)
+
+
+### Bug Fixes
+
+* extend the list of attributes that can be overriden to `'x', 'y', 'rx', 'ry', 'r', 'cx', 'cy'` ([a024bd2](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/commit/a024bd28d07217f53d8d8391287841148c4ec99a))
+
 # [1.3.0](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/compare/v1.2.1...v1.3.0) (2023-09-05)
 
 
