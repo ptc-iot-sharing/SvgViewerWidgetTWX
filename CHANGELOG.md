@@ -1,3 +1,16 @@
+# [1.3.0](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/compare/v1.2.1...v1.3.0) (2023-09-05)
+
+
+### Bug Fixes
+
+* Support overriding the x and y attributes. Fix [#36](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/issues/36) ([ab2039d](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/commit/ab2039d5f55a99c1edb74d2f5a1c95f586198d56))
+
+
+### Features
+
+* Added a new `ResetSelection` service that clears all selected items. Fix [#41](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/issues/41) ([dad1a2f](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/commit/dad1a2f3651b869e7d41f5464819d14a280b20ce))
+* Update dependencies, adopt latest build process ([8c73edc](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/commit/8c73edc5262e878f5fdc983c2125e0c17674ad2d))
+
 ## [1.2.1](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/compare/v1.2.0...v1.2.1) (2021-01-07)
 
 
