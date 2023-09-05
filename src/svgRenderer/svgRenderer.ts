@@ -113,6 +113,11 @@ export interface SvgOverride {
     [override: string]: any;
 }
 
+/**
+ * List of svg attributes that the renderer will override
+ */
+const SVG_ATTRIBUTES_TO_OVERRIDE = ['x', 'y', 'rx', 'ry', 'r', 'cx', 'cy'];
+
 export class SvgElement {
     container: JQuery;
 
@@ -368,7 +373,7 @@ export class SvgElement {
                         element.innerHTML = override[attrOverride];
                     } else if (
                         // X and Y are attributes on the element itself, not style elements
-                        ['x', 'y'].includes(attrOverride) &&
+                        SVG_ATTRIBUTES_TO_OVERRIDE.includes(attrOverride) &&
                         override[attrOverride] != undefined
                     ) {
                         element.setAttribute(attrOverride, override[attrOverride]);
