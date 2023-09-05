@@ -4,3 +4,6 @@ ui
 .gradle
 build
 zip
+.idea/
+.vscode/
+.env

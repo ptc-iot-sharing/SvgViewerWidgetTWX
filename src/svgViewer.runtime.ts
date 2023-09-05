@@ -1,7 +1,21 @@
-import { ThingworxRuntimeWidget, TWService, TWProperty } from 'typescriptwebpacksupport/widgetRuntimeSupport'
-import { SvgElement, SvgRendererOptions, SvgOverride, SvgElementIdentifier } from './svgRenderer/svgRenderer'
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import {
+    TWWidgetDefinition,
+    property,
+    canBind,
+    TWEvent,
+    event,
+    service,
+} from 'typescriptwebpacksupport/widgetRuntimeSupport';
+import {
+    SvgElement,
+    SvgRendererOptions,
+    SvgOverride,
+    SvgElementIdentifier,
+} from './svgRenderer/svgRenderer';
 
-@ThingworxRuntimeWidget
+@TWWidgetDefinition
 export class SvgViewerWidget extends TWRuntimeWidget {
     // the renderer currently used
     private svgRenderer: SvgElement;
@@ -10,24 +24,28 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     private needToApplyDefaultSelection = false;
     private _svgFileUrl: string;
 
-    @TWProperty("SVGFileUrl")
+    @property('SVGFileUrl')
     set svgFileUrl(value: string) {
         if (value != this._svgFileUrl) {
             this._svgFileUrl = value;
-            if (!TW.IDE.isImageLinkUrl(value)) {
+            if (!(TW.IDE.isImageLinkUrl as (s: string) => boolean)(value)) {
                 //check to see if imageLink is an actual URL;
-                this.setProperty("SVGFileUrl", '/Thingworx/MediaEntities/' + TW.encodeEntityName(value));
+                this.setProperty(
+                    'SVGFileUrl',
+                    '/Thingworx/MediaEntities/' +
+                        (TW.encodeEntityName as (s: string) => string)(value),
+                );
             }
             this.updateDrawnSvg();
             this.needToApplyDefaultSelection = true;
         }
-    };
+    }
 
-    @TWProperty("Data")
+    @property('Data')
     set svgData(value: TWInfotable) {
         if (this.svgRenderer) {
             this.svgRenderer.applyOverrides(this.transformDataToOverrideList(value.rows));
-            if(this.needToApplyDefaultSelection) {
+            if (this.needToApplyDefaultSelection) {
                 this.selectedElementId = this.getProperty('SelectedElementID');
             }
         } else {
@@ -35,28 +53,27 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         }
     }
 
-    @TWProperty("SelectedElementID")
-    set selectedElementId(value: String) {
+    @property('SelectedElementID')
+    set selectedElementId(value: string) {
         if (value) {
             const elements = this.findSvgElementIdentifierFromId(value);
             if (elements.length > 0) {
                 this.svgRenderer.triggerElementSelectionByName(elements);
             }
-
         }
     }
 
-    @TWService("PanOntoSelected")
+    @service('PanOntoSelected')
     PanOntoSelected(): void {
         if (this.svgRenderer) {
             this.svgRenderer.panOntoElement();
         }
     }
     renderHtml(): string {
-        require("./styles/runtime.css");
+        require('./styles/runtime.css');
 
         return '<div class="widget-content widget-svg-viewer"></div>';
-    };
+    }
 
     afterRender(): void {
         this.updateDrawnSvg();
@@ -64,53 +81,52 @@ export class SvgViewerWidget extends TWRuntimeWidget {
 
     createRendererSettings(): SvgRendererOptions {
         return {
-            overrideIdField: this.getProperty("DataIdField") || "elementName",
-            idField: this.getProperty("SVGIdField") || "id",
-            selectorField: this.getProperty("DataSelectorField") || "",
-            imageHeight: this.getProperty("ImageHeight") || "100%",
-            imageWidth: this.getProperty("ImageWidth") || "100%",
+            overrideIdField: this.getProperty('DataIdField') || 'elementName',
+            idField: this.getProperty('SVGIdField') || 'id',
+            selectorField: this.getProperty('DataSelectorField') || '',
+            imageHeight: this.getProperty('ImageHeight') || '100%',
+            imageWidth: this.getProperty('ImageWidth') || '100%',
             zoomPanOptions: {
-                isEnabled: this.getProperty("ZoomPanEnabled"),
-                initialZoom: this.getProperty("InitialZoom") || 1,
-                smoothScroll: this.getProperty("SmoothScroll"),
-                initialXPosition: this.getProperty("InitialXPosition") || 0,
-                initialYPosition: this.getProperty("InitialYPosition") || 0
+                isEnabled: this.getProperty('ZoomPanEnabled'),
+                initialZoom: this.getProperty('InitialZoom') || 1,
+                smoothScroll: this.getProperty('SmoothScroll'),
+                initialXPosition: this.getProperty('InitialXPosition') || 0,
+                initialYPosition: this.getProperty('InitialYPosition') || 0,
             },
-            elementClickedCallback: this.generateEventTriggerForHandlerNamed("ElementClicked"),
-            elementDoubleClickedCallback: this.generateEventTriggerForHandlerNamed("ElementDoubleClicked"),
-            elementMiddleClickedCallback: this.generateEventTriggerForHandlerNamed("ElementMiddleClicked"),
+            elementClickedCallback: this.generateEventTriggerForHandlerNamed('ElementClicked'),
+            elementDoubleClickedCallback:
+                this.generateEventTriggerForHandlerNamed('ElementDoubleClicked'),
+            elementMiddleClickedCallback:
+                this.generateEventTriggerForHandlerNamed('ElementMiddleClicked'),
             selectedOverride: this.styleToOverrideList(),
             selectionTrigger: this.applySelection,
-            applyToChildren: this.getProperty("ApplyToChildren"),
-            resetOverrideAttributeIfEmpty: this.getProperty("ResetOverrideAttributeIfEmpty")
-        }
+            applyToChildren: this.getProperty('ApplyToChildren'),
+            resetOverrideAttributeIfEmpty: this.getProperty('ResetOverrideAttributeIfEmpty'),
+        };
     }
 
     styleToOverrideList(): SvgOverride {
-        let selectedOverride = <SvgOverride>{};;
-        let selectedStyle = TW.getStyleFromStyleDefinition(this.getProperty('SelectedStyle'));
-        if (selectedStyle.image)
-            selectedOverride["fill"] = "url(#img1)";
-        if (selectedStyle.backgroundColor)
-            selectedOverride["fill"] = selectedStyle.backgroundColor;
-        if (selectedStyle.lineColor)
-            selectedOverride["stroke"] = selectedStyle.lineColor;
+        const selectedOverride = {} as SvgOverride;
+        const selectedStyle = TW.getStyleFromStyleDefinition(this.getProperty('SelectedStyle'));
+        if (selectedStyle.image) selectedOverride['fill'] = 'url(#img1)';
+        if (selectedStyle.backgroundColor) selectedOverride['fill'] = selectedStyle.backgroundColor;
+        if (selectedStyle.lineColor) selectedOverride['stroke'] = selectedStyle.lineColor;
         if (selectedStyle.lineThickness)
-            selectedOverride["stroke-width"] = selectedStyle.lineThickness;
+            selectedOverride['stroke-width'] = selectedStyle.lineThickness;
 
         return selectedOverride;
     }
 
     generateEventTriggerForHandlerNamed = (handlerName) => (elementName: string) => {
-        this.setProperty("SelectedElementID", elementName);
+        this.setProperty('SelectedElementID', elementName);
         this.applySelection([{ name: elementName }]);
         this.jqElement.triggerHandler(handlerName);
-    }
+    };
 
     applySelection = (elementNames: SvgElementIdentifier[]) => {
-        let selectedRows = [];
-        const overrideField = this.getProperty("OverrideListField");
-        const dataField = this.getProperty("DataIdField");
+        const selectedRows = [];
+        const overrideField = this.getProperty('OverrideListField');
+        const dataField = this.getProperty('DataIdField');
         // also update the row selection in the data array
         for (let i = 0; i < this.svgData.rows.length; i++) {
             const row = this.svgData.rows[i];
@@ -128,8 +144,8 @@ export class SvgViewerWidget extends TWRuntimeWidget {
                 }
             }
         }
-        this.updateSelection("Data", [...new Set(selectedRows)]);
-    }
+        this.updateSelection('Data', [...new Set(selectedRows)]);
+    };
 
     async updateDrawnSvg(): Promise<void> {
         if (!this.svgFileUrl) {
@@ -138,40 +154,41 @@ export class SvgViewerWidget extends TWRuntimeWidget {
         if (this.svgRenderer) {
             this.svgRenderer.dispose();
         }
-        this.svgRenderer = new SvgElement(this.jqElement, this.svgFileUrl, this.createRendererSettings());
+        this.svgRenderer = new SvgElement(
+            this.jqElement,
+            this.svgFileUrl,
+            this.createRendererSettings(),
+        );
         await this.svgRenderer.createSvgElement();
         if (this.needToApplyData) {
             this.svgRenderer.applyOverrides(this.transformDataToOverrideList(this.svgData.rows));
             this.needToApplyData = false;
         }
-        this.jqElement.triggerHandler("Loaded");
+        this.jqElement.triggerHandler('Loaded');
     }
 
-    updateProperty(info: TWUpdatePropertyInfo): void {
-    }
-
-    findSvgElementIdentifierFromId(id: String): SvgElementIdentifier[] {
-        if(this.svgData) {
-            const overrideField = this.getProperty("OverrideListField");
-            const dataField = this.getProperty("DataIdField");
-            const selectorField = this.getProperty("DataSelectorField");
+    findSvgElementIdentifierFromId(id: string): SvgElementIdentifier[] {
+        if (this.svgData) {
+            const overrideField = this.getProperty('OverrideListField');
+            const dataField = this.getProperty('DataIdField');
+            const selectorField = this.getProperty('DataSelectorField');
             if (overrideField) {
                 for (const row of this.svgData.rows) {
-                    if (row[overrideField].rows.some(el => el[dataField] == id)) {
+                    if (row[overrideField].rows.some((el) => el[dataField] == id)) {
                         return row[overrideField].rows
-                            .filter(el => el.selectable !== false)
-                            .map(el => ({
+                            .filter((el) => el.selectable !== false)
+                            .map((el) => ({
                                 name: el[dataField],
-                                selector: el[selectorField]
+                                selector: el[selectorField],
                             }));
                     }
                 }
             } else {
                 return this.svgData.rows
-                    .filter(el => el[dataField] == id)
-                    .map(el => ({
+                    .filter((el) => el[dataField] == id)
+                    .map((el) => ({
                         name: el[dataField],
-                        selector: el[selectorField]
+                        selector: el[selectorField],
                     }));
             }
         } else {
@@ -181,21 +198,39 @@ export class SvgViewerWidget extends TWRuntimeWidget {
 
     handleSelectionUpdate(propertyName, selectedRows: any[], selectedRowIndices) {
         switch (propertyName) {
-            case "Data":
+            case 'Data':
                 if (this.svgRenderer) {
                     let elements: SvgElementIdentifier[] = [];
-                    const overrideField = this.getProperty("OverrideListField");
-                    const dataField = this.getProperty("DataIdField");
-                    const selectorField = this.getProperty("DataSelectorField");
+                    const overrideField = this.getProperty('OverrideListField');
+                    const dataField = this.getProperty('DataIdField');
+                    const selectorField = this.getProperty('DataSelectorField');
                     if (overrideField) {
-                        elements = elements.concat(selectedRows.reduce((ac, el) => ac.concat(el[overrideField].rows.filter((x) => x.selectable !== false).map(x => ({ name: x[dataField], selector: x[selectorField] }))), []));
+                        elements = elements.concat(
+                            selectedRows.reduce(
+                                (ac, el) =>
+                                    ac.concat(
+                                        el[overrideField].rows
+                                            .filter((x) => x.selectable !== false)
+                                            .map((x) => ({
+                                                name: x[dataField],
+                                                selector: x[selectorField],
+                                            })),
+                                    ),
+                                [],
+                            ),
+                        );
                     } else {
-                        elements = elements.concat(selectedRows.map((el) => ({ name: el[dataField], selector: el[selectorField] })));
+                        elements = elements.concat(
+                            selectedRows.map((el) => ({
+                                name: el[dataField],
+                                selector: el[selectorField],
+                            })),
+                        );
                     }
-                    if(elements.length > 0) {
-                        this.setProperty('SelectedElementID', elements[0].name)
+                    if (elements.length > 0) {
+                        this.setProperty('SelectedElementID', elements[0].name);
                     } else {
-                        this.setProperty('SelectedElementID', "")
+                        this.setProperty('SelectedElementID', '');
                     }
 
                     this.svgRenderer.triggerElementSelectionByName(elements);
@@ -204,7 +239,7 @@ export class SvgViewerWidget extends TWRuntimeWidget {
     }
 
     transformDataToOverrideList(overrideRows: any[]) {
-        const overrideListField = this.getProperty("OverrideListField");
+        const overrideListField = this.getProperty('OverrideListField');
         if (overrideListField) {
             const overrideList = [];
             for (const row of overrideRows) {
@@ -225,10 +260,11 @@ export class SvgViewerWidget extends TWRuntimeWidget {
             for (const override of overrideRows) {
                 for (const key in override) {
                     const newRow = {};
-                    if (key.startsWith("override-")) {
-                        newRow[key.substr("override-".length)] = override[key];
+                    if (key.startsWith('override-')) {
+                        newRow[key.slice('override-'.length)] = override[key];
                     }
-                    newRow[this.getProperty("DataIdField")] = override[this.getProperty("DataIdField")];
+                    newRow[this.getProperty('DataIdField')] =
+                        override[this.getProperty('DataIdField')];
                     overrideList.push(newRow);
                 }
             }

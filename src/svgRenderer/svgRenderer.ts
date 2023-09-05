@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /**
  * Options that can be applied to the svg elements
  */
@@ -44,8 +45,8 @@ export interface SvgRendererOptions {
         isEnabled: boolean;
 
         /**
-        * Enable or disable smooth scrolling of the pan and zoom functionality
-        */
+         * Enable or disable smooth scrolling of the pan and zoom functionality
+         */
         smoothScroll: boolean;
 
         /**
@@ -62,23 +63,23 @@ export interface SvgRendererOptions {
          * The initial zoom of the svg
          */
         initialZoom: number;
-    }
-    /** 
+    };
+    /**
      * Callback fired when a element is clicked
      */
     elementClickedCallback(elementName: string): void;
 
-    /** 
+    /**
      * Callback fired when a element is double clicked
      */
     elementDoubleClickedCallback(elementName: string): void;
 
-    /** 
+    /**
      * Callback fired when a element is middle clicked
      */
     elementMiddleClickedCallback(elementName: string): void;
 
-    /** 
+    /**
      * List of overrides for the selected element
      */
     selectedOverride: SvgOverride;
@@ -123,7 +124,7 @@ export class SvgElement {
 
     svgElement: SVGSVGElement;
 
-    previousOverrideElements: { element: Element, cachedStyle: string, cachedClass: string }[] = [];
+    previousOverrideElements: { element: Element; cachedStyle: string; cachedClass: string }[] = [];
 
     currentSelectedElement: SvgElementIdentifier[] = [];
 
@@ -132,23 +133,28 @@ export class SvgElement {
         this.container = container;
         this.options = options;
         // clear the contents of the contaienr
-        container[0].innerHTML = "";
+        container[0].innerHTML = '';
         // create css styles out of the selected overrides and append them to the widget
-        let styleAttr: { attr: string, value: string }[] = [];
+        const styleAttr: { attr: string; value: string }[] = [];
         for (const attrOverride in this.options.selectedOverride) {
             if (this.options.selectedOverride.hasOwnProperty(attrOverride)) {
-                if (attrOverride != "tooltip" && attrOverride != "class") {
+                if (attrOverride != 'tooltip' && attrOverride != 'class') {
                     // construct the style attr
-                    styleAttr.push({ attr: attrOverride, value: this.options.selectedOverride[attrOverride] });
+                    styleAttr.push({
+                        attr: attrOverride,
+                        value: this.options.selectedOverride[attrOverride],
+                    });
                 }
             }
         }
         let selectedCssStyleDef = `#${container[0].id} [svg-selected] *, #${container[0].id} [svg-selected] {`;
-        selectedCssStyleDef += styleAttr.map((val) => `${val.attr}: ${val.value} !important`).join(";\n");
-        selectedCssStyleDef += "}";
+        selectedCssStyleDef += styleAttr
+            .map((val) => `${val.attr}: ${val.value} !important`)
+            .join(';\n');
+        selectedCssStyleDef += '}';
 
-        let selectedCssStyle = document.createElement("style");
-        selectedCssStyle.type = "text/css";
+        const selectedCssStyle = document.createElement('style');
+        selectedCssStyle.type = 'text/css';
         selectedCssStyle.innerHTML = selectedCssStyleDef;
 
         container[0].appendChild(selectedCssStyle);
@@ -156,104 +162,115 @@ export class SvgElement {
 
     public async createSvgElement() {
         // get the svg data as we need to inline it
-        let svgData = await this.loadSvgFile(this.svgFileUrl);
+        const svgData = await this.loadSvgFile(this.svgFileUrl);
         // add it to the container
-        this.container[0].innerHTML += (svgData);
+        this.container[0].innerHTML += svgData;
         // create a new root group for all the groups in this svg
-        let rootGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        rootGroup.setAttributeNS(null, "id", "rootGroup");
-        this.svgElement = this.container.find("svg")[0];
+        const rootGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        rootGroup.setAttributeNS(null, 'id', 'rootGroup');
+        this.svgElement = this.container.find('svg')[0];
         // move all the nodes from the svg into the root group
-        Array.prototype.slice.call(this.svgElement.childNodes).forEach(element => rootGroup.appendChild(element));
+        Array.prototype.slice
+            .call(this.svgElement.childNodes)
+            .forEach((element) => rootGroup.appendChild(element));
         this.svgElement.appendChild(rootGroup);
         if (this.options.zoomPanOptions.isEnabled) {
-            let panzoom = await require('panzoom');
+            const panzoom = await require('panzoom');
 
             // apply pan and zoom onto the svg
-            this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll("#rootGroup")[0], {
+            this.panandZoomInstance = panzoom(this.svgElement.querySelectorAll('#rootGroup')[0], {
                 smoothScroll: this.options.zoomPanOptions.smoothScroll,
                 zoomDoubleClickSpeed: 1,
                 bounds: false,
                 onTouch: (e: TouchEvent) => {
-                    if ((<Element>e.target).hasAttribute("svg-clickable")) {
-                        var currentTime = new Date().getTime();
-                        if((<any>e.target).lastTouch === undefined) {
-                            (<any>e.target).lastTouch = 0;
+                    if ((e.target as Element).hasAttribute('svg-clickable')) {
+                        const currentTime = new Date().getTime();
+                        if ((e.target as any).lastTouch === undefined) {
+                            (e.target as any).lastTouch = 0;
                         }
-                        var tapLength = currentTime - (<any>e.target).lastTouch;
-                        clearTimeout((<any>e.target).timeout);
+                        const tapLength = currentTime - (e.target as any).lastTouch;
+                        clearTimeout((e.target as any).timeout);
                         if (tapLength < 500 && tapLength > 0) {
-                            $(e.target).trigger("dblclick");
+                            $(e.target).trigger('dblclick');
                             event.preventDefault();
                         } else {
-                            (<any>e.target).timeout = setTimeout(function() {
-                                clearTimeout((<any>e.target).timeout);
+                            (e.target as any).timeout = setTimeout(function () {
+                                clearTimeout((e.target as any).timeout);
                             }, 500);
                         }
-                        (<any>e.target).lastTouch = currentTime;
+                        (e.target as any).lastTouch = currentTime;
                         return false;
                     }
-                }
+                },
             });
             this.panandZoomInstance.zoomAbs(
                 this.options.zoomPanOptions.initialXPosition, // initial x position
                 this.options.zoomPanOptions.initialYPosition, // initial y position
-                this.options.zoomPanOptions.initialZoom  // initial zoom
+                this.options.zoomPanOptions.initialZoom, // initial zoom
             );
-            this.panandZoomInstance.moveTo(this.options.zoomPanOptions.initialXPosition, this.options.zoomPanOptions.initialYPosition);
+            this.panandZoomInstance.moveTo(
+                this.options.zoomPanOptions.initialXPosition,
+                this.options.zoomPanOptions.initialYPosition,
+            );
         } else {
             // set the width and height
-            this.svgElement.setAttribute("height", this.options.imageHeight);
-            this.svgElement.setAttribute("width", this.options.imageWidth);
+            this.svgElement.setAttribute('height', this.options.imageHeight);
+            this.svgElement.setAttribute('width', this.options.imageWidth);
         }
         // register a listener for all the clickable elements in the svg
-        $(this.svgElement).on("click tap", "[svg-clickable]", (event) => {
+        $(this.svgElement).on('click tap', '[svg-clickable]', (event) => {
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
-            this.options.elementClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+            this.options.elementClickedCallback(
+                event.currentTarget.getAttribute(this.options.idField),
+            );
             event.stopPropagation();
         });
         // register a listener for all the clickable elements in the svg, for double click
-        $(this.svgElement).on("dblclick", "[svg-clickable]", (event) => {
+        $(this.svgElement).on('dblclick', '[svg-clickable]', (event) => {
             this.triggerElementSelection(event.currentTarget);
             // fire the callback with the element name
-            this.options.elementDoubleClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+            this.options.elementDoubleClickedCallback(
+                event.currentTarget.getAttribute(this.options.idField),
+            );
             event.stopPropagation();
         });
         // register a listener for all the clickable elements in the svg, for mouse down, listening for middle click
-        $(this.svgElement).on("mousedown", "[svg-clickable]", (event) => {
+        $(this.svgElement).on('mousedown', '[svg-clickable]', (event) => {
             if (event.which == 2) {
                 this.triggerElementSelection(event.currentTarget);
                 // fire the callback with the element name
-                this.options.elementMiddleClickedCallback(event.currentTarget.getAttribute(this.options.idField));
+                this.options.elementMiddleClickedCallback(
+                    event.currentTarget.getAttribute(this.options.idField),
+                );
                 event.stopPropagation();
             }
         });
     }
 
     private triggerElementSelection(element: Element) {
-        this.currentSelectedElement = [{name: element.getAttribute(this.options.idField)}];
+        this.currentSelectedElement = [{ name: element.getAttribute(this.options.idField) }];
         // remove the override from the selected elements
-        $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
+        $(this.svgElement).find('[svg-selected]').removeAttr('svg-selected');
         // add the tag to the element
-        element.setAttribute("svg-selected", "");
+        element.setAttribute('svg-selected', '');
     }
 
     public triggerElementSelectionByName(elementNames: SvgElementIdentifier[]) {
         this.currentSelectedElement = elementNames;
         // remove the override from the selected elements
-        $(this.svgElement).find("[svg-selected]").removeAttr("svg-selected");
+        $(this.svgElement).find('[svg-selected]').removeAttr('svg-selected');
         // if the element has no name, just return
         if (!elementNames || elementNames.length == 0) {
             return;
         }
         let elements = [];
-        elements = elementNames.reduce((ac, el) =>  ac.concat(this.getElementsFromOverride(el)), []);
+        elements = elementNames.reduce((ac, el) => ac.concat(this.getElementsFromOverride(el)), []);
 
         // iterate over them
         for (const element of elements) {
             // add the tag to the element
-            element.setAttribute("svg-selected", "");
+            element.setAttribute('svg-selected', '');
         }
     }
     /**
@@ -262,10 +279,10 @@ export class SvgElement {
      * @param value Test to use as title
      */
     private addTitleToElement(element: Element, value: string) {
-        if (element.querySelector("title")) {
-            element.querySelector("title").textContent = value;
+        if (element.querySelector('title')) {
+            element.querySelector('title').textContent = value;
         } else {
-            let title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+            const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
             title.textContent = value;
             element.insertBefore(title, element.firstChild);
         }
@@ -275,20 +292,23 @@ export class SvgElement {
         this.options.selectionTrigger(this.currentSelectedElement);
         // reset the existing elements
         for (const elementInfo of this.previousOverrideElements) {
-            elementInfo.element.setAttribute("style", elementInfo.cachedStyle);
+            elementInfo.element.setAttribute('style', elementInfo.cachedStyle);
             if (elementInfo.cachedClass) {
-                elementInfo.element.setAttribute("class", elementInfo.cachedClass);
+                elementInfo.element.setAttribute('class', elementInfo.cachedClass);
             } else {
-                elementInfo.element.removeAttribute("class");
+                elementInfo.element.removeAttribute('class');
             }
         }
         this.previousOverrideElements = [];
         // remove all exiting svg-clickable attributes
-        $(this.svgElement).find("[svg-clickable]").removeAttr("svg-clickable");
+        $(this.svgElement).find('[svg-clickable]').removeAttr('svg-clickable');
         // iterate over the overrides
         for (const override of overrideList) {
             // find the elements to override
-            let elements = this.getElementsFromOverride({name: override[this.options.overrideIdField], selector: override[this.options.selectorField]});
+            const elements = this.getElementsFromOverride({
+                name: override[this.options.overrideIdField],
+                selector: override[this.options.selectorField],
+            });
             // iterate over them
             for (const element of elements) {
                 if (this.options.applyToChildren) {
@@ -297,7 +317,6 @@ export class SvgElement {
                 } else {
                     this.applyOverrideToElement(element, override);
                 }
-
             }
         }
     }
@@ -311,50 +330,59 @@ export class SvgElement {
 
     private applyClickableToElement(element: Element) {
         // mark the element as clickable
-        element.setAttribute("svg-clickable", "");
-        (<SVGElement>element).style.cursor = 'pointer';
+        element.setAttribute('svg-clickable', '');
+        (element as SVGElement).style.cursor = 'pointer';
         // if there is no previously set fill, then set one
         const elementStyle = getComputedStyle(element);
-        if (elementStyle.getPropertyValue("fill") == "" || elementStyle.getPropertyValue("fill") == "none" || element.getAttribute("fill") == "" || element.getAttribute("fill") == "none") {
-            (<SVGElement>element).style.fill = 'transparent';
+        if (
+            elementStyle.getPropertyValue('fill') == '' ||
+            elementStyle.getPropertyValue('fill') == 'none' ||
+            element.getAttribute('fill') == '' ||
+            element.getAttribute('fill') == 'none'
+        ) {
+            (element as SVGElement).style.fill = 'transparent';
         }
     }
 
     private applyOverrideToElement(element: Element, override: SvgOverride) {
         // skip over title elements as they don't need to have overrides
-        if (element.tagName == "title") return;
+        if (element.tagName == 'title') return;
         // make sure we are not adding the same element twice
-        if(this.previousOverrideElements.filter((el)=> (el.element == element)).length == 0) {
-            this.previousOverrideElements.push({ element: element, cachedStyle: element.getAttribute("style"), cachedClass: element.getAttribute("class") });
+        if (this.previousOverrideElements.filter((el) => el.element == element).length == 0) {
+            this.previousOverrideElements.push({
+                element: element,
+                cachedStyle: element.getAttribute('style'),
+                cachedClass: element.getAttribute('class'),
+            });
         }
-        if(override["selectable"] !== false) {
+        if (override['selectable'] !== false) {
             this.applyClickableToElement(element);
         }
         // iterate over the attributes to override
         for (const attrOverride in override) {
             if (override.hasOwnProperty(attrOverride)) {
-                if (attrOverride != "tooltip") {
-                    if (attrOverride == "class") {
-                        (<SVGAElement>element).classList.add(override[attrOverride]);
-                    } else if (attrOverride == "text" && override[attrOverride] != undefined) {
+                if (attrOverride != 'tooltip') {
+                    if (attrOverride == 'class') {
+                        (element as SVGAElement).classList.add(override[attrOverride]);
+                    } else if (attrOverride == 'text' && override[attrOverride] != undefined) {
                         element.innerHTML = override[attrOverride];
                     } else {
                         // only override if we have a value
                         if (override[attrOverride] || this.options.resetOverrideAttributeIfEmpty) {
                             // construct the style attr based on overrides
-                            (<SVGElement>element).style[attrOverride] = override[attrOverride];
+                            (element as SVGElement).style[attrOverride] = override[attrOverride];
                         }
                     }
-                    if (element.tagName == "text") {
-                        if (attrOverride == "stroke-width") {
+                    if (element.tagName == 'text') {
+                        if (attrOverride == 'stroke-width') {
                             continue;
-                        } else if (attrOverride == "text-stroke-width") {
+                        } else if (attrOverride == 'text-stroke-width') {
                             // construct the style attr based on overrides
-                            (<SVGElement>element).style["stroke-width"] = override[attrOverride];
+                            (element as SVGElement).style['stroke-width'] = override[attrOverride];
                         }
                     }
                 }
-                if (attrOverride == "tooltip") {
+                if (attrOverride == 'tooltip') {
                     this.addTitleToElement(element, override[attrOverride]);
                 }
             }
@@ -372,34 +400,38 @@ export class SvgElement {
     public panOntoElement() {
         if (this.panandZoomInstance) {
             // find the first selected element
-            let selectedElement: Element;
-
-            selectedElement = this.getElementsFromOverride(this.currentSelectedElement[0])[0];
+            const selectedElement = this.getElementsFromOverride(this.currentSelectedElement[0])[0];
             if (selectedElement) {
                 // find the size of the element we are zooming into
-                let clientRect = selectedElement.getBoundingClientRect();
-                let cx = clientRect.left + clientRect.width / 2;
-                let cy = clientRect.top + clientRect.height / 2;
+                const clientRect = selectedElement.getBoundingClientRect();
+                const cx = clientRect.left + clientRect.width / 2;
+                const cy = clientRect.top + clientRect.height / 2;
                 // find the size of the container
-                let container = this.container[0].getBoundingClientRect();
-                let dx = container.left + container.width / 2 - cx;
-                let dy = container.top + container.height / 2 - cy;
+                const container = this.container[0].getBoundingClientRect();
+                const dx = container.left + container.width / 2 - cx;
+                const dy = container.top + container.height / 2 - cy;
                 // pan onto the element
                 this.panandZoomInstance.moveBy(dx, dy, true);
             } else {
-                console.error("No elements found to select");
+                console.error('No elements found to select');
                 return;
             }
         } else {
-            console.error("Cannot pan onto something as pan and zoom is disabled")
+            console.error('Cannot pan onto something as pan and zoom is disabled');
         }
     }
 
     private getElementsFromOverride(elementIdentifier: SvgElementIdentifier): Element[] {
-        if(elementIdentifier.selector) {
-            return Array.prototype.slice.call(this.svgElement.querySelectorAll(elementIdentifier.selector));
+        if (elementIdentifier.selector) {
+            return Array.prototype.slice.call(
+                this.svgElement.querySelectorAll(elementIdentifier.selector),
+            );
         } else {
-            return Array.prototype.slice.call(this.svgElement.querySelectorAll(`[${this.options.idField}="${elementIdentifier.name}"]`));
+            return Array.prototype.slice.call(
+                this.svgElement.querySelectorAll(
+                    `[${this.options.idField}="${elementIdentifier.name}"]`,
+                ),
+            );
         }
     }
 
@@ -416,8 +448,8 @@ export class SvgElement {
                 success: function (data) {
                     resolve(data);
                 },
-                error: reject
-            })
-        })
+                error: reject,
+            });
+        });
     }
 }
