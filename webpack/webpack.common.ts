@@ -159,9 +159,11 @@ export function createConfig(env, argv): WebpackConfiguration {
         (result as WebpackConfiguration).optimization = {
             minimizer: [
                 new EsbuildPlugin({
-                    minify: true,
-                    target: 'es2015',
+                    minifyWhitespace: true,
+                    minifySyntax: true,
+                    // identifiers are left unminified because thingworx depends on the variable names for the widget names
                     minifyIdentifiers: false,
+                    target: 'es2015',
                 }),
             ],
         };
