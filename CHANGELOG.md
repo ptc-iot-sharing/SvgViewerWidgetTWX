@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/compare/v1.3.1...v1.3.2) (2023-11-30)
+
+
+### Bug Fixes
+
+* trigger a new release, with a valid production build ([6d9a8e7](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/commit/6d9a8e7e2c584cad1107fca7cfc262279f393dcf))
+
 ## [1.3.1](https://github.com/ptc-iot-sharing/SvgViewerWidgetTWX/compare/v1.3.0...v1.3.1) (2023-09-05)
 
 
